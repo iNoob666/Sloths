@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sloths.source.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +10,22 @@ namespace Sloths.source.math
 {
     class Line : IFigure
     {
-        private double k;
-        private double b;
-        private double x0;
-        private double x1;
-
-        private List<double> findY()
+        //private double k;
+        //private double b;
+        //private double x0;
+        //private double x1;
+        //Начальная координа определяемая начало фигуры
+        public NormPoint BeginCoord { get; set; }
+        //Коненая координата определяющая размер фигуры
+        public NormPoint EndCoord { get; set; }
+        public Line()
         {
-            double y0 = this.k * this.x0 + this.b;
-            double y1 = this.k * this.x1 + this.b;
-            List<double> tmp = new List<double>();
-            tmp.Add(y0);
-            tmp.Add(y1);
-            return tmp;
+            BeginCoord = new NormPoint();
+            EndCoord = new NormPoint();
+        }
+        public void Draw(IPaint screen)
+        {
+            screen.drawline(new List<NormPoint> { BeginCoord, EndCoord });
         }
 
     }

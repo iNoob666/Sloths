@@ -27,19 +27,20 @@
 
         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="0, 0, 2, 0">
             <ToolBarPanel x:Name="Tools">
-                <Button x:Name="line" Style="{StaticResource choiceButtons}">
+                <Button x:Name="Line" Style="{StaticResource choiceButtons}">
                     L
                 </Button>
-                <Button x:Name="circle" Style="{StaticResource choiceButtons}">
+                <Button x:Name="Circle" Style="{StaticResource choiceButtons}">
                     C
                 </Button>
-                <Button x:Name="rectangle" Style="{StaticResource choiceButtons}">
+                <Button x:Name="Rectangle" Style="{StaticResource choiceButtons}">
                     R
                 </Button>
             </ToolBarPanel>
         </Border>
 
-        <wpf:OpenGLControl OpenGLDraw="OpenGLControl_OpenGLDraw"
+        <wpf:OpenGLControl x:Name = "DrawingPanel"
+                           OpenGLDraw="OpenGLControl_OpenGLDraw"
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
                            DrawFPS="True"
