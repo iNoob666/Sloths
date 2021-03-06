@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sloths"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800"
+        xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF">
 
     <Window.Resources>
         <Style x:Key="choiceButtons">
@@ -38,6 +39,11 @@
             </ToolBarPanel>
         </Border>
 
-        <Canvas x:Name="drawingPanel" Grid.Row="1" Grid.Column="1"></Canvas>
+        <wpf:OpenGLControl OpenGLDraw="OpenGLControl_OpenGLDraw"
+                           OpenGLInitialized="OpenGLControl_OpenGLInitialized"
+                           Resized="OpenGLControl_Resized"
+                           DrawFPS="True"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
     </Grid>
 </Window>

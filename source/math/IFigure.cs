@@ -4,15 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Sloths.source.model;
 
 namespace Sloths.source.math
 {
-    class Rectangle : IFigure
+    public interface IFigure
     {
-        public void draw(IPaint screen)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

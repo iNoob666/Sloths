@@ -70,10 +70,14 @@
     </ApplicationDefinition>
     <Compile Include="source\file system\InOut.cs" />
     <Compile Include="source\gui\painter.cs" />
-    <Compile Include="source\math\Circle.cs" />
-    <Compile Include="source\math\Line.cs" />
-    <Compile Include="source\math\Rectangle.cs" />
-    <Compile Include="source\model\IFigure.cs" />
+    <Compile Include="source\math\fabricks\FabricCircle.cs" />
+    <Compile Include="source\math\fabricks\FabricLine.cs" />
+    <Compile Include="source\math\fabricks\FabricRectangle.cs" />
+    <Compile Include="source\math\figures\Circle.cs" />
+    <Compile Include="source\math\figures\Line.cs" />
+    <Compile Include="source\math\figures\Rectangle.cs" />
+    <Compile Include="source\math\IFigure.cs" />
+    <Compile Include="source\model\IFabric.cs" />
     <Compile Include="source\model\IInOut.cs" />
     <Compile Include="source\model\IPaint.cs" />
     <Compile Include="source\model\source.cs" />

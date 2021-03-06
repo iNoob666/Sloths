@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 using Sloths.source.model;
 
-
-namespace Sloths.source.math
+namespace Sloths.source.math.fabricks
 {
-    class Circle : IFigure
+    class FabricRectangle : IFabric
     {
-        public void draw(IPaint screen)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
