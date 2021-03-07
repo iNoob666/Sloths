@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Sloths.source.math;
 
-namespace Sloths.source.model
+namespace Sloths.source.math
 {
     public interface IFigure
     {
@@ -15,6 +14,6 @@ namespace Sloths.source.model
         //Коненая координата определяющая размер фигуры
         NormPoint EndCoord { get; set; }
         //void SetCoords(IEnumerable<NormPoint> xy);
-        void Draw(IPaint screen);
+        void Draw(model.IPaint screen);
     }
 }

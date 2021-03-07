@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Sloths.source.model;
 
-namespace Sloths.source.math.fabricks
+namespace Sloths.source.math
 {
     class FabricLine : IFabric
     {

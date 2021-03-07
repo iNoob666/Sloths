@@ -9,6 +9,7 @@ namespace Sloths.source.model
 {
     public interface IPaint
     {
-        void drawline(List<double> xy);
+        void drawline(IEnumerable<math.NormPoint> xy);
+
     }
 }
