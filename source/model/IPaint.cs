@@ -10,6 +10,7 @@ namespace Sloths.source.model
     public interface IPaint
     {
         void drawline(IEnumerable<math.NormPoint> xy);
+        void drawcircle(math.NormPoint xy, double rad);
 
     }
 }

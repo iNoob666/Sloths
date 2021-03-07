@@ -13,22 +13,24 @@ namespace Sloths.source.math
 {
     public class NormPoint
     {
-        private double w,h;
+        private double mouse_x, mouse_y; // Координаты мыши
+        //Размеры полотна по которому нормируем
+        public static double Widht; 
+        public static double Height;
         public double X { get; private set; }
         public double Y { get; private set;  }
-        public NormPoint(double x = 0, double y = 0, double w = 1, double h = 1)
+        public NormPoint(double x = 0, double y = 0)
         {
-            this.w = w;
-            this.h = h;
-            X = 2 * x / w - 1;
-            Y = 2 * (h - y) / h - 1;
+            //переводим позицию мыши в кооринаты OpenGL
+            X = 2 * x / Widht - 1;
+            Y = 2 * (Height - y) / Height - 1;
+            mouse_x = x; mouse_y = y;
         }
-        public void UpdateSize(double w, double h)
+        public void UpdateSize()
         {
-            this.w = w;
-            this.h = h;
-            X = 2 * X / w - 1;
-            Y = 2 * (h - Y) / h - 1;
+            //переводим позицию мыши в кооринаты OpenGL
+            X = 2 * mouse_x / Widht - 1;
+            Y = 2 * (Height - mouse_y) / Height - 1;
         }
     }
 }

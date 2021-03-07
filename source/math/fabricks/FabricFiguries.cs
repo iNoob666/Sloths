@@ -18,28 +18,47 @@ namespace Sloths.source.math.fabricks
         {
             ListOfFigures = new List<IFigure>();
         }
-        public static List<IFigure> ListOfFigures { get; }
-        //Если по простому то метод этого класса создает экземпляр класса по его названию
-        //Из этого следует что: КНОПКИ ДОЛЖНЫ НАЗЫВАТЬСЯ ТАК ЖЕ КАК И КЛАССЫ!!!!
-        //(это не работает)
-        public static IFigure Create(string name)
+        public static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
+        //ВРЕМЕННО 
+        //Рома хочет сделать фабрики для каждого типа фигур
+        //будем переделывать
+        public static IFigure Create(string name) //Создание фигуры name - название фигуры 
         {
-            //потом сделаю свич
-            return new Line();
-            //object obj = Activator.CreateInstance("Sloths", "Sloths.source.math." + name);
-            //var t = obj.GetType();
-            //obj = Activator.CreateInstance(t);
-            //return obj as IFigure;
+
+            switch (name)
+            {
+                case "Line":
+                    return new Line();
+                case "Circle":
+                    return new Circle();
+                case "Rectangle":
+                    return new Rectangle();
+                default:
+                    return new Line(); //что нибудь придумать для дефолта
+
+            }
+
+
+            
+           
         }
-        public static void AddFigureToFabric(IFigure newfig)
+        public static void AddFigureToFabric(IFigure newfig) //Добавление фигуры в список newfig - фигура
         {
 
             ListOfFigures.Add(newfig);
         }
-        public static void DrawAll(model.IPaint screen)
+        public static void DrawAll(model.IPaint screen) //Отрисовка всех фигур из списка screen - клас полотна на котором рисуем 
         {
             if(ListOfFigures != null) //костыль
                 foreach (IFigure figure in ListOfFigures) figure.Draw(screen);
+        }
+        public static void Update() //Изменение координат фигур при изменении размеров полотна 
+        {
+            foreach(IFigure fig in ListOfFigures)
+            {
+                fig.BeginCoord.UpdateSize();
+                fig.EndCoord.UpdateSize();
+            }
         }
     }
 }

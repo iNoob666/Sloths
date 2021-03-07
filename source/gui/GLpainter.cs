@@ -7,6 +7,7 @@ using Sloths.source.model;
 
 using SharpGL;
 using Sloths.source.math;
+using System.Windows.Media;
 
 namespace Sloths.source.gui
 {
@@ -17,14 +18,32 @@ namespace Sloths.source.gui
         {
             openGL = gl;
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            openGL.ClearColor(0f, 0f, 0f, 0.3f);
+            openGL.ClearColor(1f, 1f, 1f, 0.3f);
         }
-        void IPaint.drawline(IEnumerable<NormPoint> xy)
+        void IPaint.drawline(IEnumerable<NormPoint> xy) //Отрисовка линии
         {
 
-            openGL.Begin(OpenGL.GL_LINES);
+            openGL.Begin(OpenGL.GL_LINES); //Начало рисования
+            openGL.Color(0f, 0f, 0f); //Задаем цвет
+            foreach(NormPoint p in xy) openGL.Vertex(p.X, p.Y); //Отрисовываем точки
+            openGL.End();
+        }
+        void IPaint.drawcircle(NormPoint xy, double rad) //Отрисовка круга
+        {
+            
+            Single twicePI = (Single)(2.0f * Math.PI); 
+            int stop = 100; //количество линий в "многоугольнике"
+            openGL.Begin(OpenGL.GL_LINE_LOOP); 
             openGL.Color(1f, 1f, 1f);
-            foreach(NormPoint p in xy) openGL.Vertex(p.X, p.Y);
+            for (int i = 0; i <= stop; i++)
+            {
+                //считаем позиции x,y для следующей точки
+                Single x = (float)(xy.X + Math.Cos(i * twicePI / stop));
+                Single y = (float)(xy.Y + Math.Sin(i * twicePI / stop)); 
+                //рисуем точку
+                openGL.Vertex(x, y); 
+            }
+
             openGL.End();
         }
     }
