@@ -76,7 +76,7 @@
     <Compile Include="source\math\figures\Circle.cs" />
     <Compile Include="source\math\figures\Line.cs" />
     <Compile Include="source\math\figures\Rectangle.cs" />
-    <Compile Include="source\math\IFigure.cs" />
+    <Compile Include="source\model\IFigure.cs" />
     <Compile Include="source\model\IFabric.cs" />
     <Compile Include="source\model\IInOut.cs" />
     <Compile Include="source\model\IPaint.cs" />

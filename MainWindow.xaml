@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
         xmlns:local="clr-namespace:Sloths"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
-        xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF">
+        Title="MainWindow" Height="600" Width="800">
 
     <Window.Resources>
         <Style x:Key="choiceButtons">
@@ -42,7 +42,6 @@
         <wpf:OpenGLControl OpenGLDraw="OpenGLControl_OpenGLDraw"
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
-                           DrawFPS="True"
                            Grid.Row="1"
                            Grid.Column="1"/>
     </Grid>

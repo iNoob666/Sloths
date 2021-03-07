@@ -14,7 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using SharpGL;
-using SharpGL.SceneGraph;
+using SharpGL.SceneGraph.Primitives;
+using SharpGL.SceneGraph.Quadrics;
+using SharpGL.WPF;
 
 
 namespace Sloths
@@ -48,13 +50,13 @@ namespace Sloths
             id = butt.Name;
         }
 
-        public void OpenGLControl_OpenGLInitialized(object sender, OpenGLEventArgs args)
+        public void OpenGLControl_OpenGLInitialized(object sender, OpenGLRoutedEventArgs args)
         {
             var gl = args.OpenGL;
             gl.ClearColor(0.3f, 0.3f, 0.3f, 0.3f);
         }
 
-        public void OpenGLControl_OpenGLDraw(object sender, OpenGLEventArgs args)
+        public void OpenGLControl_OpenGLDraw(object sender, OpenGLRoutedEventArgs args)
         {
             var gl = args.OpenGL;
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
@@ -66,7 +68,7 @@ namespace Sloths
             gl.End();
         }
 
-        public void OpenGLControl_Resized(object sender, OpenGLEventArgs args)
+        public void OpenGLControl_Resized(object sender, OpenGLRoutedEventArgs args)
         {
         }
     }

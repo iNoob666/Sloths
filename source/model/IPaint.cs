@@ -9,6 +9,6 @@ namespace Sloths.source.model
 {
     public interface IPaint
     {
-        void drawline(IEnumerable<int> xy);
+        void drawline(List<double> xy);
     }
 }
