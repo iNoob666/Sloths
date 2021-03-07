@@ -47,8 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Drawing.Common.4.7.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.5.0.1\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,14 +69,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="source\file system\InOut.cs" />
-    <Compile Include="source\gui\painter.cs" />
+    <Compile Include="source\gui\GLpainter.cs" />
     <Compile Include="source\math\fabricks\FabricCircle.cs" />
+    <Compile Include="source\math\fabricks\FabricFiguries.cs" />
     <Compile Include="source\math\fabricks\FabricLine.cs" />
     <Compile Include="source\math\fabricks\FabricRectangle.cs" />
     <Compile Include="source\math\figures\Circle.cs" />
     <Compile Include="source\math\figures\Line.cs" />
     <Compile Include="source\math\figures\Rectangle.cs" />
     <Compile Include="source\math\IFigure.cs" />
+    <Compile Include="source\math\NormPoint.cs" />
     <Compile Include="source\model\IFabric.cs" />
     <Compile Include="source\model\IInOut.cs" />
     <Compile Include="source\model\IPaint.cs" />

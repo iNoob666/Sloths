@@ -4,17 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Sloths.source.math
 {
     public interface IFigure
     {
-        bool IsIn(Point p);         //принадлежность точки фигуре
-        IFigure Scale(double percentX, double percentY);        //изменение размера фигуры процентами
-        IFigure Fit(double w, double h);        //изменение размера фигуры значениями
-        IFigure MoveByVector(Point v);          //перемещение
-        IFigure Rotate(Point center, double Phi);         //поворот 
+        //Начальная координа определяемая начало фигуры
+        NormPoint BeginCoord { get; set; }
+        //Коненая координата определяющая размер фигуры
+        NormPoint EndCoord { get; set; }
+        //void SetCoords(IEnumerable<NormPoint> xy);
+
+        bool IsIn(NormPoint p);         //принадлежность точки фигуре
+
+        IFigure Scale(double koeff);        //изменение размера фигуры процентами
+        IFigure MoveByVector(NormPoint v);          //перемещение
+        IFigure Rotate(NormPoint center, double Phi);         //поворот 
         IFigure Rotate(double Phi);         //поворот относительно центра
-        IFigure Reflection(Point a, Point b);   //отражение
-        void Draw(IGraphic screen, IFigureGraphicParameters param); //рисование
+        IFigure Reflection(NormPoint a, NormPoint b);   //отражение
+
+ 
+        void Draw(model.IPaint screen);
     }
 }
