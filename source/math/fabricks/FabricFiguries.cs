@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Sloths.source.model;
 /*
  * Я не очень понимаю зачем нам нужны три фабрики для каждого типа фигуры
  * как я понимаю с каждой фигурой мы будем работать одинаково 
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
  * Так что я создал свой класс для фабрики (Я ХУДОЖНИК Я ТАК ВИЖУ!!!11!!1)
  * (А учитывая что пишу я это в час ночи вижу я всякое :Р)
  */
-namespace Sloths.source.math.fabricks
+namespace Sloths.source.math
 {
     public static class FabricFiguries
     {

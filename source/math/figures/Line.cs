@@ -28,16 +28,5 @@ namespace Sloths.source.math
         {
             screen.drawline(new List<NormPoint> { BeginCoord, EndCoord });
         }
-
-        public void Draw(IPaint screen)
-        {
-            List<double> y = findY();
-            List<double> xy = new List<double>();
-            xy.Add(this.x0);
-            xy.Add(y[0]);
-            xy.Add(this.x1);
-            xy.Add(y[1]);
-            screen.drawline(xy);
-        }
     }
 }
