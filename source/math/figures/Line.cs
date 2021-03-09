@@ -17,7 +17,7 @@ namespace Sloths.source.math
         //private double x1;
         //Начальная координа определяемая начало фигуры
         public NormPoint BeginCoord { get; set; }
-        //Коненая координата определяющая размер фигуры
+        //Коненая координата определяющая размер и положение фигуры
         public NormPoint EndCoord { get; set; }
         public Line()
         {

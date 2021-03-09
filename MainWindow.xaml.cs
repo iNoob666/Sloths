@@ -19,6 +19,7 @@ using SharpGL.SceneGraph.Quadrics;
 using SharpGL.WPF;
 using Sloths.source.gui;
 using Sloths.source.math;
+using Sloths.source.math.fabricks;
 using Sloths.source.model;
 
 namespace Sloths
@@ -29,131 +30,113 @@ namespace Sloths
     
     public partial class MainWindow : Window
     {
-        IPaint engine;
-        IFigure Figure;
-
-
-        //private Single x1 = 0.0f, x2 = 0.0f, y1 = 0.0f, y2 = 0.0f;
-        private string id = "";
+        private IPaint engine; //Движок на котором рисуем все
+        private IFigure Figure; //Поле для новой фигуры
+        private string id = ""; //Название нажатой кнопки  
         public MainWindow()
         {
 
             InitializeComponent();
-            
+            //Присваиваем статическому классу NormPoint размеры холста для рисования
+            //это необходимо для приобразования координат из wpf в OpenGL
+            NormPoint.Height = DrawingPanel.ActualHeight;
+            NormPoint.Widht = DrawingPanel.ActualWidth;
+
+            //Назначаем иветны на кнопки
+            //**ДЛЯ ОТДЕЛА UI**
+            //Когда будете пилить сюда интерфейс оберните кнопки фигур в контейнер плз))
             foreach (Button elem in Tools.Children)
             {
                 elem.Click += ButtonActive_Event;
             }
-            //line.Click += LineButtonClick;
-            //circle.Click += CircleButtonClick;
-            //rectangle.Click += RectButtonClick;
+            
 
 
 
         }
+        //Ивент срабатывающий при нажатии кнопки фигуры
         private void ButtonActive_Event(object sender, RoutedEventArgs e)
         {
+            //Чистим цвета
             foreach (Button elem in Tools.Children)
             {
                 elem.Background = new SolidColorBrush(Colors.White);
             }
             Button butt = sender as Button;
             id = butt.Name;
-            butt.Background = new SolidColorBrush(Colors.Red);
-            Figure = FabricFiguries.Create(id);
-            DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
+            butt.Background = new SolidColorBrush(Colors.Red); //Подсвечиваем красным нажатую кнопку
+            Figure = FabricFiguries.Create(id); //Создаем экземляр класса фигуры
+            DrawingPanel.MouseLeftButtonDown += MouseDown_Event; //Назначаем на левую кнопку мыши евент для начала рисования
         }
-       
+        //Ивент срабатывающий при нажатии на холст левой кнопкой мыши.
+        //При нажатии на холст создается фигура
         private void MouseDown_Event(object sender, MouseButtonEventArgs e)
         {
-            Figure = FabricFiguries.Create(id);
-            DrawingPanel.MouseMove += MouseMove_Event;
-            DrawingPanel.MouseLeftButtonUp += MouseUp_Event;
+            Figure = FabricFiguries.Create(id); //Создаем экземляр класса фигуры
+            DrawingPanel.MouseMove += MouseMove_Event; //Назначаем ивент для движения мышью с помощью которого будем менять размер фигуры
+            DrawingPanel.MouseLeftButtonUp += MouseUp_Event; //Назначаем ивент при отпуске левой кнопки мыши заканчивающий создание фигуры
             var _Mouse = e;
             var gLControl = (OpenGLControl)sender;
-            var MouseCoord = _Mouse.GetPosition(this.DrawingPanel);
-            
-            Figure.BeginCoord = new source.math.NormPoint(MouseCoord.X, MouseCoord.Y, gLControl.ActualWidth, gLControl.ActualHeight);
-
+            var MouseCoord = _Mouse.GetPosition(this.DrawingPanel); //Сичтываем позицию мыши на полотне
+            //Назначаем начальную координату фигуры, которая в дальнейшем меняться не будет
+            Figure.BeginCoord = new NormPoint(MouseCoord.X, MouseCoord.Y);
+            //Вторая координата фигуры, которая в дальнейшем будет меняться в ивенте MouseMove_Event
+            Figure.EndCoord = new NormPoint(MouseCoord.X, MouseCoord.Y); 
         }
-
-        private void MouseUp_Event(object sender, MouseButtonEventArgs e)
-        {
-            FabricFiguries.AddFigureToFabric(Figure);
-
-            DrawingPanel.MouseMove -= MouseMove_Event;
-        }
-
         private void MouseMove_Event(object sender, MouseEventArgs e)
         {
             var _Mouse = e;
             var gLControl = (OpenGLControl)sender;
-            var MouseCoord = _Mouse.GetPosition(this.DrawingPanel);
-            Figure.EndCoord = new source.math.NormPoint(MouseCoord.X, MouseCoord.Y, gLControl.ActualWidth, gLControl.ActualHeight);
+            var MouseCoord = _Mouse.GetPosition(this.DrawingPanel);//Сичтываем позицию мыши на полотне
+            //Меняем вторую координату фигуры для изменения размера и положения фигуры 
+            Figure.EndCoord = new NormPoint(MouseCoord.X, MouseCoord.Y);
         }
 
-        //Мусорный код
-        //private void CircleButtonClick(object sender, RoutedEventArgs e)
-        //{
-        //    x1 = 0.66f;
-        //    y1 = 0.66f;
-        //    x2 = -0.66f;
-        //    y2 = -0.66f;
-        //}
-        //private void RectButtonClick(object sender, RoutedEventArgs e)
-        //{
-        //    x1 = 0.33f;
-        //    y1 = 0.33f;
-        //    x2 = -0.33f;
-        //    y2 = -0.33f;
-        //}
-        //DEBUG ДЛЯ ПРОВЕКТИ РИСОВКИ ЛИНИЙ
-        //private void LineButtonClick(object sender, RoutedEventArgs e)
-        //{
-        //    var b = sender as Button;
+        private void MouseUp_Event(object sender, MouseButtonEventArgs e)
+        {
+            //Добавляем фигуру в фабрику для дальнейшей отрисовки  
+            FabricFiguries.AddFigureToFabric(Figure);
 
-        //    id = b.Name;
+            DrawingPanel.MouseLeftButtonUp -= MouseUp_Event;
+            DrawingPanel.MouseMove -= MouseMove_Event;
+        }
 
+        
 
+        
 
-        //}
-
-
-        public void OpenGLControl_OpenGLInitialized(object sender, OpenGLRoutedEventArgs args)
+        /*
+          Сегмент кода про OpenGL
+             */
+        public void OpenGLControl_OpenGLInitialized(object sender, OpenGLRoutedEventArgs args) //Инициализация полотна 
         {
             var gl = args.OpenGL;
-            engine = new GLpainter(ref gl);
+            engine = new GLpainter(ref gl); //Создаем экземляр класса GLpainter с помощью которого рисуем графику
+
+        }
+
+        public void OpenGLControl_OpenGLDraw(object sender, OpenGLRoutedEventArgs args) //Ивент для отрисовки кадра
+        {
+            var gl = args.OpenGL;
+            gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT); //Отчищаем полотно
+            FabricFiguries.DrawAll(engine); //Рисуем все фугу из фабрики
+            if (Figure != null) Figure.Draw(engine); //Отрисовка новой фигуры
+
+        }
+
+        public void OpenGLControl_Resized(object sender, OpenGLRoutedEventArgs args) //Ивент изменения размера окна
+        {
+
+            var glContol = (OpenGLControl)sender;
+            //Присваиваем новые размеры полотна
+            NormPoint.Height = glContol.ActualHeight;
+            NormPoint.Widht = glContol.ActualWidth;
+            //Изменяем положение фигур на новом холсте
+            FabricFiguries.Update();
             
         }
 
-        public void OpenGLControl_OpenGLDraw(object sender, OpenGLRoutedEventArgs args)
-        {
-            var gl = args.OpenGL;
-            gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            FabricFiguries.DrawAll(engine);
-            if(Figure != null) Figure.Draw(engine);
-            //var gl = args.OpenGL;
-            //gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            //gl.Begin(OpenGL.GL_LINES);
-            //gl.Color(0f, 1f, 0f);
 
-            //gl.Vertex(x1, y1);
-            //gl.Vertex(x2, y2);
-            //gl.End();
-        }
-
-        public void OpenGLControl_Resized(object sender, OpenGLRoutedEventArgs args)
-        {
-        }
-
-
-        //private Point Nornmalize(Point point, double w, double h)
-        //{
-
-        //    double X = 2*point.X / w - 1;
-        //    double Y = 2*(h -point.Y) / h - 1;
-
-        //    return new Point(X, Y);
-        //}
+       
     }
 }
