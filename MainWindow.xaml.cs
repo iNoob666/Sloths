@@ -19,7 +19,6 @@ using SharpGL.SceneGraph.Quadrics;
 using SharpGL.WPF;
 using Sloths.source.gui;
 using Sloths.source.math;
-using Sloths.source.math.fabricks;
 using Sloths.source.model;
 
 namespace Sloths
