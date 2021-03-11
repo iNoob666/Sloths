@@ -57,12 +57,20 @@ namespace Sloths.source.math
 
         public IFigure Rotate(NormPoint center, double Phi)
         {
-            return this;
+            Line tmp = new Line();
+            tmp = this;
+            tmp.BeginCoord.UpdateCoord(center.X + BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), center.Y + BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
+            tmp.EndCoord.UpdateCoord(center.X + EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
+            return tmp;
         }
 
         public IFigure Rotate(double Phi)
         {
-            return this;
+            Line tmp = new Line();
+            tmp = this;
+            tmp.BeginCoord.UpdateCoord(BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
+            tmp.EndCoord.UpdateCoord(EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
+            return tmp;
         }
 
         public IFigure Reflection(NormPoint a, NormPoint b)

@@ -38,11 +38,7 @@ namespace Sloths.source.math
                 default:
                     return new Line(); //что нибудь придумать для дефолта
 
-            }
-
-
-            
-           
+            }  
         }
         public static void AddFigureToFabric(IFigure newfig) //Добавление фигуры в список newfig - фигура
         {
