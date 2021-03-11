@@ -10,13 +10,21 @@ namespace Sloths.source.math
 {
     class Rectangle : IFigure
     {
-        public NormPoint BeginCoord { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public NormPoint EndCoord { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public NormPoint BeginCoord { get; set; }
+        public NormPoint EndCoord { get; set; }
+        public NormPoint Node3 { get; set; }
+        public NormPoint Node4 { get; set; }
 
         public Rectangle()
         {
             BeginCoord = new NormPoint();
             EndCoord = new NormPoint();
+        }
+
+        public void InitNodes()
+        {
+            Node3.UpdateCoord(BeginCoord.X, EndCoord.Y);
+            Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
         }
 
         public bool IsIn(NormPoint p)
@@ -45,12 +53,24 @@ namespace Sloths.source.math
 
         public IFigure Rotate(NormPoint center, double Phi)
         {
-            return this;
+            Rectangle tmp = new Rectangle();
+            tmp = this;
+            tmp.BeginCoord.UpdateCoord(center.X + BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), center.Y + BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
+            tmp.EndCoord.UpdateCoord(center.X+EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
+            tmp.Node3.UpdateCoord(center.X+Node3.X * Math.Sin(Phi) + Node3.Y * Math.Cos(Phi), center.Y + Node3.X * Math.Cos(Phi) - Node3.Y * Math.Sin(Phi));
+            tmp.Node4.UpdateCoord(center.X+Node4.X * Math.Sin(Phi) + Node4.Y * Math.Cos(Phi), center.Y + Node4.X * Math.Cos(Phi) - Node4.Y * Math.Sin(Phi));
+            return tmp;
         }
 
         public IFigure Rotate(double Phi)
         {
-            return this;
+            Rectangle tmp = new Rectangle();
+            tmp = this;
+            tmp.BeginCoord.UpdateCoord(BeginCoord.X * Math.Sin(Phi)+ BeginCoord.Y * Math.Cos(Phi), BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
+            tmp.EndCoord.UpdateCoord(EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
+            tmp.Node3.UpdateCoord(Node3.X * Math.Sin(Phi) + Node3.Y * Math.Cos(Phi), Node3.X * Math.Cos(Phi) - Node3.Y * Math.Sin(Phi));
+            tmp.Node4.UpdateCoord(Node4.X * Math.Sin(Phi) + Node4.Y * Math.Cos(Phi), Node4.X * Math.Cos(Phi) - Node4.Y * Math.Sin(Phi));
+            return tmp;
         }
 
         public IFigure Reflection(NormPoint a, NormPoint b)
@@ -59,22 +79,14 @@ namespace Sloths.source.math
         }
 
 
-       /* public void Draw()
-        {
-
-        }*/
-
         public void Draw(IPaint screen)
         {
-            NormPoint a,b;
-            a = BeginCoord;
-            b = BeginCoord;
-            a.UpdateCoord(BeginCoord.X,EndCoord.Y);
-            b.UpdateCoord(EndCoord.X, BeginCoord.Y);
-            screen.drawline(new List<NormPoint> { BeginCoord, a });
-            screen.drawline(new List<NormPoint> { BeginCoord, b });
-            screen.drawline(new List<NormPoint> { b, EndCoord });
-            screen.drawline(new List<NormPoint> { EndCoord, a });
+            Node3.UpdateCoord(BeginCoord.X,EndCoord.Y);
+            Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
+            screen.drawline(new List<NormPoint> { BeginCoord, Node3 });
+            screen.drawline(new List<NormPoint> { BeginCoord, Node4 });
+            screen.drawline(new List<NormPoint> { Node4, EndCoord });
+            screen.drawline(new List<NormPoint> { EndCoord, Node3 });
         }
     }
 }

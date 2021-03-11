@@ -10,5 +10,9 @@ namespace Sloths.source.math.fabricks
 {
     class FabricCircle : IFabric
     {
+        public static IFigure Create(string name)
+        {
+            return new Circle();
+        }
     }
 }

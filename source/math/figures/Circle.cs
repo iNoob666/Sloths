@@ -72,12 +72,19 @@ namespace Sloths.source.math
 
         public IFigure Rotate(NormPoint center, double Phi)
         {
-            return this;
+            Circle tmp = new Circle();
+            tmp = this;
+            tmp.BeginCoord.UpdateCoord(center.X + BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), center.Y + BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
+            tmp.EndCoord.UpdateCoord(center.X + EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
+            tmp.C.UpdateCoord(center.X + C.X * Math.Sin(Phi) + C.Y * Math.Cos(Phi), center.Y + C.X * Math.Cos(Phi) - C.Y * Math.Sin(Phi));
+            return tmp;
         }
+
         public IFigure Rotate(double Phi)
         {
             return this;
         }
+
         public IFigure Reflection(NormPoint a, NormPoint b)
         {
             return this;

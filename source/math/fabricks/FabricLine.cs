@@ -10,5 +10,11 @@ namespace Sloths.source.math.fabricks
 {
     class FabricLine : IFabric
     {
+        public static IFigure Create(string name)
+        {
+            return new Line();
+        }
+
+
     }
 }
