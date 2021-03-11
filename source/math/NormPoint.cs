@@ -32,5 +32,11 @@ namespace Sloths.source.math
             X = 2 * mouse_x / Widht - 1;
             Y = 2 * (Height - mouse_y) / Height - 1;
         }
+
+        public void UpdateCoord(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
     }
 }

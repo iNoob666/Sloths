@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Sloths.source.math
+namespace Sloths.source.model
 {
     public interface IFigure
     {

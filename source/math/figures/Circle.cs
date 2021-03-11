@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Sloths.source.model;
 
 namespace Sloths.source.math
 {
@@ -89,9 +88,6 @@ namespace Sloths.source.math
         {
             return this;
         }
-
-
-
 
 
         public void Draw()
