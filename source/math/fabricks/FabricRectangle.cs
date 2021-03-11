@@ -10,5 +10,9 @@ namespace Sloths.source.math
 {
     class FabricRectangle : IFabric
     {
+        public static IFigure Create(string name)
+        {
+            return new Rectangle();
+        }
     }
 }

@@ -10,10 +10,9 @@ namespace Sloths.source.math
 {
     class FabricCircle : IFabric
     {
-        public IFigure create()
+        public static IFigure Create(string name)
         {
-            IFigure tmp = new Circle();
-            return tmp;
+            return new Circle();
         }
     }
 }
