@@ -8,6 +8,6 @@ namespace Sloths.source.model
 {
     public interface IFabric
     {
-
+        IFigure Create(string name);
     }
 }

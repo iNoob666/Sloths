@@ -27,7 +27,7 @@
 
         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="0, 0, 2, 0">
             <ToolBarPanel x:Name="Tools">
-                <Button x:Name="Line" Style="{StaticResource choiceButtons}">
+                <Button x:Name="Line" Style="{StaticResource choiceButtons}" Background="Red">
                     L
                 </Button>
                 <Button x:Name="Circle" Style="{StaticResource choiceButtons}">
