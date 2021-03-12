@@ -10,7 +10,7 @@ namespace Sloths.source.math
 {
     class FabricLine : IFabric
     {
-        public static IFigure Create(string name)
+        public IFigure Create(string name)
         {
             return new Line();
         }
