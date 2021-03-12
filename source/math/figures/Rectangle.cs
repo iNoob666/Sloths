@@ -12,8 +12,8 @@ namespace Sloths.source.math
     {
         public NormPoint BeginCoord { get; set; }
         public NormPoint EndCoord { get; set; }
-        public NormPoint Node3 { get; set; }
-        public NormPoint Node4 { get; set; }
+        private NormPoint Node3 { get; set; }
+        private NormPoint Node4 { get; set; }
 
         public Rectangle()
         {

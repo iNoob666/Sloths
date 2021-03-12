@@ -13,8 +13,8 @@ namespace Sloths.source.math
         public NormPoint BeginCoord { get; set; }
         public NormPoint EndCoord { get; set; }
 
-        public double R { get; set; }
-        public NormPoint C { get; set; }
+        private double R { get; set; }
+        private NormPoint C { get; set; }
 
         public Circle()
         {
@@ -90,14 +90,9 @@ namespace Sloths.source.math
         }
 
 
-        public void Draw()
-        {
-
-        }
-
         public void Draw(IPaint screen)
         {
-            throw new NotImplementedException();//передается точка центра и радиус
+            screen.drawcircle(C, R);
         }
     }
 }
