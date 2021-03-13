@@ -19,10 +19,14 @@ namespace Sloths.source.math
         {
             BeginCoord = new NormPoint();
             EndCoord = new NormPoint();
+            Node3 = new NormPoint();
+            Node4 = new NormPoint();
         }
 
-        public void InitNodes()
+        public void Init(NormPoint p1, NormPoint p2)
         {
+            BeginCoord = p1;
+            EndCoord = p2;
             Node3.UpdateCoord(BeginCoord.X, EndCoord.Y);
             Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
         }
@@ -40,6 +44,8 @@ namespace Sloths.source.math
             Rectangle tmp = new Rectangle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X * koeff, this.BeginCoord.Y * koeff);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X * koeff, this.EndCoord.Y * koeff);
+            Node3.UpdateCoord(Node3.X*koeff, Node3.Y * koeff);
+            Node4.UpdateCoord(Node4.X * koeff, Node4.Y * koeff);
             return tmp;
         }
 
@@ -81,8 +87,8 @@ namespace Sloths.source.math
 
         public void Draw(IPaint screen)
         {
-            Node3.UpdateCoord(BeginCoord.X,EndCoord.Y);
-            Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
+            //Node3.UpdateCoord(BeginCoord.X,EndCoord.Y);
+           // Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
             screen.drawline(new List<NormPoint> { BeginCoord, Node3 });
             screen.drawline(new List<NormPoint> { BeginCoord, Node4 });
             screen.drawline(new List<NormPoint> { Node4, EndCoord });

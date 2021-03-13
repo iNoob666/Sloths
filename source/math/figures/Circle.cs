@@ -20,10 +20,13 @@ namespace Sloths.source.math
         {
             BeginCoord = new NormPoint();
             EndCoord = new NormPoint();
+            C = new NormPoint();
         }
 
-        public void InitRC()
+        public void Init(NormPoint p1, NormPoint p2)
         {
+            BeginCoord = p1;
+            EndCoord = p2;
             bool tmp;
             int flag;
             if (BeginCoord.X - EndCoord.X < BeginCoord.Y - EndCoord.Y)
