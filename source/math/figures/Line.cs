@@ -24,6 +24,13 @@ namespace Sloths.source.math
             BeginCoord = new NormPoint();
             EndCoord = new NormPoint();
         }
+
+        public void Init(NormPoint p1, NormPoint p2)
+        {
+            BeginCoord = p1;
+            EndCoord = p2;
+        }
+
         public void Draw(IPaint screen)
         {
             screen.drawline(new List<NormPoint> { BeginCoord, EndCoord });

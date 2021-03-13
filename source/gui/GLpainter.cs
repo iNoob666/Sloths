@@ -34,12 +34,18 @@ namespace Sloths.source.gui
             Single twicePI = (Single)(2.0f * Math.PI); 
             int stop = 100; //количество линий в "многоугольнике"
             openGL.Begin(OpenGL.GL_LINE_LOOP); 
-            openGL.Color(1f, 1f, 1f);
+            openGL.Color(0f, 0f, 0f);
+            //Single x = (float)(xy.X + rad);
+            //Single y = (float) xy.Y;
+            //openGL.Vertex(x, y);
             for (int i = 0; i <= stop; i++)
             {
                 //считаем позиции x,y для следующей точки
-                Single x = (float)(xy.X + Math.Cos(i * twicePI / stop));
-                Single y = (float)(xy.Y + Math.Sin(i * twicePI / stop)); 
+
+                Single x = (float)(xy.X + rad*Math.Cos(i * twicePI / stop));
+                Single y = (float)(xy.Y + rad*Math.Sin(i * twicePI / stop));
+                //Single x1 = (float)(xy.X + x * Math.Sin(i * twicePI / stop) + y * Math.Cos(i * twicePI / stop));
+                //Single y1 = (float)(xy.Y + x * Math.Cos(i * twicePI / stop) - y * Math.Sin(i * twicePI / stop)); 
                 //рисуем точку
                 openGL.Vertex(x, y); 
             }

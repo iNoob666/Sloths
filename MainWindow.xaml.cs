@@ -75,9 +75,8 @@ namespace Sloths
             var gLControl = (OpenGLControl)sender;
             var MouseCoord = e.GetPosition(this.DrawingPanel); //Сичтываем позицию мыши на полотне
             //Назначаем начальную координату фигуры, которая в дальнейшем меняться не будет
-            Figure.BeginCoord = new NormPoint(MouseCoord.X, MouseCoord.Y);
+            Figure.Init(new NormPoint(MouseCoord.X, MouseCoord.Y),new NormPoint(MouseCoord.X, MouseCoord.Y));
             //Вторая координата фигуры, которая в дальнейшем будет меняться в ивенте MouseMove_Event
-            Figure.EndCoord = new NormPoint(MouseCoord.X, MouseCoord.Y);
             DrawingPanel.MouseMove += MouseMove_Event; //Назначаем ивент для движения мышью с помощью которого будем менять размер фигуры
             DrawingPanel.MouseLeftButtonUp += MouseUp_Event; //Назначаем ивент при отпуске левой кнопки мыши заканчивающий создание фигуры
         }
@@ -87,7 +86,8 @@ namespace Sloths
             var gLControl = (OpenGLControl)sender;
             var MouseCoord = e.GetPosition(this.DrawingPanel);//Сичтываем позицию мыши на полотне
             //Меняем вторую координату фигуры для изменения размера и положения фигуры 
-            Figure.EndCoord = new NormPoint(MouseCoord.X, MouseCoord.Y);
+            Figure.Init(Figure.BeginCoord, new NormPoint(MouseCoord.X, MouseCoord.Y));
+            //Figure.EndCoord = new NormPoint(MouseCoord.X, MouseCoord.Y);
         }
 
         private void MouseUp_Event(object sender, MouseButtonEventArgs e)
