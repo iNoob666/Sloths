@@ -29,19 +29,19 @@ namespace Sloths.source.math
             EndCoord = p2;
             bool tmp;
             int flag;
-            if (BeginCoord.X - EndCoord.X < BeginCoord.Y - EndCoord.Y)
+            if (Math.Abs(BeginCoord.X - EndCoord.X) < Math.Abs(BeginCoord.Y - EndCoord.Y))
             {
-                R = (BeginCoord.X - EndCoord.X) / 2;
+                R = Math.Abs(BeginCoord.X - EndCoord.X) / 2;
                 if (BeginCoord.Y > EndCoord.Y) flag = 1;
                 else flag = -1;
-                EndCoord.UpdateCoord(EndCoord.X, BeginCoord.Y - flag * (BeginCoord.X + EndCoord.X));
+                EndCoord.UpdateCoord(EndCoord.X, BeginCoord.Y - flag * Math.Abs(EndCoord.X - BeginCoord.X));
             }
             else
             { 
-                R = (BeginCoord.Y - EndCoord.Y) / 2;
+                R = Math.Abs(BeginCoord.Y - EndCoord.Y) / 2;
                 if (BeginCoord.X > EndCoord.X) flag = 1;
                 else flag = -1;
-                EndCoord.UpdateCoord(BeginCoord.X - flag * (BeginCoord.Y - EndCoord.Y), EndCoord.Y);
+                EndCoord.UpdateCoord(BeginCoord.X - flag * Math.Abs(BeginCoord.Y - EndCoord.Y), EndCoord.Y);
             }
             C.UpdateCoord((BeginCoord.X + EndCoord.X) / 2, (BeginCoord.Y + EndCoord.Y) / 2);
         }
