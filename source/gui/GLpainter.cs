@@ -22,15 +22,14 @@ namespace Sloths.source.gui
         }
         void IPaint.drawline(IEnumerable<NormPoint> xy) //Отрисовка линии
         {
-
             openGL.Begin(OpenGL.GL_LINES); //Начало рисования
             openGL.Color(0f, 0f, 0f); //Задаем цвет
-            foreach(NormPoint p in xy) openGL.Vertex(p.X, p.Y); //Отрисовываем точки
+            foreach(NormPoint p in xy)
+                openGL.Vertex(p.X, p.Y); //Отрисовываем точки
             openGL.End();
         }
         void IPaint.drawcircle(NormPoint xy, double rad) //Отрисовка круга
         {
-            
             Single twicePI = (Single)(2.0f * Math.PI); 
             int stop = 100; //количество линий в "многоугольнике"
             openGL.Begin(OpenGL.GL_LINE_LOOP); 

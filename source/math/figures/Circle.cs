@@ -29,21 +29,21 @@ namespace Sloths.source.math
             EndCoord = p2;
             bool tmp;
             int flag;
-            if (Math.Abs(BeginCoord.X - EndCoord.X) < Math.Abs(BeginCoord.Y - EndCoord.Y))
+            if (Math.Abs(p1.X - p2.X) < Math.Abs(p1.Y - p2.Y))
             {
-                R = Math.Abs(BeginCoord.X - EndCoord.X) / 2;
-                if (BeginCoord.Y > EndCoord.Y) flag = 1;
+                R = Math.Abs(p1.X - p2.X) / 2;
+                if (p1.Y > p2.Y) flag = 1;
                 else flag = -1;
-                EndCoord.UpdateCoord(EndCoord.X, BeginCoord.Y - flag * Math.Abs(EndCoord.X - BeginCoord.X));
+                EndCoord.UpdateCoord(p2.X, p1.Y - flag * Math.Abs(p2.X - p1.X));
             }
             else
             { 
-                R = Math.Abs(BeginCoord.Y - EndCoord.Y) / 2;
-                if (BeginCoord.X > EndCoord.X) flag = 1;
+                R = Math.Abs(p1.Y - p2.Y) / 2;
+                if (p1.X > p2.X) flag = 1;
                 else flag = -1;
-                EndCoord.UpdateCoord(BeginCoord.X - flag * Math.Abs(BeginCoord.Y - EndCoord.Y), EndCoord.Y);
+                EndCoord.UpdateCoord(p1.X - flag * Math.Abs(p1.Y - p2.Y), p2.Y);
             }
-            C.UpdateCoord((BeginCoord.X + EndCoord.X) / 2, (BeginCoord.Y + EndCoord.Y) / 2);
+            C.UpdateCoord((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
         }
 
         public bool IsIn(NormPoint p)
@@ -63,7 +63,7 @@ namespace Sloths.source.math
             return tmp;
         }
 
-        public IFigure MoveByVector(NormPoint v)
+        public IFigure MoveByVector(NormPoint v)// ? фигня какая-то, надо изменить.
         {
             Circle tmp = new Circle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + v.X, this.BeginCoord.Y + v.Y);

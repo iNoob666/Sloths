@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpGL;
 
 using Sloths.source.model;
 /*
@@ -20,13 +21,13 @@ namespace Sloths.source.math
         {
             ListOfFigures = new List<IFigure>();
         }
-        public static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
+
+        private static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
         //ВРЕМЕННО 
         //Рома хочет сделать фабрики для каждого типа фигур
         //будем переделывать
         public static IFigure Create(string name) //Создание фигуры name - название фигуры 
         {
-
             switch (name)
             {
                 case "Line":
@@ -37,19 +38,20 @@ namespace Sloths.source.math
                     return new Rectangle();
                 default:
                     return new Line(); //что нибудь придумать для дефолта
-
             }  
         }
+
         public static void AddFigureToFabric(IFigure newfig) //Добавление фигуры в список newfig - фигура
         {
-
             ListOfFigures.Add(newfig);
         }
-        public static void DrawAll(model.IPaint screen) //Отрисовка всех фигур из списка screen - клас полотна на котором рисуем 
+
+        public static void DrawAll(IPaint screen) //Отрисовка всех фигур из списка screen - клас полотна на котором рисуем 
         {
-            if(ListOfFigures != null) //костыль
-                foreach (IFigure figure in ListOfFigures) figure.Draw(screen);
+            foreach (IFigure figure in ListOfFigures)
+                figure.Draw(screen);
         }
+
         public static void Update() //Изменение координат фигур при изменении размеров полотна 
         {
             foreach(IFigure fig in ListOfFigures)

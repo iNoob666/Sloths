@@ -94,7 +94,7 @@ namespace Sloths
         {
             DrawingPanel.MouseMove -= MouseMove_Event;
             DrawingPanel.MouseLeftButtonUp -= MouseUp_Event;
-            //Добавляем фигуру в фабрику для дальнейшей отрисовки  
+            //Добавляем фигуру в фабрику для дальнейшей отрисовки
             FabricFiguries.AddFigureToFabric(Figure);
             
             DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
@@ -107,7 +107,6 @@ namespace Sloths
         {
             var gl = args.OpenGL;
             engine = new GLpainter(ref gl); //Создаем экземляр класса GLpainter с помощью которого рисуем графику
-
         }
 
         public void OpenGLControl_OpenGLDraw(object sender, OpenGLRoutedEventArgs args) //Ивент для отрисовки кадра
