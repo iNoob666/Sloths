@@ -27,6 +27,7 @@ namespace Sloths.source.gui
             foreach(NormPoint p in xy)
                 openGL.Vertex(p.X, p.Y); //Отрисовываем точки
             openGL.End();
+            openGL.Flush();
         }
         void IPaint.drawcircle(NormPoint xy, double rad) //Отрисовка круга
         {
@@ -50,6 +51,12 @@ namespace Sloths.source.gui
             }
 
             openGL.End();
+            openGL.Flush();
+        }
+
+        public void _flush()
+        {
+            openGL.Flush();
         }
     }
 }
