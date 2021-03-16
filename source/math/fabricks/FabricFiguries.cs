@@ -58,6 +58,7 @@ namespace Sloths.source.math
             {
                 fig.BeginCoord.UpdateSize();
                 fig.EndCoord.UpdateSize();
+                fig.Init(fig.BeginCoord, fig.EndCoord);
             }
         }
     }
