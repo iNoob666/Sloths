@@ -50,6 +50,7 @@ namespace Sloths.source.math
         {
             foreach (IFigure figure in ListOfFigures)
                 figure.Draw(screen);
+            screen._flush();
         }
 
         public static void Update() //Изменение координат фигур при изменении размеров полотна 

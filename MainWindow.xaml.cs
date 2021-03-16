@@ -112,8 +112,8 @@ namespace Sloths
         public void OpenGLControl_OpenGLDraw(object sender, OpenGLRoutedEventArgs args) //Ивент для отрисовки кадра
         {
             args.OpenGL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT); //Отчищаем полотно
-            FabricFiguries.DrawAll(engine); //Рисуем все фугу из фабрики
             Figure.Draw(engine); //Отрисовка новой фигуры
+            FabricFiguries.DrawAll(engine); //Рисуем все фигуры из фабрики
         }
 
         public void OpenGLControl_Resized(object sender, OpenGLRoutedEventArgs args) //Ивент изменения размера окна

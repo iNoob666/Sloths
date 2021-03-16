@@ -43,6 +43,7 @@
                            OpenGLDraw="OpenGLControl_OpenGLDraw"
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
+                           DrawFPS="True"
                            Grid.Row="1"
                            Grid.Column="1"/>
     </Grid>
