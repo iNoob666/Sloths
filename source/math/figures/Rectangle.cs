@@ -31,12 +31,23 @@ namespace Sloths.source.math
             Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
         }
 
+
+        private double Scal(NormPoint a, NormPoint b, NormPoint c)
+        {
+            return a.X * b.Y - b.X * a.Y - a.X * c.Y + c.X * a.Y + b.X * c.Y - c.X * b.Y;
+        }
+
         public bool IsIn(NormPoint p)
         {
-            if (p.X > BeginCoord.X  && p.X < EndCoord.X || p.X < BeginCoord.X && p.X > EndCoord.X)
-                if (p.Y > BeginCoord.Y && p.Y < EndCoord.Y || p.Y < BeginCoord.Y && p.Y > EndCoord.Y)
-                    return true;
-            return false;
+            double abp = Scal(BeginCoord, Node3, p);
+            double bcp = Scal(Node3, EndCoord, p);
+            double acp = Scal(EndCoord, BeginCoord , p);
+            double adp = Scal(BeginCoord, Node4, p);
+            double cdp = Scal(Node4, EndCoord, p);
+
+            if (abp > 0 && bcp > 0 && acp > 0 || abp < 0 && bcp < 0 && acp < 0 || adp > 0 && cdp > 0 && acp > 0 || adp < 0 && cdp < 0 && acp < 0)
+                return true;
+            else return false;
         }
 
         public IFigure Scale(double koeff)

@@ -96,7 +96,9 @@ namespace Sloths
             DrawingPanel.MouseLeftButtonUp -= MouseUp_Event;
             //Добавляем фигуру в фабрику для дальнейшей отрисовки  
             FabricFiguries.AddFigureToFabric(Figure);
-            
+            NormPoint p = new NormPoint();
+            p.UpdateCoord(0, 0);
+            bool flag = Figure.IsIn(p);
             DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
         }
 
