@@ -125,5 +125,13 @@ namespace Sloths
             //Изменяем положение фигур на новом холсте
             FabricFiguries.Update();
         }
+
+        //Часть кода которая отвечает за ресайз всего окна, оставляя его aspect ratio , тем самым предотвращая изменение aspect ratio GL окна
+        private void Window_SourceInitialized(object sender, EventArgs e)
+        {
+            WindowAspectRatio.Register((Window)sender);
+        }
+
+
     }
 }
