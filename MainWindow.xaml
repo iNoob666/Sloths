@@ -36,6 +36,12 @@
                 <Button x:Name="Rectangle" Style="{StaticResource choiceButtons}">
                     R
                 </Button>
+				<Button x:Name="Save" Style="{StaticResource choiceButtons}">
+					S
+				</Button>
+				<Button x:Name="Load" Style="{StaticResource choiceButtons}">
+					L
+				</Button>
             </ToolBarPanel>
         </Border>
 
