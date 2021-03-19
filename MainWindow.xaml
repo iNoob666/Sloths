@@ -6,7 +6,8 @@
         xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
         xmlns:local="clr-namespace:Sloths"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="700"
+        SourceInitialized="Window_SourceInitialized">
 
     <Window.Resources>
         <Style x:Key="choiceButtons">
@@ -17,11 +18,11 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"></RowDefinition>
+            
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -36,6 +37,12 @@
                 <Button x:Name="Rectangle" Style="{StaticResource choiceButtons}">
                     R
                 </Button>
+				<Button x:Name="Save" Style="{StaticResource choiceButtons}">
+					S
+				</Button>
+				<Button x:Name="Load" Style="{StaticResource choiceButtons}">
+					L
+				</Button>
             </ToolBarPanel>
         </Border>
 
