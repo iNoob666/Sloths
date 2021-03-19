@@ -24,71 +24,76 @@
 
         <Border BorderBrush="LightGray" BorderThickness="0 0 5 0">
             <StackPanel>
-            <Menu Height="20">
-                
-                <MenuItem VerticalAlignment="Center" Header="File" Height="24">
-                    <MenuItem Header="Save"></MenuItem>
-                    <MenuItem Header="Load"></MenuItem>
-                </MenuItem>
+                <Menu Height="20">
 
-            </Menu>
-            <Grid x:Name="Tools" Margin="5px" >
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
+                    <MenuItem VerticalAlignment="Center" Header="File" Height="24">
+                        <MenuItem Header="Save"></MenuItem>
+                        <MenuItem Header="Load"></MenuItem>
+                    </MenuItem>
 
+                </Menu>
+                <Grid x:Name="Tools" Margin="5px" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="33*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"></RowDefinition>
+                    </Grid.RowDefinitions>
 
-        
-                <Button Grid.Column="0" x:Name="Line" Content="{materialDesign:PackIcon chartlinevariant}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5"/>
-                <Button Grid.Column="1" x:Name="Triangle" Content="{materialDesign:PackIcon triangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5"/>
-                <Button Grid.Column="0" Grid.Row="1" x:Name="Circle" Content="{materialDesign:PackIcon circle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5">
-
-                </Button>
-                <Button Grid.Column="1" Grid.Row="1" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5">
-
-                </Button>
-                <Button Grid.Column="0" Grid.Row="2" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5">
-
-                </Button>
-                <Button Grid.Column="1" Grid.Row="2" x:Name="Brush" Content="{materialDesign:PackIcon brush}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5">
-
-                </Button>
-                <Button Grid.Column="0" Grid.Row="3" x:Name="Undo" Content="{materialDesign:PackIcon undo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5">
-
-                </Button>
-                <Button Grid.Column="1" Grid.Row="3" x:Name="Redo" Content="{materialDesign:PackIcon redo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
-                        Width="60" Margin="0 0 0 5">
-
-                </Button>
-                
-            </Grid>
-        </StackPanel>
+                    <Button Grid.Column="0" x:Name="Line" Content="{materialDesign:PackIcon chartlinevariant}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,17,5" Grid.RowSpan="2"/>
+                    <Button Grid.Column="1" x:Name="Triangle" Content="{materialDesign:PackIcon triangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,16,5" Grid.RowSpan="2"/>
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="Circle" Content="{materialDesign:PackIcon circle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,17,5">
+                    </Button>
+                    <Button Grid.Column="1" Grid.Row="2" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,16,5">
+                    </Button>
+                    <Button Grid.Column="0" Grid.Row="3" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,17,5">
+                    </Button>
+                    <Button Grid.Column="1" Grid.Row="3" x:Name="Brush" Content="{materialDesign:PackIcon brush}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,16,5" Click="Brush_Click">
+                    </Button>
+                    <Button Grid.Column="0" Grid.Row="4" x:Name="Undo" Content="{materialDesign:PackIcon undo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,17,5">
+                    </Button>
+                    <Button Grid.Column="1" Grid.Row="4" x:Name="Redo" Content="{materialDesign:PackIcon redo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,16,5">
+                    </Button>
+                    <Button Grid.Column="0" Grid.Row="5" x:Name="Paint" Content="{materialDesign:PackIcon palette}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,16,5">
+                    </Button>
+                    <Button Grid.Column="1" Grid.Row="5" x:Name="Select" Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,16,5">
+                    </Button>
+                    <Button Grid.Column="0" Grid.Row="6" x:Name="Delete" Content="{materialDesign:PackIcon delete}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Icon" Height="60"
+                        Width="60" Margin="16,0,16,5">
+                    </Button>
+                </Grid>
+            </StackPanel>
         </Border>
 
-        
+
         <wpf:OpenGLControl x:Name = "DrawingPanel"
                            OpenGLDraw="OpenGLControl_OpenGLDraw"
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
                            Grid.Row="1"
                            Grid.Column="1" OpenGLVersion="OpenGL4_4" FrameRate="60" RenderContextType="DIBSection" DrawFPS="True"/>
-        
+
     </Grid>
 </Window>

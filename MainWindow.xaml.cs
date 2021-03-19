@@ -132,6 +132,9 @@ namespace Sloths
             WindowAspectRatio.Register((Window)sender);
         }
 
+        private void Brush_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }
