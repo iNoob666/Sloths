@@ -5,17 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
         xmlns:local="clr-namespace:Sloths"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="700"
         SourceInitialized="Window_SourceInitialized">
 
-    <Window.Resources>
-        <Style x:Key="choiceButtons">
-            <Setter Property="ItemsControl.Margin" Value="0 3 0 3" />
-            <Setter Property="ItemsControl.Width" Value="20" />
-            <Setter Property="ItemsControl.Height" Value="20" />
-        </Style>
-    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             
@@ -26,25 +21,51 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="0, 0, 2, 0">
-            <ToolBarPanel x:Name="Tools">
-                <Button x:Name="Line" Style="{StaticResource choiceButtons}" Background="Red">
-                    L
+        
+            <Grid x:Name="Tools" Margin="5px" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" x:Name="Line" Content="{materialDesign:PackIcon chartlinevariant}"  ToolTip="Icon" Margin="0 5 0 5">
+                    
                 </Button>
-                <Button x:Name="Circle" Style="{StaticResource choiceButtons}">
-                    C
+                <Button Grid.Column="0" Grid.Row="0" x:Name="Triangle" Content="{materialDesign:PackIcon triangle}" ToolTip="Icon" Margin="0 0 0 5">
+
                 </Button>
-                <Button x:Name="Rectangle" Style="{StaticResource choiceButtons}">
-                    R
+            <Button Grid.Column="0" Grid.Row="0" x:Name="Circle" Content="{materialDesign:PackIcon circle}" ToolTip="Icon" Margin="0 0 0 5">
+                    
                 </Button>
-				<Button x:Name="Save" Style="{StaticResource choiceButtons}">
-					S
+            <Button Grid.Column="0" Grid.Row="0" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" ToolTip="Icon" Margin="0 0 0 5">
+
+            </Button>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" ToolTip="Icon" Margin="0 0 0 5">
+
+            </Button>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="Brush" Content="{materialDesign:PackIcon brush}" ToolTip="Icon" Margin="0 0 0 5">
+
+            </Button>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="Undo" Content="{materialDesign:PackIcon undo}" ToolTip="Icon" Margin="0 0 0 5">
+
+            </Button>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="Redo" Content="{materialDesign:PackIcon redo}" ToolTip="Icon" Margin="0 0 0 5">
+                    
+                </Button>
+            <Button Grid.Column="0" Grid.Row="0" x:Name="Save" Content="{materialDesign:PackIcon contentsave}" ToolTip="Icon" Margin="0 0 0 5">
+					
 				</Button>
-				<Button x:Name="Load" Style="{StaticResource choiceButtons}">
-					L
+            <Button Grid.Column="0" Grid.Row="0" x:Name="Load" Content="{materialDesign:PackIcon folderupload}" ToolTip="Icon" Margin="0 0 0 5">
+					
 				</Button>
-            </ToolBarPanel>
-        </Border>
+            </Grid>
+        
 
         <wpf:OpenGLControl x:Name = "DrawingPanel"
                            OpenGLDraw="OpenGLControl_OpenGLDraw"
