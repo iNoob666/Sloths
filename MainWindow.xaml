@@ -52,6 +52,6 @@
                            Resized="OpenGLControl_Resized"
                            DrawFPS="True"
                            Grid.Row="1"
-                           Grid.Column="1"/>
+                           Grid.Column="1" FrameRate="60" OpenGLVersion="OpenGL4_3" IsManipulationEnabled="True"/>
     </Grid>
 </Window>
