@@ -95,15 +95,44 @@ namespace Sloths.source.math
             return this;
         }
 
+        public void Highlight(IPaint screen)
+        {
+            NormPoint a = new NormPoint();
+            NormPoint b = new NormPoint();
+            NormPoint c = new NormPoint();
+            NormPoint d = new NormPoint();
+            a = BeginCoord;
+            b = Node3;
+            c = EndCoord;
+            d = Node4;
+            int hx,hy;
+            if (BeginCoord.X < EndCoord.X) hx = 1;
+            else hx = -1;
+            a.UpdateCoord(BeginCoord.X - hx * 0.001, BeginCoord.Y);
+            d.UpdateCoord(Node4.X - hx * 0.001, Node4.Y);
+            c.UpdateCoord(EndCoord.X + hx * 0.001, EndCoord.Y);
+            b.UpdateCoord(Node3.X + hx * 0.001, Node3.Y);
+
+            if (BeginCoord.Y < EndCoord.Y) hy = 1;
+            else hy = -1;
+            a.UpdateCoord(BeginCoord.X , BeginCoord.Y- hy * 0.001);
+            d.UpdateCoord(Node4.X , Node4.Y- hy * 0.001);
+            c.UpdateCoord(EndCoord.X , EndCoord.Y+ hy * 0.001);
+            b.UpdateCoord(Node3.X , Node3.Y+ hy * 0.001);
+
+            screen.drawline(new List<NormPoint> { a, b });
+            screen.drawline(new List<NormPoint> { b, c });
+            screen.drawline(new List<NormPoint> { c, d });
+            screen.drawline(new List<NormPoint> { d, a });
+        }
+
+
+
 
         public void Draw(IPaint screen)
         {
-            //Node3.UpdateCoord(BeginCoord.X,EndCoord.Y);
-           // Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
-            screen.drawline(new List<NormPoint> { BeginCoord, Node3 });
-            screen.drawline(new List<NormPoint> { BeginCoord, Node4 });
-            screen.drawline(new List<NormPoint> { Node4, EndCoord });
-            screen.drawline(new List<NormPoint> { EndCoord, Node3 });
+
+            screen.drawhighlight(new List<NormPoint> { BeginCoord, Node3, BeginCoord, Node4, Node4, EndCoord, EndCoord, Node3});
         }
     }
 }

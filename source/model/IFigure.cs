@@ -23,8 +23,8 @@ namespace Sloths.source.model
         IFigure Rotate(NormPoint center, double Phi);         //поворот 
         IFigure Rotate(double Phi);         //поворот относительно центра
         IFigure Reflection(NormPoint a, NormPoint b);   //отражение
+        void Highlight(model.IPaint screen);
 
- 
         void Draw(model.IPaint screen);
     }
 }

@@ -29,6 +29,21 @@ namespace Sloths.source.gui
             openGL.End();
             openGL.Flush();
         }
+
+        void IPaint.drawhighlight(IEnumerable<NormPoint> xy) //Отрисовка линии
+        {  
+            openGL.Enable(OpenGL.GL_LINE_STIPPLE);
+            openGL.LineStipple(1, 0x00F0);
+            openGL.Begin(OpenGL.GL_LINE_LOOP); //Начало рисования
+            openGL.Color(0f, 0f, 0f); //Задаем цвет
+            foreach (NormPoint p in xy)
+                openGL.Vertex(p.X, p.Y); //Отрисовываем точки
+            openGL.End();
+            openGL.Disable(OpenGL.GL_LINE_STIPPLE);
+            openGL.Flush();
+        }
+
+
         void IPaint.drawcircle(NormPoint xy, double rad) //Отрисовка круга
         {
             Single twicePI = (Single)(2.0f * Math.PI); 

@@ -92,6 +92,18 @@ namespace Sloths.source.math
             return this;
         }
 
+        public void Highlight(IPaint screen)
+        {
+            NormPoint a = new NormPoint();
+            NormPoint b = new NormPoint();
+            a.UpdateCoord(EndCoord.X, BeginCoord.Y);
+            b.UpdateCoord(BeginCoord.X, EndCoord.Y);
+            screen.drawline(new List<NormPoint> { BeginCoord, a });
+            screen.drawline(new List<NormPoint> { BeginCoord, b });
+            screen.drawline(new List<NormPoint> { b, EndCoord });
+            screen.drawline(new List<NormPoint> { EndCoord, a });
+        }
+
 
         public void Draw(IPaint screen)
         {

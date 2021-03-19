@@ -11,6 +11,7 @@ namespace Sloths.source.model
     {
         void drawline(IEnumerable<math.NormPoint> xy);
         void drawcircle(math.NormPoint xy, double rad);
+        void drawhighlight(IEnumerable<math.NormPoint> xy);
         void _flush();
     }
 }
