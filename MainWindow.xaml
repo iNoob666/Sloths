@@ -111,15 +111,15 @@
 
                     <Button Grid.Column="0" Grid.Row="2" x:Name="Circle" Content="{materialDesign:PackIcon circle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Circle" Height="60"
                         Width="60" Margin="16,0,17,5"/>
-                    
+
                     <Button Grid.Column="1" Grid.Row="2" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rectangle" Height="60"
                         Width="60" Margin="16,0,16,5"/>
 
                     <Button Grid.Column="1" Grid.Row="3" x:Name="Brush" Content="{materialDesign:PackIcon brush}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Brush" Height="60"
-                        Width="60" Margin="16,0,16,5" Click="Brush_Click"/>
+                        Width="60" Margin="16,0,16,5"/>
                 </Grid>
-                
-                <StackPanel  Margin="16,5,16,5" x:Name="BrushSettingsContainer">
+
+                <StackPanel  Margin="23,5,22,5" x:Name="BrushSettingsContainer" Height="211">
                     <Label>Толщина Кисти</Label>
                     <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
 
@@ -127,6 +127,7 @@
                     <materialDesign:ColorPicker/>
                     <Label>Цвет</Label>
                     <TextBox Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7">#ffffff</TextBox>
+                    <Button x:Name="brushColorOk" Margin="36,25,49,15" Content="Ок" />
                 </StackPanel>
 
             </StackPanel>
