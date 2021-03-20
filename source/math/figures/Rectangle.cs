@@ -124,10 +124,10 @@ namespace Sloths.source.math
             NormPoint b = new NormPoint();
             NormPoint c = new NormPoint();
             NormPoint d = new NormPoint();
-            a = BeginCoord;
-            b = Node3;
-            c = EndCoord;
-            d = Node4;
+            a.UpdateCoord(BeginCoord.X,BeginCoord.Y);
+            b.UpdateCoord(Node3.X, Node3.Y);
+            c.UpdateCoord(EndCoord.X, EndCoord.Y);
+            d.UpdateCoord(Node4.X, Node4.Y);
             int hx,hy;
             if (BeginCoord.X < EndCoord.X) hx = 1;
             else hx = -1;
