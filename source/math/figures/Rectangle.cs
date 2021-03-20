@@ -60,11 +60,12 @@ namespace Sloths.source.math
             return tmp;
         }
 
-        public IFigure MoveByVector(NormPoint v)
+        public IFigure MoveByVector(float x, float y)
         {
             Rectangle tmp = new Rectangle();
-            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + v.X, this.BeginCoord.Y + v.Y);
-            tmp.EndCoord.UpdateCoord(this.EndCoord.X + v.X, this.EndCoord.Y + v.Y);
+            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
+            tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord);
             return tmp;
         }
 
@@ -101,29 +102,24 @@ namespace Sloths.source.math
             NormPoint b = new NormPoint();
             NormPoint c = new NormPoint();
             NormPoint d = new NormPoint();
-            a = BeginCoord;
-            b = Node3;
-            c = EndCoord;
-            d = Node4;
-            int hx,hy;
+            a.UpdateCoord(BeginCoord.X, BeginCoord.Y);
+            b.UpdateCoord(Node3.X, Node3.Y);
+            c.UpdateCoord(EndCoord.X, EndCoord.Y);
+            d.UpdateCoord(Node4.X, Node4.Y);
+            int hx, hy;
             if (BeginCoord.X < EndCoord.X) hx = 1;
             else hx = -1;
-            a.UpdateCoord(BeginCoord.X - hx * 0.001, BeginCoord.Y);
-            d.UpdateCoord(Node4.X - hx * 0.001, Node4.Y);
-            c.UpdateCoord(EndCoord.X + hx * 0.001, EndCoord.Y);
-            b.UpdateCoord(Node3.X + hx * 0.001, Node3.Y);
-
             if (BeginCoord.Y < EndCoord.Y) hy = 1;
             else hy = -1;
-            a.UpdateCoord(BeginCoord.X , BeginCoord.Y- hy * 0.001);
-            d.UpdateCoord(Node4.X , Node4.Y- hy * 0.001);
-            c.UpdateCoord(EndCoord.X , EndCoord.Y+ hy * 0.001);
-            b.UpdateCoord(Node3.X , Node3.Y+ hy * 0.001);
-
-            screen.drawline(new List<NormPoint> { a, b });
-            screen.drawline(new List<NormPoint> { b, c });
-            screen.drawline(new List<NormPoint> { c, d });
-            screen.drawline(new List<NormPoint> { d, a });
+            a.UpdateCoord(BeginCoord.X - hx * 0.02, BeginCoord.Y - hy * 0.02);
+            d.UpdateCoord(Node4.X + hx * 0.02, Node4.Y - hy * 0.02);
+            c.UpdateCoord(EndCoord.X + hx * 0.02, EndCoord.Y + hy * 0.02);
+            b.UpdateCoord(Node3.X - hx * 0.02, Node3.Y + hy * 0.02);
+            screen.drawhighlight(new List<NormPoint> { a, b, b, c, c, d, d, a });
+            //screen.drawhighlight(new List<NormPoint> { BeginCoord, Node3 });
+            //screen.drawhighlight(new List<NormPoint> { BeginCoord, Node4 });
+            //screen.drawhighlight(new List<NormPoint> { Node4, EndCoord });
+            //screen.drawhighlight(new List<NormPoint> { EndCoord, Node3 });
         }
 
 
@@ -132,7 +128,7 @@ namespace Sloths.source.math
         public void Draw(IPaint screen)
         {
 
-            screen.drawhighlight(new List<NormPoint> { BeginCoord, Node3, BeginCoord, Node4, Node4, EndCoord, EndCoord, Node3});
+            screen.drawline(new List<NormPoint> { BeginCoord, Node3, BeginCoord, Node4, Node4, EndCoord, EndCoord, Node3});
         }
     }
 }

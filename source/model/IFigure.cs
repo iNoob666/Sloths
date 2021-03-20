@@ -19,7 +19,7 @@ namespace Sloths.source.model
         bool IsIn(NormPoint p);         //принадлежность точки фигуре
         void Init(NormPoint p1, NormPoint p2);
         IFigure Scale(double koeff);        //изменение размера фигуры процентами
-        IFigure MoveByVector(NormPoint v);          //перемещение
+        IFigure MoveByVector(float x, float y);         //перемещение
         IFigure Rotate(NormPoint center, double Phi);         //поворот 
         IFigure Rotate(double Phi);         //поворот относительно центра
         IFigure Reflection(NormPoint a, NormPoint b);   //отражение

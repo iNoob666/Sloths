@@ -35,6 +35,36 @@ namespace Sloths
         public MainWindow()
         {
             InitializeComponent();
+            // Хоткеи
+            // Дефолтные команды
+            CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, FabricFiguries.UndoEvent));
+            CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, FabricFiguries.RedoEvent));
+            CommandBindings.Add(new CommandBinding(ApplicationCommands.Open, FabricFiguries.OpenEvent));
+            CommandBindings.Add(new CommandBinding(ApplicationCommands.SaveAs, FabricFiguries.SaveEvent));
+            // Команды премещения фигуры
+            KeyDown += MainWindow_KeyDown;
+
+            //KeyBinding W = new KeyBinding();
+            //W.Key = Key.W;
+            //W.Command = CustomComands.Up;
+            //DrawingPanel.InputBindings.Add(W);
+            //KeyBinding S = new KeyBinding();
+            //S.Command = CustomComands.Down;
+            //S.Key = Key.S;
+            //DrawingPanel.InputBindings.Add(S);
+            //KeyBinding A = new KeyBinding();
+            //A.Command = CustomComands.Left;
+            //A.Key = Key.A;
+            //DrawingPanel.InputBindings.Add(A);
+            //KeyBinding D = new KeyBinding();
+            //D.Command = CustomComands.Right;
+            //D.Key = Key.D;
+            //DrawingPanel.InputBindings.Add(D);
+
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Up, FabricFiguries.UpEvent));
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Down, FabricFiguries.DownEvent));
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Right, FabricFiguries.RightEvent));
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Left, FabricFiguries.LeftEvent));
             //Присваиваем статическому классу NormPoint размеры холста для рисования
             //это необходимо для приобразования координат из wpf в OpenGL
             NormPoint.Height = DrawingPanel.ActualHeight;
@@ -49,6 +79,39 @@ namespace Sloths
             {
                 elem.Click += ButtonActive_Event;
             }
+            Save.Click += SelectClick_Event;
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.W:
+                    FabricFiguries.UpEvent();
+                    break;
+                case Key.A:
+                    FabricFiguries.LeftEvent();
+                    break;
+                case Key.S:
+                    FabricFiguries.DownEvent();
+                    break;
+                case Key.D:
+                    FabricFiguries.RightEvent();
+                    break;
+            }
+
+        }
+
+        private void SelectClick_Event(object sender, RoutedEventArgs e)
+        {
+            DrawingPanel.MouseLeftButtonDown -= MouseDown_Event;
+            DrawingPanel.MouseLeftButtonDown += SelectMouseDown_Event;
+        }
+        private void SelectMouseDown_Event(object sender, MouseButtonEventArgs e)
+        {
+            var MouseCoord = e.GetPosition(this.DrawingPanel);
+            var point = new NormPoint(MouseCoord.X, MouseCoord.Y);
+            FabricFiguries.SelectFigure(point, engine);
         }
 
         //Ивент срабатывающий при нажатии кнопки фигуры
@@ -96,9 +159,10 @@ namespace Sloths
             DrawingPanel.MouseLeftButtonUp -= MouseUp_Event;
             //Добавляем фигуру в фабрику для дальнейшей отрисовки
             FabricFiguries.AddFigureToFabric(Figure);
+            Figure = null;
             NormPoint p = new NormPoint();
             p.UpdateCoord(0, 0);
-            bool flag = Figure.IsIn(p);
+            
             DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
         }
 
@@ -114,7 +178,7 @@ namespace Sloths
         public void OpenGLControl_OpenGLDraw(object sender, OpenGLRoutedEventArgs args) //Ивент для отрисовки кадра
         {
             args.OpenGL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT); //Отчищаем полотно
-            Figure.Draw(engine); //Отрисовка новой фигуры
+            if(Figure != null) Figure.Draw(engine); //Отрисовка новой фигуры
             FabricFiguries.DrawAll(engine); //Рисуем все фигуры из фабрики
         }
 

@@ -62,13 +62,12 @@ namespace Sloths.source.math
             tmp.C = C;
             return tmp;
         }
-
-        public IFigure MoveByVector(NormPoint v)// ? фигня какая-то, надо изменить.
+        public IFigure MoveByVector(float x, float y)
         {
-            Circle tmp = new Circle();
-            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + v.X, this.BeginCoord.Y + v.Y);
-            tmp.EndCoord.UpdateCoord(this.EndCoord.X + v.X, this.EndCoord.Y + v.Y);
-            tmp.C.UpdateCoord(this.C.X + v.X, this.C.Y + v.Y);
+            Rectangle tmp = new Rectangle();
+            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
+            tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord);
             return tmp;
         }
 
@@ -98,10 +97,11 @@ namespace Sloths.source.math
             NormPoint b = new NormPoint();
             a.UpdateCoord(EndCoord.X, BeginCoord.Y);
             b.UpdateCoord(BeginCoord.X, EndCoord.Y);
-            screen.drawline(new List<NormPoint> { BeginCoord, a });
-            screen.drawline(new List<NormPoint> { BeginCoord, b });
-            screen.drawline(new List<NormPoint> { b, EndCoord });
-            screen.drawline(new List<NormPoint> { EndCoord, a });
+            screen.drawhighlight(new List<NormPoint> { BeginCoord, a });
+            screen.drawhighlight(new List<NormPoint> { BeginCoord, b });
+            screen.drawhighlight(new List<NormPoint> { b, EndCoord });
+            screen.drawhighlight(new List<NormPoint> { EndCoord, a });
+
         }
 
 

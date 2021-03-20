@@ -54,11 +54,12 @@ namespace Sloths.source.math
             return tmp;
         }
 
-        public IFigure MoveByVector(NormPoint v) 
+        public IFigure MoveByVector(float x, float y)
         {
-            Line tmp = new Line();
-            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + v.X, this.BeginCoord.Y + v.Y);
-            tmp.EndCoord.UpdateCoord(this.EndCoord.X + v.X, this.EndCoord.Y + v.Y);
+            Rectangle tmp = new Rectangle();
+            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
+            tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord);
             return tmp;
         }
 
@@ -91,11 +92,12 @@ namespace Sloths.source.math
         {
             NormPoint a = new NormPoint();
             NormPoint b = new NormPoint();
-            a = BeginCoord;
-            b = EndCoord;
-            a.UpdateCoord(BeginCoord.X+0.001, BeginCoord.Y + 0.001);
-            b.UpdateCoord(EndCoord.X + 0.001, EndCoord.Y + 0.001);
-            screen.drawline(new List<NormPoint> { a, b });
+            a.UpdateCoord(BeginCoord.X, BeginCoord.Y);
+            b.UpdateCoord(EndCoord.X, EndCoord.Y);
+            a.UpdateCoord(BeginCoord.X + 0.001, BeginCoord.Y + 0.01);
+            b.UpdateCoord(EndCoord.X + 0.001, EndCoord.Y + 0.01);
+            screen.drawhighlight(new List<NormPoint> { a, b });
+
         }
     }
 }
