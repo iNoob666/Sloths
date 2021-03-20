@@ -14,6 +14,8 @@ namespace Sloths.source.math
         public NormPoint EndCoord { get; set; }
         private NormPoint Node3 { get; set; }
         private NormPoint Node4 { get; set; }
+        public float LineThick { get; set; }
+        public Color BorderColor { get; set; }
 
         public Rectangle()
         {
@@ -21,6 +23,17 @@ namespace Sloths.source.math
             EndCoord = new NormPoint();
             Node3 = new NormPoint();
             Node4 = new NormPoint();
+            BorderColor = Color.FromRGBA(0, 0, 0, 1);
+            LineThick = 1;
+        }
+        public void SelectLineThick(float p)
+        {
+            LineThick = p;
+        }
+
+        public void SelectBorderColor(byte p1, byte p2, byte p3, byte p4)
+        {
+            BorderColor = Color.FromRGBA(p1, p2, p3, p4);
         }
 
         public void Init(NormPoint p1, NormPoint p2)
@@ -29,6 +42,16 @@ namespace Sloths.source.math
             EndCoord = p2;
             Node3.UpdateCoord(BeginCoord.X, EndCoord.Y);
             Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
+        }
+
+        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick)
+        {
+            BeginCoord = p1;
+            EndCoord = p2;
+            Node3.UpdateCoord(BeginCoord.X, EndCoord.Y);
+            Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
+            SelectBorderColor(Color.R, Color.G, Color.B, Color.A);
+            SelectLineThick(Thick);
         }
 
 
@@ -120,10 +143,10 @@ namespace Sloths.source.math
             c.UpdateCoord(EndCoord.X , EndCoord.Y+ hy * 0.001);
             b.UpdateCoord(Node3.X , Node3.Y+ hy * 0.001);
 
-            screen.drawline(new List<NormPoint> { a, b });
-            screen.drawline(new List<NormPoint> { b, c });
-            screen.drawline(new List<NormPoint> { c, d });
-            screen.drawline(new List<NormPoint> { d, a });
+            screen.drawhighlight(new List<NormPoint> { a, b });
+            screen.drawhighlight(new List<NormPoint> { b, c });
+            screen.drawhighlight(new List<NormPoint> { c, d });
+            screen.drawhighlight(new List<NormPoint> { d, a });
         }
 
 
@@ -132,7 +155,7 @@ namespace Sloths.source.math
         public void Draw(IPaint screen)
         {
 
-            screen.drawhighlight(new List<NormPoint> { BeginCoord, Node3, BeginCoord, Node4, Node4, EndCoord, EndCoord, Node3});
+            screen.drawline(new List<NormPoint> { BeginCoord, Node3, BeginCoord, Node4, Node4, EndCoord, EndCoord, Node3},BorderColor,LineThick);
         }
     }
 }

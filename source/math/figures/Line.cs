@@ -19,10 +19,14 @@ namespace Sloths.source.math
         public NormPoint BeginCoord { get; set; }
         //Коненая координата определяющая размер фигуры
         public NormPoint EndCoord { get; set; }
+        public float LineThick { get; set; }
+        public Color BorderColor { get; set; }
         public Line()
         {
             BeginCoord = new NormPoint();
             EndCoord = new NormPoint();
+            BorderColor = Color.FromRGBA(0, 0, 0, 1);
+            LineThick = 1;
         }
 
         public void Init(NormPoint p1, NormPoint p2)
@@ -31,9 +35,28 @@ namespace Sloths.source.math
             EndCoord = p2;
         }
 
+        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick)
+        {
+            BeginCoord = p1;
+            EndCoord = p2;
+            SelectBorderColor(Color.R, Color.G, Color.B, Color.A);
+            SelectLineThick(Thick);
+        }
+
+
+        public void SelectLineThick(float p)
+        {
+            LineThick = p;
+        }
+
+        public void SelectBorderColor(byte p1, byte p2, byte p3, byte p4)
+        {
+            BorderColor = Color.FromRGBA(p1, p2, p3, p4);
+        }
+
         public void Draw(IPaint screen)
         {
-            screen.drawline(new List<NormPoint> { BeginCoord, EndCoord });
+            screen.drawline(new List<NormPoint> { BeginCoord, EndCoord }, BorderColor, LineThick);
         }
 
         public bool IsIn(NormPoint p)
@@ -95,7 +118,7 @@ namespace Sloths.source.math
             b = EndCoord;
             a.UpdateCoord(BeginCoord.X+0.001, BeginCoord.Y + 0.001);
             b.UpdateCoord(EndCoord.X + 0.001, EndCoord.Y + 0.001);
-            screen.drawline(new List<NormPoint> { a, b });
+            screen.drawhighlight(new List<NormPoint> { a, b });
         }
     }
 }

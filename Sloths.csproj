@@ -83,6 +83,7 @@
     <Compile Include="source\math\figures\Circle.cs" />
     <Compile Include="source\math\figures\Line.cs" />
     <Compile Include="source\math\figures\Rectangle.cs" />
+    <Compile Include="source\model\Color.cs" />
     <Compile Include="source\model\IFigure.cs" />
     <Compile Include="source\math\NormPoint.cs" />
     <Compile Include="source\model\IFabric.cs" />

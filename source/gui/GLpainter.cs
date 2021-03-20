@@ -20,10 +20,12 @@ namespace Sloths.source.gui
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             openGL.ClearColor(1f, 1f, 1f, 0.3f);
         }
-        void IPaint.drawline(IEnumerable<NormPoint> xy) //Отрисовка линии
+
+        void IPaint.drawline(IEnumerable<NormPoint> xy, model.Color BorderColor, float LineThick) //Отрисовка линии
         {
+            openGL.LineWidth(LineThick);
             openGL.Begin(OpenGL.GL_LINES); //Начало рисования
-            openGL.Color(0f, 0f, 0f); //Задаем цвет
+            openGL.Color(BorderColor.R, BorderColor.G, BorderColor.B, BorderColor.A); //Задаем цвет
             foreach(NormPoint p in xy)
                 openGL.Vertex(p.X, p.Y); //Отрисовываем точки
             openGL.End();
@@ -44,12 +46,13 @@ namespace Sloths.source.gui
         }
 
 
-        void IPaint.drawcircle(NormPoint xy, double rad) //Отрисовка круга
+        void IPaint.drawcircle(NormPoint xy, double rad, model.Color BorderColor, float LineThick) //Отрисовка круга
         {
+            openGL.LineWidth(LineThick);
             Single twicePI = (Single)(2.0f * Math.PI); 
             int stop = 100; //количество линий в "многоугольнике"
             openGL.Begin(OpenGL.GL_LINE_LOOP); 
-            openGL.Color(0f, 0f, 0f);
+            openGL.Color(BorderColor.R, BorderColor.G, BorderColor.B, BorderColor.A);
             //Single x = (float)(xy.X + rad);
             //Single y = (float) xy.Y;
             //openGL.Vertex(x, y);
