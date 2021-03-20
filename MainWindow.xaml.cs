@@ -45,7 +45,11 @@ namespace Sloths
             //Назначаем иветны на кнопки
             //**ДЛЯ ОТДЕЛА UI**
             //Когда будете пилить сюда интерфейс оберните кнопки фигур в контейнер плз))
-            foreach (Button elem in Tools.Children)
+            foreach (Button elem in SelectTools.Children)
+            {
+                elem.Click += ButtonActive_Event;
+            }
+            foreach (Button elem in PantTools.Children)
             {
                 elem.Click += ButtonActive_Event;
             }
@@ -55,11 +59,17 @@ namespace Sloths
         private void ButtonActive_Event(object sender, RoutedEventArgs e)
         {
             DrawingPanel.MouseLeftButtonDown -= MouseDown_Event;
-            //Чистим цвета
-            foreach (Button elem in Tools.Children)
+            //Чистим цвета в левой части интерфейса
+            foreach (Button elem in SelectTools.Children)
             {
-                elem.Background = new SolidColorBrush(Colors.White);
+                elem.Background = new SolidColorBrush(Colors.LightBlue);
             }
+            // //Чистим цвета в правой части интерфейса
+            foreach (Button elem in PantTools.Children)
+            {
+                elem.Background = new SolidColorBrush(Colors.LightBlue);
+            }
+
             Button butt = sender as Button;
             id = butt.Name;
             butt.Background = new SolidColorBrush(Colors.Red); //Подсвечиваем красным нажатую кнопку
@@ -133,7 +143,5 @@ namespace Sloths
         {
             WindowAspectRatio.Register((Window)sender);
         }
-
-
     }
 }

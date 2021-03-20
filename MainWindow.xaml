@@ -5,53 +5,129 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
         xmlns:local="clr-namespace:Sloths"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="700"
+        Title="MainWindow" Height="600" Width="1000"
         SourceInitialized="Window_SourceInitialized">
 
-    <Window.Resources>
-        <Style x:Key="choiceButtons">
-            <Setter Property="ItemsControl.Margin" Value="0 3 0 3" />
-            <Setter Property="ItemsControl.Width" Value="20" />
-            <Setter Property="ItemsControl.Height" Value="20" />
-        </Style>
-    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="0, 0, 2, 0">
-            <ToolBarPanel x:Name="Tools">
-                <Button x:Name="Line" Style="{StaticResource choiceButtons}" Background="Red">
-                    L
-                </Button>
-                <Button x:Name="Circle" Style="{StaticResource choiceButtons}">
-                    C
-                </Button>
-                <Button x:Name="Rectangle" Style="{StaticResource choiceButtons}">
-                    R
-                </Button>
-				<Button x:Name="Save" Style="{StaticResource choiceButtons}">
-					S
-				</Button>
-				<Button x:Name="Load" Style="{StaticResource choiceButtons}">
-					L
-				</Button>
-            </ToolBarPanel>
+        <Border BorderBrush="LightGray" BorderThickness="0 0 5 0">
+            <StackPanel>
+                <Menu Height="20">
+                    <MenuItem VerticalAlignment="Center" Header="Меню" Height="24">
+                        <MenuItem Header="Save"></MenuItem>
+                        <MenuItem Header="Load"></MenuItem>
+                    </MenuItem>
+                </Menu>
+                <Grid x:Name="SelectTools" Margin="5px" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="33*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" x:Name="SelectMode" Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                        Width="60" Margin="16,0,16,5"/>
+
+                    <Button Grid.Column="0" Grid.Row="1" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="ColorPicker" Height="60"
+                        Width="60" Margin="16,5,17,5"/>
+
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="Undo" Content="{materialDesign:PackIcon undo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Undo" Height="60"
+                        Width="60" Margin="16,0,17,5"/>
+
+                    <Button Grid.Column="1" Grid.Row="2" x:Name="Redo" Content="{materialDesign:PackIcon redo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Redo" Height="60"
+                        Width="60" Margin="16,0,16,5"/>
+
+                    <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
+                        Width="60" Margin="16,35,16,5"/>
+
+                    <Button Grid.Column="1" Grid.Row="1" x:Name="Rotate" Content="{materialDesign:PackIcon axiszrotateclockwise}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rotate" Height="60"
+                        Width="60" Margin="16,0,16,5"/>
+                    
+                    
+                </Grid>
+            </StackPanel>
         </Border>
+
 
         <wpf:OpenGLControl x:Name = "DrawingPanel"
                            OpenGLDraw="OpenGLControl_OpenGLDraw"
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
-                           DrawFPS="True"
                            Grid.Row="1"
-                           Grid.Column="1" FrameRate="60" OpenGLVersion="OpenGL4_3" IsManipulationEnabled="True"/>
+                           Grid.Column="1" OpenGLVersion="OpenGL4_4" FrameRate="60" RenderContextType="DIBSection" DrawFPS="True"/>
+
+        <Border Grid.Column="2" Margin="15 25 0 0" BorderBrush="LightGray" BorderThickness="5 0 0 0">
+            <StackPanel Margin="0 0 0 0">
+                <Grid x:Name="PantTools">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="33*"/>
+                        <RowDefinition Height="32*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="0*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="0" Grid.Row="0" x:Name="Line" Content="{materialDesign:PackIcon chartlinevariant}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Line" Height="60"
+                        Width="60" Margin="16,0,16,15"/>
+
+                    <Button Grid.Column="1" Grid.Row="0" x:Name="Triangle" Content="{materialDesign:PackIcon triangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Triangle" Height="60"
+                        Width="60" Margin="16,0,16,15"/>
+
+                    <Button Grid.Column="0" Grid.Row="1" x:Name="Circle" Content="{materialDesign:PackIcon circle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Circle" Height="60"
+                        Width="60" Margin="16,0,16,5"/>
+
+                    <Button Grid.Column="1" Grid.Row="1" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rectangle" Height="60"
+                        Width="60" Margin="16,0,16,5"/>
+                </Grid>
+
+                <StackPanel  Margin="23,5,22,5" x:Name="BrushSettingsContainer" Height="211">
+                    <Label>Толщина Кисти</Label>
+                    <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
+
+                    <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
+                    <materialDesign:ColorPicker/>
+                    <Label>Цвет</Label>
+                    <TextBox Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7">#ffffff</TextBox>
+                    <Button x:Name="brushColorOk" Margin="36,25,49,15" Content="Ок" />
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
     </Grid>
 </Window>
