@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Sloths.source.math
 {
-    class Rectangle : IFigure
+    class IsoscelesTriangle: IFigure
     {
         public NormPoint BeginCoord { get; set; }
         public NormPoint EndCoord { get; set; }
         private NormPoint Node3 { get; set; }
         private NormPoint Node4 { get; set; }
 
-        public Rectangle()
+        public IsoscelesTriangle()
         {
             BeginCoord = new NormPoint();
             EndCoord = new NormPoint();
@@ -28,7 +27,7 @@ namespace Sloths.source.math
             BeginCoord = p1;
             EndCoord = p2;
             Node3.UpdateCoord(BeginCoord.X, EndCoord.Y);
-            Node4.UpdateCoord(EndCoord.X, BeginCoord.Y);
+            Node4.UpdateCoord((EndCoord.X+BeginCoord.X)/2, BeginCoord.Y);
         }
 
 
@@ -39,61 +38,58 @@ namespace Sloths.source.math
 
         public bool IsIn(NormPoint p)
         {
-            double abp = Scal(BeginCoord, Node3, p);
-            double bcp = Scal(Node3, EndCoord, p);
-            double acp = Scal(EndCoord, BeginCoord , p);
-            double adp = Scal(BeginCoord, Node4, p);
-            double cdp = Scal(Node4, EndCoord, p);
+            double abp = Scal(Node3, Node4, p);
+            double bcp = Scal(Node4, EndCoord, p);
+            double acp = Scal(EndCoord, Node3, p);
 
-            if (abp > 0 && bcp > 0 && acp > 0 || abp < 0 && bcp < 0 && acp < 0 || adp > 0 && cdp > 0 && acp > 0 || adp < 0 && cdp < 0 && acp < 0)
+            if (abp > 0 && bcp > 0 && acp > 0 || abp < 0 && bcp < 0 && acp < 0)
                 return true;
             else return false;
         }
 
         public IFigure Scale(double koeff)
         {
-            Rectangle tmp = new Rectangle();
+            IsoscelesTriangle tmp = new IsoscelesTriangle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X * koeff, this.BeginCoord.Y * koeff);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X * koeff, this.EndCoord.Y * koeff);
-            Node3.UpdateCoord(Node3.X*koeff, Node3.Y * koeff);
+            Node3.UpdateCoord(Node3.X * koeff, Node3.Y * koeff);
             Node4.UpdateCoord(Node4.X * koeff, Node4.Y * koeff);
             return tmp;
         }
 
         public IFigure MoveByVector(float x, float y)
         {
-            Rectangle tmp = new Rectangle();
+            IsoscelesTriangle tmp = new IsoscelesTriangle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
             tmp.Node3.UpdateCoord(this.Node3.X + x, this.Node3.Y + y);
             tmp.Node4.UpdateCoord(this.Node4.X + x, this.Node4.Y + y);
-            //tmp.Init(tmp.BeginCoord, tmp.EndCoord);
             return tmp;
         }
 
         public IFigure Rotate(NormPoint center, double Phi)
         {
-            Rectangle tmp = new Rectangle();
+            IsoscelesTriangle tmp = new IsoscelesTriangle();
             tmp = this;
             tmp.BeginCoord.UpdateCoord(center.X + BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), center.Y + BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
-            tmp.EndCoord.UpdateCoord(center.X+EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
-            tmp.Node3.UpdateCoord(center.X+Node3.X * Math.Sin(Phi) + Node3.Y * Math.Cos(Phi), center.Y + Node3.X * Math.Cos(Phi) - Node3.Y * Math.Sin(Phi));
-            tmp.Node4.UpdateCoord(center.X+Node4.X * Math.Sin(Phi) + Node4.Y * Math.Cos(Phi), center.Y + Node4.X * Math.Cos(Phi) - Node4.Y * Math.Sin(Phi));
+            tmp.EndCoord.UpdateCoord(center.X + EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
+            tmp.Node3.UpdateCoord(center.X + Node3.X * Math.Sin(Phi) + Node3.Y * Math.Cos(Phi), center.Y + Node3.X * Math.Cos(Phi) - Node3.Y * Math.Sin(Phi));
+            tmp.Node4.UpdateCoord(center.X + Node4.X * Math.Sin(Phi) + Node4.Y * Math.Cos(Phi), center.Y + Node4.X * Math.Cos(Phi) - Node4.Y * Math.Sin(Phi));
             return tmp;
         }
 
         public IFigure Rotate(double Phi)
         {
-            Rectangle tmp = new Rectangle();
+            IsoscelesTriangle tmp = new IsoscelesTriangle();
             tmp = this;
 
             Single PI = (Single)(Math.PI);
             NormPoint C = new NormPoint();
             C.UpdateCoord((BeginCoord.X + EndCoord.X) / 2, (BeginCoord.Y + EndCoord.Y) / 2);
-            tmp.BeginCoord.UpdateCoord(C.X+(BeginCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (BeginCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y+(BeginCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (BeginCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
-            tmp.EndCoord.UpdateCoord(C.X+(EndCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (EndCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y+(EndCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (EndCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
-            tmp.Node3.UpdateCoord(C.X+(Node3.X - C.X) * Math.Cos(Phi * PI / 180) - (Node3.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y+(Node3.X - C.X) * Math.Sin(Phi * PI / 180) + (Node3.Y - C.Y) * Math.Cos(Phi * PI / 180));
-            tmp.Node4.UpdateCoord(C.X+(Node4.X - C.X) * Math.Cos(Phi * PI / 180) - (Node4.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y+(Node4.X - C.X) * Math.Sin(Phi * PI / 180) + (Node4.Y - C.Y) * Math.Cos(Phi * PI / 180));
+            tmp.BeginCoord.UpdateCoord(C.X + (BeginCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (BeginCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (BeginCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (BeginCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
+            tmp.EndCoord.UpdateCoord(C.X + (EndCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (EndCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (EndCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (EndCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
+            tmp.Node3.UpdateCoord(C.X + (Node3.X - C.X) * Math.Cos(Phi * PI / 180) - (Node3.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (Node3.X - C.X) * Math.Sin(Phi * PI / 180) + (Node3.Y - C.Y) * Math.Cos(Phi * PI / 180));
+            tmp.Node4.UpdateCoord(C.X + (Node4.X - C.X) * Math.Cos(Phi * PI / 180) - (Node4.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (Node4.X - C.X) * Math.Sin(Phi * PI / 180) + (Node4.Y - C.Y) * Math.Cos(Phi * PI / 180));
 
             return tmp;
         }
@@ -112,26 +108,14 @@ namespace Sloths.source.math
             a.UpdateCoord(BeginCoord.X, BeginCoord.Y);
             b.UpdateCoord(Node3.X, Node3.Y);
             c.UpdateCoord(EndCoord.X, EndCoord.Y);
-            d.UpdateCoord(Node4.X, Node4.Y);
-            int hx, hy;
-            if (BeginCoord.X < EndCoord.X) hx = 1;
-            else hx = -1;
-            if (BeginCoord.Y < EndCoord.Y) hy = 1;
-            else hy = -1;
-            a.UpdateCoord(BeginCoord.X - hx * 0.02, BeginCoord.Y - hy * 0.02);
-            d.UpdateCoord(Node4.X + hx * 0.02, Node4.Y - hy * 0.02);
-            c.UpdateCoord(EndCoord.X + hx * 0.02, EndCoord.Y + hy * 0.02);
-            b.UpdateCoord(Node3.X - hx * 0.02, Node3.Y + hy * 0.02);
+            d.UpdateCoord(EndCoord.X, BeginCoord.Y);
+            
             screen.drawhighlight(new List<NormPoint> { a, b, b, c, c, d, d, a });
         }
 
-
-
-
         public void Draw(IPaint screen)
         {
-
-            screen.drawline(new List<NormPoint> { BeginCoord, Node3, BeginCoord, Node4, Node4, EndCoord, EndCoord, Node3});
+            screen.drawline(new List<NormPoint> { Node3, Node4, Node4, EndCoord, EndCoord, Node3 });
         }
     }
 }
