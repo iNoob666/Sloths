@@ -30,6 +30,7 @@ namespace Sloths.source.math
         //будем переделывать
         public static IFigure Create(string name) //Создание фигуры name - название фигуры 
         {
+            SelectedItem = -1;
             switch (name)
             {
                 case "Line":
@@ -126,8 +127,22 @@ namespace Sloths.source.math
         {
             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(-0.02f, 0);
         }
-
-
+        internal static void СounterClockWiseEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(0.0001);
+        }
+        internal static void ClockWiseEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-0.0001);
+        }
+        internal static void СounterClockWiseAroundCenterEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0,0), 0.0001);
+        }
+        internal static void ClockWiseAroundCenterEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0, 0), -0.0001);
+        }
     }
 }
 

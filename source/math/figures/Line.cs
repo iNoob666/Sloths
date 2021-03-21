@@ -56,7 +56,7 @@ namespace Sloths.source.math
 
         public IFigure MoveByVector(float x, float y)
         {
-            Rectangle tmp = new Rectangle();
+            Line tmp = new Line();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
             tmp.Init(tmp.BeginCoord, tmp.EndCoord);

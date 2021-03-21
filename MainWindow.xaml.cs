@@ -42,7 +42,7 @@ namespace Sloths
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Open, FabricFiguries.OpenEvent));
             CommandBindings.Add(new CommandBinding(ApplicationCommands.SaveAs, FabricFiguries.SaveEvent));
             // Команды премещения фигуры
-            KeyDown += MainWindow_KeyDown;
+            
 
             //KeyBinding W = new KeyBinding();
             //W.Key = Key.W;
@@ -98,6 +98,18 @@ namespace Sloths
                 case Key.D:
                     FabricFiguries.RightEvent();
                     break;
+                case Key.E:
+                    FabricFiguries.ClockWiseEvent();
+                    break;
+                case Key.Q:
+                    FabricFiguries.СounterClockWiseEvent();
+                    break;
+                case Key.C:
+                    FabricFiguries.ClockWiseAroundCenterEvent();
+                    break;
+                case Key.X:
+                    FabricFiguries.СounterClockWiseAroundCenterEvent();
+                    break;
             }
 
         }
@@ -112,11 +124,13 @@ namespace Sloths
             var MouseCoord = e.GetPosition(this.DrawingPanel);
             var point = new NormPoint(MouseCoord.X, MouseCoord.Y);
             FabricFiguries.SelectFigure(point, engine);
+            KeyDown += MainWindow_KeyDown;
         }
 
         //Ивент срабатывающий при нажатии кнопки фигуры
         private void ButtonActive_Event(object sender, RoutedEventArgs e)
         {
+            KeyDown -= MainWindow_KeyDown;
             DrawingPanel.MouseLeftButtonDown -= MouseDown_Event;
             //Чистим цвета
             foreach (Button elem in Tools.Children)
@@ -126,6 +140,7 @@ namespace Sloths
             Button butt = sender as Button;
             id = butt.Name;
             butt.Background = new SolidColorBrush(Colors.Red); //Подсвечиваем красным нажатую кнопку
+            if (id == "Save") DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
             DrawingPanel.MouseLeftButtonDown += MouseDown_Event; //Назначаем на левую кнопку мыши евент для начала рисования
         }
 
