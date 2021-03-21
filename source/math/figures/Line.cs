@@ -76,8 +76,52 @@ namespace Sloths.source.math
         {
             Line tmp = new Line();
             tmp = this;
-            tmp.BeginCoord.UpdateCoord(BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
-            tmp.EndCoord.UpdateCoord(EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
+            Single PI = (Single)(Math.PI);
+            NormPoint C = new NormPoint();
+            C.UpdateCoord((BeginCoord.X + EndCoord.X) / 2, (BeginCoord.Y + EndCoord.Y) / 2);
+            tmp.BeginCoord.UpdateCoord(C.X+(BeginCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (BeginCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y+(BeginCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (BeginCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
+            tmp.EndCoord.UpdateCoord(C.X+(EndCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (EndCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y+(EndCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (EndCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
+
+            // double angle;
+            //double rad = Math.Sqrt(((EndCoord.X - BeginCoord.X) * (EndCoord.X - BeginCoord.X) + (EndCoord.Y - BeginCoord.Y) * (EndCoord.Y - BeginCoord.Y)) / 4);
+
+            /* double angle1;
+             double angle2;
+             if (BeginCoord.X < EndCoord.X)
+             {
+                 if (BeginCoord.Y > EndCoord.Y)
+                 {
+                     angle1 = PI / 2;
+                     angle2 = - PI / 2;
+                 }
+                 else
+                 {
+                     angle2 = 0;
+                     angle1 = -PI;
+                 }
+             }
+             else
+             {
+                 if (BeginCoord.Y > EndCoord.Y)
+                 {
+                     angle1 = 0;
+                     angle2 = -PI;
+                 }
+                 else
+                 {
+                     angle2 = PI / 2;
+                     angle1 = -PI / 2;
+                 }
+
+             }
+             double angle = Math.Asin(Math.Abs(EndCoord.X - BeginCoord.X) / 2 * rad);
+             angle1 += angle;
+             angle2 += angle;
+             NormPoint C = new NormPoint();
+             C.UpdateCoord((BeginCoord.X+EndCoord.X)/2, (BeginCoord.Y + EndCoord.Y) / 2);
+             tmp.BeginCoord.UpdateCoord((float)(C.X + rad * Math.Cos(angle1 + Phi * PI / 180)), (float)(C.Y + rad * Math.Sin(angle1 + Phi * PI / 180)));
+             tmp.EndCoord.UpdateCoord((float)(C.X + rad * Math.Cos(angle2 + Phi * PI / 180)), (float)(C.Y + rad * Math.Sin(angle2 + Phi * PI / 180)));
+            */
             return tmp;
         }
 

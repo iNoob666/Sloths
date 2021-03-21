@@ -129,11 +129,11 @@ namespace Sloths.source.math
         }
         internal static void СounterClockWiseEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(0.0001);
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(1);
         }
         internal static void ClockWiseEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-0.0001);
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-1);
         }
         internal static void СounterClockWiseAroundCenterEvent()
         {
