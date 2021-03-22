@@ -8,5 +8,8 @@ namespace Sloths.source.model
 {
     public interface IInOut
     {
+        void Save();
+
+        void Load();
     }
 }

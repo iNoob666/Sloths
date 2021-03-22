@@ -6,9 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Sloths.source.model;
+using System.Runtime.Serialization;
 
 namespace Sloths.source.math
 {
+    [DataContract]
+    [KnownType(typeof(IFigure))]
     class Line : IFigure
     {
         //private double k;
@@ -16,8 +19,10 @@ namespace Sloths.source.math
         //private double x0;
         //private double x1;
         //Начальная координа определяемая начало фигуры
+        [DataMember]
         public NormPoint BeginCoord { get; set; }
         //Коненая координата определяющая размер фигуры
+        [DataMember]
         public NormPoint EndCoord { get; set; }
         public float LineThick { get; set; }
         public Color BorderColor { get; set; }
@@ -120,5 +125,6 @@ namespace Sloths.source.math
             b.UpdateCoord(EndCoord.X + 0.001, EndCoord.Y + 0.001);
             screen.drawhighlight(new List<NormPoint> { a, b });
         }
+
     }
 }

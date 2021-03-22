@@ -25,8 +25,8 @@
             <StackPanel>
                 <Menu Height="20">
                     <MenuItem VerticalAlignment="Center" Header="Меню" Height="24">
-                        <MenuItem Header="Save"></MenuItem>
-                        <MenuItem Header="Load"></MenuItem>
+                        <MenuItem x:Name="Saver" Header="Save"></MenuItem>
+                        <MenuItem x:Name="Loader" Header="Load"></MenuItem>
                     </MenuItem>
                 </Menu>
                 <Grid x:Name="SelectTools" Margin="5px" >

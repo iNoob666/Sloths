@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SharpGL;
 
 using Sloths.source.model;
+using System.Runtime.Serialization;
 /*
  * Я не очень понимаю зачем нам нужны три фабрики для каждого типа фигуры
  * как я понимаю с каждой фигурой мы будем работать одинаково 
@@ -21,8 +22,7 @@ namespace Sloths.source.math
         {
             ListOfFigures = new List<IFigure>();
         }
-
-        private static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
+        public static List<IFigure> ListOfFigures { get; set; } //список всех нарисованых фигур
         //ВРЕМЕННО 
         //Рома хочет сделать фабрики для каждого типа фигур
         //будем переделывать
@@ -61,6 +61,11 @@ namespace Sloths.source.math
                 fig.EndCoord.UpdateSize();
                 fig.Init(fig.BeginCoord, fig.EndCoord);
             }
+        }
+
+        static List<IFigure> getList()
+        {
+            return ListOfFigures;
         }
     }
 }
