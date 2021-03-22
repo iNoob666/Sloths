@@ -72,16 +72,18 @@ namespace Sloths.source.math
             double dY = EndCoord.Y - BeginCoord.Y;
             dX= (p.X - BeginCoord.X)/dX;
             dY = dX * dY + BeginCoord.Y;
-            if ((dY - p.Y) / dY < 0.001) return true;
+            if (p.Y < dY + LineThick/100 && p.Y > dY - LineThick / 100) return true;
             else return false;           
         }
 
         public IFigure Scale(double koeff)
         {
             Line tmp = new Line();
-            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X * Math.Sqrt(koeff),this.BeginCoord.Y  );
-            tmp.EndCoord.UpdateCoord(this.EndCoord.X * Math.Sqrt(koeff), this.EndCoord.Y );
-            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
+            double CX = (BeginCoord.X + EndCoord.X) / 2;
+            double CY = (BeginCoord.Y + EndCoord.Y) / 2;
+            tmp.BeginCoord.UpdateCoord(CX + (BeginCoord.X-CX) * koeff, CY + (BeginCoord.Y-CY) * koeff);
+            tmp.EndCoord.UpdateCoord(CX + (EndCoord.X - CX) * koeff, CY + (EndCoord.Y - CY) * koeff);
+            //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 

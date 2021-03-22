@@ -107,9 +107,9 @@ namespace Sloths.source.math
         public IFigure Scale(double koeff)
         {
             Circle tmp = new Circle();
-            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X * koeff, this.BeginCoord.Y * koeff);
-            tmp.EndCoord.UpdateCoord(this.EndCoord.X * koeff, this.EndCoord.Y * koeff);
-            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
+            tmp.BeginCoord.UpdateCoord(C.X + (BeginCoord.X - C.X) * koeff, C.Y + (BeginCoord.Y - C.Y) * koeff);
+            tmp.EndCoord.UpdateCoord(C.X + (EndCoord.X - C.X) * koeff, C.Y + (EndCoord.Y - C.Y) * koeff);
+            //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             tmp.R = R * koeff;
             tmp.C = C;
             return tmp;
@@ -119,7 +119,8 @@ namespace Sloths.source.math
             Circle tmp = new Circle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
-            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
+            tmp.C.UpdateCoord(C.X + x, C.Y + y);
+            //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 
