@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using System.Windows;
+
+
 using System.Runtime.Serialization;
 
 namespace Sloths.source.math
@@ -105,6 +109,7 @@ namespace Sloths.source.math
             Circle tmp = new Circle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X * koeff, this.BeginCoord.Y * koeff);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X * koeff, this.EndCoord.Y * koeff);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             tmp.R = R * koeff;
             tmp.C = C;
             return tmp;
@@ -114,7 +119,7 @@ namespace Sloths.source.math
             Circle tmp = new Circle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
-            tmp.Init(tmp.BeginCoord, tmp.EndCoord);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 

@@ -33,14 +33,10 @@ namespace Sloths
         private IPaint engine; //Движок на котором рисуем все
         private IFigure Figure = FabricFiguries.Create("Line"); //Поле для новой фигуры
         private string id = ""; //Название нажатой кнопки  
-<<<<<<< Updated upstream
-        private IInOut saverLoader = new InOut();
-=======
         private Sloths.source.model.Color Color_;
         private float Thickness;
         private IInOut saverLoader = new InOut();
 
->>>>>>> Stashed changes
         public MainWindow()
         {
             InitializeComponent();
@@ -53,7 +49,7 @@ namespace Sloths
 
             BrushSettings();
 
-
+            Saver.Click += SaveList;
 
             //Присваиваем статическому классу NormPoint размеры холста для рисования
             //это необходимо для приобразования координат из wpf в OpenGL
@@ -77,8 +73,7 @@ namespace Sloths
             {
                 elem.Click += ButtonFigureActive_Event;
             }
-<<<<<<< Updated upstream
-=======
+
 
         }
         private void BrushSettings()
@@ -140,8 +135,8 @@ namespace Sloths
         {
             var color = System.Drawing.ColorTranslator.FromHtml(ColorTextBox.Text);
             Color_ = source.model.Color.FromRGBA(color.R, color.G, color.B, color.A);
->>>>>>> Stashed changes
-            Saver.Click += SaveList;
+
+
         }
 
         private void SaveList(object sender, RoutedEventArgs e)

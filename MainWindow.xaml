@@ -23,7 +23,7 @@
         <Border BorderBrush="LightGray" BorderThickness="0 0 2 0">
             <StackPanel>
                 <Menu Height="20">
-                    <MenuItem VerticalAlignment="Center" Header="Меню" Height="24">
+                    <MenuItem x:Name="Menu" VerticalAlignment="Center" Header="Меню" Height="24">
                         <MenuItem x:Name="Saver" Header="Save"></MenuItem>
                         <MenuItem x:Name="Loader" Header="Load"></MenuItem>
                     </MenuItem>
