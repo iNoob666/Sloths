@@ -102,13 +102,12 @@ namespace Sloths.source.math
             tmp.C = C;
             return tmp;
         }
-
-        public IFigure MoveByVector(NormPoint v)// ? фигня какая-то, надо изменить.
+        public IFigure MoveByVector(float x, float y)
         {
             Circle tmp = new Circle();
-            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + v.X, this.BeginCoord.Y + v.Y);
-            tmp.EndCoord.UpdateCoord(this.EndCoord.X + v.X, this.EndCoord.Y + v.Y);
-            tmp.C.UpdateCoord(this.C.X + v.X, this.C.Y + v.Y);
+            tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
+            tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord);
             return tmp;
         }
 
@@ -142,6 +141,7 @@ namespace Sloths.source.math
             screen.drawhighlight(new List<NormPoint> { BeginCoord, b });
             screen.drawhighlight(new List<NormPoint> { b, EndCoord });
             screen.drawhighlight(new List<NormPoint> { EndCoord, a });
+
         }
 
 

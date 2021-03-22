@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
-
+using System.Windows.Input;
 using Sloths.source.model;
 /*
  * Я не очень понимаю зачем нам нужны три фабрики для каждого типа фигуры
@@ -20,14 +20,17 @@ namespace Sloths.source.math
         static FabricFiguries()
         {
             ListOfFigures = new List<IFigure>();
+            SelectedItem = -1;
         }
 
-        private static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
+        public static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
+        private static int SelectedItem { get; set; }
         //ВРЕМЕННО 
         //Рома хочет сделать фабрики для каждого типа фигур
         //будем переделывать
         public static IFigure Create(string name) //Создание фигуры name - название фигуры 
         {
+            SelectedItem = -1;
             switch (name)
             {
                 case "Line":
@@ -46,10 +49,14 @@ namespace Sloths.source.math
             ListOfFigures.Add(newfig);
         }
 
-        public static void DrawAll(IPaint screen) //Отрисовка всех фигур из списка screen - клас полотна на котором рисуем 
+        public static void DrawAll(IPaint screen) //Отрисовка всех фигур из списка screen - класс полотна на котором рисуем 
         {
-            foreach (IFigure figure in ListOfFigures)
-                figure.Draw(screen);
+
+            for (int i = 0; i < ListOfFigures.Count(); i++)
+            {
+                ListOfFigures[i].Draw(screen);
+            }
+            if(SelectedItem != -1) ListOfFigures[SelectedItem].Highlight(screen);
             screen._flush();
         }
 
@@ -62,5 +69,80 @@ namespace Sloths.source.math
                 fig.Init(fig.BeginCoord, fig.EndCoord);
             }
         }
+        public static void SelectFigure(NormPoint point, IPaint screen)
+        {
+            int i = 1;
+            for (; i <= ListOfFigures.Count(); i++)
+            {
+                if (ListOfFigures[ListOfFigures.Count() - i].IsIn(point))
+                {
+                    SelectedItem = ListOfFigures.Count() - i;
+                    break;
+                };
+            }
+           
+
+
+
+        }
+        /// <summary>
+        /// Ивенты для работы с фигурами
+        /// </summary>
+        public static void UndoEvent(object sender, ExecutedRoutedEventArgs e)
+        {
+            if(ListOfFigures.Count() > 0)
+                ListOfFigures.RemoveAt(ListOfFigures.Count() - 1);
+        }
+        public static void RedoEvent(object sender, ExecutedRoutedEventArgs e)
+        {
+            ListOfFigures.Add(ListOfFigures[ListOfFigures.Count() - 1].MoveByVector(0.05f, 0.05f));
+
+        }
+        public static void OpenEvent(object sender, ExecutedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void SaveEvent(object sender, ExecutedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        //пкркмещение фигур в пространстве
+        internal static void UpEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0,0.02f);
+        }
+
+        internal static void DownEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0,-0.02f);
+        }
+
+        internal static void RightEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0.02f, 0);
+        }
+
+        internal static void LeftEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(-0.02f, 0);
+        }
+        internal static void СounterClockWiseEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(1);
+        }
+        internal static void ClockWiseEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-1);
+        }
+        internal static void СounterClockWiseAroundCenterEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0,0), 0.0001);
+        }
+        internal static void ClockWiseAroundCenterEvent()
+        {
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0, 0), -0.0001);
+        }
     }
 }
+

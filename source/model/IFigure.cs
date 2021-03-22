@@ -23,7 +23,7 @@ namespace Sloths.source.model
         void Init(NormPoint p1, NormPoint p2);
         void Init(NormPoint p1, NormPoint p2, Color BorderColor, float LineThick);
         IFigure Scale(double koeff);        //изменение размера фигуры процентами
-        IFigure MoveByVector(NormPoint v);          //перемещение
+        IFigure MoveByVector(float x, float y);         //перемещение
         IFigure Rotate(NormPoint center, double Phi);         //поворот 
         IFigure Rotate(double Phi);         //поворот относительно центра
         IFigure Reflection(NormPoint a, NormPoint b);   //отражение
