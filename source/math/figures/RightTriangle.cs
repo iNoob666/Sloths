@@ -69,6 +69,7 @@ namespace Sloths.source.math
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X * koeff, this.BeginCoord.Y * koeff);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X * koeff, this.EndCoord.Y * koeff);
             Node3.UpdateCoord(Node3.X * koeff, Node3.Y * koeff);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 
@@ -77,7 +78,7 @@ namespace Sloths.source.math
             RightTriangle tmp = new RightTriangle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
-            tmp.Node3.UpdateCoord(this.Node3.X + x, this.Node3.Y + y);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 
@@ -91,6 +92,7 @@ namespace Sloths.source.math
             tmp.BeginCoord.UpdateCoord(C.X + (BeginCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (BeginCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (BeginCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (BeginCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
             tmp.EndCoord.UpdateCoord(C.X + (EndCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (EndCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (EndCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (EndCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
             tmp.Node3.UpdateCoord(C.X + (Node3.X - C.X) * Math.Cos(Phi * PI / 180) - (Node3.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (Node3.X - C.X) * Math.Sin(Phi * PI / 180) + (Node3.Y - C.Y) * Math.Cos(Phi * PI / 180));
+            //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 
