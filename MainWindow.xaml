@@ -53,7 +53,7 @@
                         <RowDefinition Height="0*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" x:Name="SelectMode" Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                    <Button Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" x:Name="SelectMode" Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
                         Width="60" Margin="16,0,16,15"/>
 
                     <Button Grid.Column="0" Grid.Row="1" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="ColorPicker" Height="60"
@@ -68,8 +68,7 @@
                     <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
                         Width="60" Margin="16,35,16,15"/>
 
-                    <Button Grid.Column="1" Grid.Row="1" x:Name="Rotate" Content="{materialDesign:PackIcon axiszrotateclockwise}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rotate" Height="Auto"
-                        Width="60" Margin="16,0,16,15"/>
+                    
                 </Grid>
             </StackPanel>
         </Border>
@@ -131,7 +130,6 @@
                     <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
 
                     <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
-                    <materialDesign:ColorPicker/>
                     <Label>Цвет</Label>
                     <TextBox Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7">#ffffff</TextBox>
                     <Button x:Name="brushColorOk" Margin="36,25,49,15" Content="Ок" />

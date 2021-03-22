@@ -12,8 +12,8 @@ namespace Sloths.source.math
         public NormPoint BeginCoord { get; set; }
         public NormPoint EndCoord { get; set; }
         private NormPoint Node3 { get; set; }
-        public float LineThick { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Color BorderColor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public float LineThick { get; set; }
+        public Color BorderColor { get; set; }
 
         public RightTriangle()
         {
@@ -29,6 +29,24 @@ namespace Sloths.source.math
             Node3.UpdateCoord(BeginCoord.X, EndCoord.Y);
         }
 
+        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick)
+        {
+            BeginCoord = p1;
+            EndCoord = p2;
+            Node3.UpdateCoord(BeginCoord.X, EndCoord.Y);
+            SelectBorderColor(Color.R, Color.G, Color.B, Color.A);
+            SelectLineThick(Thick);
+        }
+
+        public void SelectLineThick(float p)
+        {
+            LineThick = p;
+        }
+
+        public void SelectBorderColor(byte p1, byte p2, byte p3, byte p4)
+        {
+            BorderColor = Color.FromRGBA(p1, p2, p3, p4);
+        }
 
         private double Scal(NormPoint a, NormPoint b, NormPoint c)
         {
@@ -63,16 +81,6 @@ namespace Sloths.source.math
             return tmp;
         }
 
-        public IFigure Rotate(NormPoint center, double Phi)
-        {
-            RightTriangle tmp = new RightTriangle();
-            tmp = this;
-            tmp.BeginCoord.UpdateCoord(center.X + BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), center.Y + BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
-            tmp.EndCoord.UpdateCoord(center.X + EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
-            tmp.Node3.UpdateCoord(center.X + Node3.X * Math.Sin(Phi) + Node3.Y * Math.Cos(Phi), center.Y + Node3.X * Math.Cos(Phi) - Node3.Y * Math.Sin(Phi));
-            return tmp;
-        }
-
         public IFigure Rotate(double Phi)
         {
             RightTriangle tmp = new RightTriangle();
@@ -86,10 +94,6 @@ namespace Sloths.source.math
             return tmp;
         }
 
-        public IFigure Reflection(NormPoint a, NormPoint b)
-        {
-            return this;
-        }
 
         public void Highlight(IPaint screen)
         {
@@ -107,23 +111,8 @@ namespace Sloths.source.math
 
         public void Draw(IPaint screen)
         {
-
             screen.drawline(new List<NormPoint> { BeginCoord, Node3, BeginCoord, EndCoord, EndCoord, Node3 }, BorderColor, LineThick);
         }
 
-        public void Init(NormPoint p1, NormPoint p2, Color BorderColor, float LineThick)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SelectLineThick(float p)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SelectBorderColor(byte p1, byte p2, byte p3, byte p4)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -111,22 +111,7 @@ namespace Sloths.source.math
             return tmp;
         }
 
-        public IFigure Rotate(NormPoint center, double Phi)
-        {
-            Circle tmp = new Circle();
-            tmp = this;
-            tmp.BeginCoord.UpdateCoord(center.X + BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), center.Y + BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
-            tmp.EndCoord.UpdateCoord(center.X + EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
-            tmp.C.UpdateCoord(center.X + C.X * Math.Sin(Phi) + C.Y * Math.Cos(Phi), center.Y + C.X * Math.Cos(Phi) - C.Y * Math.Sin(Phi));
-            return tmp;
-        }
-
         public IFigure Rotate(double Phi)
-        {
-            return this;
-        }
-
-        public IFigure Reflection(NormPoint a, NormPoint b)
         {
             return this;
         }
@@ -137,11 +122,7 @@ namespace Sloths.source.math
             NormPoint b = new NormPoint();
             a.UpdateCoord(EndCoord.X, BeginCoord.Y);
             b.UpdateCoord(BeginCoord.X, EndCoord.Y);
-            screen.drawhighlight(new List<NormPoint> { BeginCoord, a });
-            screen.drawhighlight(new List<NormPoint> { BeginCoord, b });
-            screen.drawhighlight(new List<NormPoint> { b, EndCoord });
-            screen.drawhighlight(new List<NormPoint> { EndCoord, a });
-
+            screen.drawhighlight(new List<NormPoint> { BeginCoord, a,BeginCoord, b,b, EndCoord,EndCoord, a  });
         }
 
 

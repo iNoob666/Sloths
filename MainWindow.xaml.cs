@@ -107,12 +107,12 @@ namespace Sloths
                 case Key.Q:
                     FabricFiguries.СounterClockWiseEvent();
                     break;
-                case Key.C:
+                /*case Key.C:
                     FabricFiguries.ClockWiseAroundCenterEvent();
-                    break;
-                case Key.X:
+                    break;*/
+                /*case Key.X:
                     FabricFiguries.СounterClockWiseAroundCenterEvent();
-                    break;
+                    break;*/
             }
 
         }

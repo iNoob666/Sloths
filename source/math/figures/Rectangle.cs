@@ -94,17 +94,6 @@ namespace Sloths.source.math
             return tmp;
         }
 
-        public IFigure Rotate(NormPoint center, double Phi)
-        {
-            Rectangle tmp = new Rectangle();
-            tmp = this;
-            tmp.BeginCoord.UpdateCoord(center.X + BeginCoord.X * Math.Sin(Phi) + BeginCoord.Y * Math.Cos(Phi), center.Y + BeginCoord.X * Math.Cos(Phi) - BeginCoord.Y * Math.Sin(Phi));
-            tmp.EndCoord.UpdateCoord(center.X+EndCoord.X * Math.Sin(Phi) + EndCoord.Y * Math.Cos(Phi), center.Y + EndCoord.X * Math.Cos(Phi) - EndCoord.Y * Math.Sin(Phi));
-            tmp.Node3.UpdateCoord(center.X+Node3.X * Math.Sin(Phi) + Node3.Y * Math.Cos(Phi), center.Y + Node3.X * Math.Cos(Phi) - Node3.Y * Math.Sin(Phi));
-            tmp.Node4.UpdateCoord(center.X+Node4.X * Math.Sin(Phi) + Node4.Y * Math.Cos(Phi), center.Y + Node4.X * Math.Cos(Phi) - Node4.Y * Math.Sin(Phi));
-            return tmp;
-        }
-
         public IFigure Rotate(double Phi)
         {
             Rectangle tmp = new Rectangle();
@@ -119,11 +108,6 @@ namespace Sloths.source.math
             tmp.Node4.UpdateCoord(C.X+(Node4.X - C.X) * Math.Cos(Phi * PI / 180) - (Node4.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y+(Node4.X - C.X) * Math.Sin(Phi * PI / 180) + (Node4.Y - C.Y) * Math.Cos(Phi * PI / 180));
 
             return tmp;
-        }
-
-        public IFigure Reflection(NormPoint a, NormPoint b)
-        {
-            return this;
         }
 
         public void Highlight(IPaint screen)
@@ -145,9 +129,6 @@ namespace Sloths.source.math
             b.UpdateCoord(Node3.X - hx * 0.02, Node3.Y + hy * 0.02);
             screen.drawhighlight(new List<NormPoint> { a, b, b, c, c, d, d, a });
         }
-
-
-
 
         public void Draw(IPaint screen)
         {

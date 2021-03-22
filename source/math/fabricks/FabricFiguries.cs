@@ -135,14 +135,14 @@ namespace Sloths.source.math
         {
             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-1);
         }
-        internal static void СounterClockWiseAroundCenterEvent()
+       /* internal static void СounterClockWiseAroundCenterEvent()
         {
             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0,0), 0.0001);
-        }
-        internal static void ClockWiseAroundCenterEvent()
+        }*/
+        /*internal static void ClockWiseAroundCenterEvent()
         {
             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0, 0), -0.0001);
-        }
+        }*/
     }
 }
 
