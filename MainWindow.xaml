@@ -7,20 +7,25 @@
         xmlns:local="clr-namespace:Sloths"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="627" Width="1004"
+        Title="MainWindow" Height="600" Width="1000"
         SourceInitialized="Window_SourceInitialized">
 
-    <Grid Grid.IsSharedSizeScope="True">
+
+
+
+
+    <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="6*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="LightGray" BorderThickness="0 0 2 0">
+        <Border BorderBrush="LightGray" BorderThickness="0 0 5 0">
             <StackPanel>
                 <Menu Height="20">
                     <MenuItem VerticalAlignment="Center" Header="Меню" Height="24">
@@ -62,6 +67,8 @@
 
                     <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
                         Width="60" Margin="16,35,16,15"/>
+
+                    
                 </Grid>
             </StackPanel>
         </Border>
@@ -71,12 +78,12 @@
                            OpenGLDraw="OpenGLControl_OpenGLDraw"
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
-                           
+                           Grid.Row="1"
                            Grid.Column="1" OpenGLVersion="OpenGL4_4" FrameRate="60" RenderContextType="DIBSection" DrawFPS="True"/>
 
-        <Border Grid.Column="2" Margin="0 0 0 0" BorderBrush="LightGray" BorderThickness="2 0 0 0">
-            <StackPanel Margin="0 5 0 0">
-                <Grid Margin="0 3 0 0" x:Name="PantTools">
+        <Border Grid.Column="2" Margin="15 25 0 0" BorderBrush="LightGray" BorderThickness="5 0 0 0">
+            <StackPanel Margin="0 0 0 0">
+                <Grid x:Name="PantTools">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -120,22 +127,11 @@
 
                 <StackPanel  Margin="23,5,22,5" x:Name="BrushSettingsContainer" Height="211">
                     <Label>Толщина Кисти</Label>
-                    <Slider x:Name= "ThickSlider" Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
+                    <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
+
                     <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
                     <Label>Цвет</Label>
-                    <ComboBox SelectedIndex="0" Name="ColorList" Height="30" VerticalAlignment="Top">
-                        <TextBlock x:Name="Black" HorizontalAlignment="Left" Width="100" Background="Black"></TextBlock>
-                        <TextBlock x:Name="Gray" HorizontalAlignment="Left" Width="100" Background="Gray"></TextBlock>
-                        <TextBlock x:Name="Brown" HorizontalAlignment="Left" Width="100" Background="Brown"></TextBlock>
-                        <TextBlock x:Name="Red" HorizontalAlignment="Left" Width="100" Background="Red"></TextBlock>
-                        <TextBlock x:Name="Orange" HorizontalAlignment="Left" Width="100" Background="Orange"></TextBlock>
-                        <TextBlock x:Name="Yellow" HorizontalAlignment="Left" Width="100" Background="Yellow"></TextBlock>
-                        <TextBlock x:Name="Green" HorizontalAlignment="Left" Width="100" Background="Green"></TextBlock>
-                        <TextBlock x:Name="LightBlue" HorizontalAlignment="Left" Width="100" Background="LightBlue"></TextBlock>
-                        <TextBlock x:Name="Blue" HorizontalAlignment="Left" Width="100" Background="Blue"></TextBlock>
-                        <TextBlock x:Name="Purple" HorizontalAlignment="Left" Width="100" Background="Purple"></TextBlock>
-                    </ComboBox>
-                    <TextBox x:Name= "ColorTextBox" Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7">#ffffff</TextBox>
+                    <TextBox Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7">#ffffff</TextBox>
                     <Button x:Name="brushColorOk" Margin="36,25,49,15" Content="Ок" />
                 </StackPanel>
 

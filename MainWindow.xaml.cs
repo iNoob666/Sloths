@@ -33,28 +33,40 @@ namespace Sloths
         private IPaint engine; //Движок на котором рисуем все
         private IFigure Figure = FabricFiguries.Create("Line"); //Поле для новой фигуры
         private string id = ""; //Название нажатой кнопки  
-<<<<<<< Updated upstream
         private IInOut saverLoader = new InOut();
-=======
-        private Sloths.source.model.Color Color_;
-        private float Thickness;
-        private IInOut saverLoader = new InOut();
-
->>>>>>> Stashed changes
         public MainWindow()
         {
             InitializeComponent();
             // Хоткеи
             // Дефолтные команды
-            CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, UndoEvent));
-            CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, RedoEvent));
+            CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, FabricFiguries.UndoEvent));
+            CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, FabricFiguries.RedoEvent));
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Open, FabricFiguries.OpenEvent));
             CommandBindings.Add(new CommandBinding(ApplicationCommands.SaveAs, FabricFiguries.SaveEvent));
+            // Команды премещения фигуры
+            
 
-            BrushSettings();
+            //KeyBinding W = new KeyBinding();
+            //W.Key = Key.W;
+            //W.Command = CustomComands.Up;
+            //DrawingPanel.InputBindings.Add(W);
+            //KeyBinding S = new KeyBinding();
+            //S.Command = CustomComands.Down;
+            //S.Key = Key.S;
+            //DrawingPanel.InputBindings.Add(S);
+            //KeyBinding A = new KeyBinding();
+            //A.Command = CustomComands.Left;
+            //A.Key = Key.A;
+            //DrawingPanel.InputBindings.Add(A);
+            //KeyBinding D = new KeyBinding();
+            //D.Command = CustomComands.Right;
+            //D.Key = Key.D;
+            //DrawingPanel.InputBindings.Add(D);
 
-
-
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Up, FabricFiguries.UpEvent));
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Down, FabricFiguries.DownEvent));
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Right, FabricFiguries.RightEvent));
+            //DrawingPanel.CommandBindings.Add(new CommandBinding(CustomComands.Left, FabricFiguries.LeftEvent));
             //Присваиваем статическому классу NormPoint размеры холста для рисования
             //это необходимо для приобразования координат из wpf в OpenGL
             NormPoint.Height = DrawingPanel.ActualHeight;
@@ -67,80 +79,14 @@ namespace Sloths
             //Назначаем иветны на кнопки
             //**ДЛЯ ОТДЕЛА UI**
             //Когда будете пилить сюда интерфейс оберните кнопки фигур в контейнер плз))
-            
-            SelectMode.Click += SelectClick_Event;
-            Delete.Click += DeleteFigure_Event;
-            Undo.Click += UndoClick_Event;
-            Redo.Click += RedoClick_Event;
-            ColorPicker.Click += ColorPicker_Event;
+            foreach (Button elem in SelectTools.Children)
+            {
+                elem.Click += ButtonActive_Event;
+            }
             foreach (Button elem in PantTools.Children)
             {
-                elem.Click += ButtonFigureActive_Event;
+                elem.Click += ButtonActive_Event;
             }
-<<<<<<< Updated upstream
-=======
-
-        }
-        private void BrushSettings()
-        {
-            ThickSlider.ValueChanged += ValueChanged_Event;
-            ColorList.SelectionChanged += ColorListChanged_Event;
-            brushColorOk.Click += brushColorOk_Event;
-        }
-
-        private void ColorListChanged_Event(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            TextBlock selectedItem = (TextBlock)comboBox.SelectedItem;
-            var color = System.Drawing.ColorTranslator.FromHtml(selectedItem.Name);
-            Color_ = source.model.Color.FromRGBA(color.R, color.G, color.B, color.A);
-
-        }
-
-        private void ValueChanged_Event(object sender, RoutedPropertyChangedEventArgs<double> e) => Thickness = (float)e.NewValue;
-
-
-
-        private void ColorPicker_Event(object sender, RoutedEventArgs e) => DrawingPanel.MouseLeftButtonDown += ClickForColor_Event;
-
-
-        private void ClickForColor_Event(object sender, MouseButtonEventArgs e)
-        {
-            var coords = e.GetPosition(DrawingPanel);
-            Color_ = FabricFiguries.GetColor(new NormPoint(coords.X,coords.Y));
-            DrawingPanel.MouseLeftButtonDown -= ClickForColor_Event;
-        }
-
-        private void RedoEvent(object sender, ExecutedRoutedEventArgs e)
-        {
-            FabricFiguries.Redo();
-        }
-
-        private void UndoEvent(object sender, ExecutedRoutedEventArgs e)
-        {
-            FabricFiguries.Undo();
-        }
-
-        private void RedoClick_Event(object sender, RoutedEventArgs e)
-        {
-            FabricFiguries.Redo();
-        }
-
-        private void UndoClick_Event(object sender, RoutedEventArgs e)
-        {
-            FabricFiguries.Undo();
-        }
-
-        private void DeleteFigure_Event(object sender, RoutedEventArgs e)
-        {
-            FabricFiguries.DeleteSelectedFigureFromFabric();
-        }
-
-        private void brushColorOk_Event(object sender, RoutedEventArgs e)
-        {
-            var color = System.Drawing.ColorTranslator.FromHtml(ColorTextBox.Text);
-            Color_ = source.model.Color.FromRGBA(color.R, color.G, color.B, color.A);
->>>>>>> Stashed changes
             Saver.Click += SaveList;
         }
 
@@ -171,12 +117,12 @@ namespace Sloths
                 case Key.Q:
                     FabricFiguries.СounterClockWiseEvent();
                     break;
-                case Key.C:
-                    FabricFiguries.PlusSizeEvent();
-                    break; 
-                case Key.X:
-                    FabricFiguries.MinusSizeEvent();
-                    break;
+                /*case Key.C:
+                    FabricFiguries.ClockWiseAroundCenterEvent();
+                    break;*/
+                /*case Key.X:
+                    FabricFiguries.СounterClockWiseAroundCenterEvent();
+                    break;*/
             }
 
         }
@@ -190,12 +136,12 @@ namespace Sloths
         {
             var MouseCoord = e.GetPosition(this.DrawingPanel);
             var point = new NormPoint(MouseCoord.X, MouseCoord.Y);
-            FabricFiguries.SelectFigure(point);
+            FabricFiguries.SelectFigure(point, engine);
             KeyDown += MainWindow_KeyDown;
         }
 
         //Ивент срабатывающий при нажатии кнопки фигуры
-        private void ButtonFigureActive_Event(object sender, RoutedEventArgs e)
+        private void ButtonActive_Event(object sender, RoutedEventArgs e)
         {
             KeyDown -= MainWindow_KeyDown;
             DrawingPanel.MouseLeftButtonDown -= MouseDown_Event;
@@ -226,7 +172,7 @@ namespace Sloths
             var gLControl = (OpenGLControl)sender;
             var MouseCoord = e.GetPosition(this.DrawingPanel); //Сичтываем позицию мыши на полотне
             //Назначаем начальную координату фигуры, которая в дальнейшем меняться не будет
-            Figure.Init(new NormPoint(MouseCoord.X, MouseCoord.Y),new NormPoint(MouseCoord.X, MouseCoord.Y),Color_, Thickness);
+            Figure.Init(new NormPoint(MouseCoord.X, MouseCoord.Y),new NormPoint(MouseCoord.X, MouseCoord.Y));
             //Вторая координата фигуры, которая в дальнейшем будет меняться в ивенте MouseMove_Event
             DrawingPanel.MouseMove += MouseMove_Event; //Назначаем ивент для движения мышью с помощью которого будем менять размер фигуры
             DrawingPanel.MouseLeftButtonUp += MouseUp_Event; //Назначаем ивент при отпуске левой кнопки мыши заканчивающий создание фигуры
@@ -285,7 +231,5 @@ namespace Sloths
         {
             WindowAspectRatio.Register((Window)sender);
         }
-
- 
     }
 }

@@ -40,10 +40,6 @@ namespace Sloths.source.math
                     return new Circle();
                 case "Rectangle":
                     return new Rectangle();
-                case "Triangle2":
-                    return new IsoscelesTriangle();
-                case "Triangle":
-                    return new RightTriangle();
                 default:
                     return new Line(); //что нибудь придумать для дефолта
             }  
@@ -53,11 +49,7 @@ namespace Sloths.source.math
         {
             ListOfFigures.Add(newfig);
         }
-        public static void DeleteSelectedFigureFromFabric()
-        {
-            if (SelectedItem != -1)  ListOfFigures.Remove(ListOfFigures[SelectedItem]);
-            SelectedItem = -1;
-        }
+
         public static void DrawAll(IPaint screen) //Отрисовка всех фигур из списка screen - класс полотна на котором рисуем 
         {
 
@@ -78,7 +70,7 @@ namespace Sloths.source.math
                 fig.Init(fig.BeginCoord, fig.EndCoord);
             }
         }
-        public static void SelectFigure(NormPoint point)
+        public static void SelectFigure(NormPoint point, IPaint screen)
         {
             int i = 1;
             for (; i <= ListOfFigures.Count(); i++)
@@ -89,25 +81,20 @@ namespace Sloths.source.math
                     break;
                 };
             }
-        }
-        public static Color GetColor(NormPoint point)
-        {
-            foreach(IFigure elem in ListOfFigures)
-            {
-                if (elem.IsIn(point)) return elem.BorderColor;
-            }
-            return Color.WHITE;
-                    
+           
+
+
+
         }
         /// <summary>
         /// Ивенты для работы с фигурами
         /// </summary>
-        public static void Undo()
+        public static void UndoEvent(object sender, ExecutedRoutedEventArgs e)
         {
             if(ListOfFigures.Count() > 0)
                 ListOfFigures.RemoveAt(ListOfFigures.Count() - 1);
         }
-        public static void Redo()
+        public static void RedoEvent(object sender, ExecutedRoutedEventArgs e)
         {
             ListOfFigures.Add(ListOfFigures[ListOfFigures.Count() - 1].MoveByVector(0.05f, 0.05f));
 
@@ -149,18 +136,10 @@ namespace Sloths.source.math
         {
             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-1);
         }
-        internal static void PlusSizeEvent()
+       /* internal static void СounterClockWiseAroundCenterEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Scale(1.1);
-        }
-        internal static void MinusSizeEvent()
-        {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Scale(0.9);
-        }
-        /* internal static void СounterClockWiseAroundCenterEvent()
-         {
-             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0,0), 0.0001);
-         }*/
+            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0,0), 0.0001);
+        }*/
         /*internal static void ClockWiseAroundCenterEvent()
         {
             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(new NormPoint(0, 0), -0.0001);

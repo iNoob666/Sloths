@@ -78,9 +78,8 @@ namespace Sloths.source.math
             Rectangle tmp = new Rectangle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X * koeff, this.BeginCoord.Y * koeff);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X * koeff, this.EndCoord.Y * koeff);
-            //Node3.UpdateCoord(Node3.X*koeff, Node3.Y * koeff);
-            //Node4.UpdateCoord(Node4.X * koeff, Node4.Y * koeff);
-            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
+            Node3.UpdateCoord(Node3.X*koeff, Node3.Y * koeff);
+            Node4.UpdateCoord(Node4.X * koeff, Node4.Y * koeff);
             return tmp;
         }
 
