@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using System.Runtime.Serialization;
 /*
  * У OpenGL своя "очень интересная" система координат: 
  * левому нижнему углу соотвествует координата (-1,-1)
@@ -11,13 +13,20 @@ using System.Threading.Tasks;
  */
 namespace Sloths.source.math
 {
+    [DataContract]
+    [KnownType(typeof(NormPoint))]
     public class NormPoint
     {
+        [DataMember]
         private double mouse_x, mouse_y; // Координаты мыши
         //Размеры полотна по которому нормируем
-        public static double Widht; 
+        [DataMember]
+        public static double Widht;
+        [DataMember]
         public static double Height;
+        [DataMember]
         public double X { get; private set; }
+        [DataMember]
         public double Y { get; private set;  }
         public NormPoint(double x = 0, double y = 0)
         {
@@ -38,5 +47,6 @@ namespace Sloths.source.math
             X = x;
             Y = y;
         }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SharpGL;
 using System.Windows.Input;
 using Sloths.source.model;
+using System.Runtime.Serialization;
 /*
  * Я не очень понимаю зачем нам нужны три фабрики для каждого типа фигуры
  * как я понимаю с каждой фигурой мы будем работать одинаково 

@@ -1,17 +1,21 @@
-﻿//using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace Sloths.source.model
 {
-    public readonly struct Color
+    [DataContract]
+    public struct Color
     {
-        public byte R { get; }
-        public byte G { get; }
-        public byte B { get; }
-        public byte A { get; }
-        //[JsonConstructor]
+        [DataMember]
+        public byte R { get; set; }
+        [DataMember]
+        public byte G { get; set; }
+        [DataMember]
+        public byte B { get; set; }
+        [DataMember]
+        public byte A { get; set; }
         private Color(byte R, byte G, byte B, byte A) { this.R = R; this.G = G; this.B = B; this.A = A; }
         public static Color FromRGBA(byte R, byte G, byte B, byte A) { return new Color(R, G, B, A); }
         public static Color FromRGBA(uint rgba) { return new Color((byte)(rgba & 0xff), (byte)((rgba >> 8) & 0xff), (byte)((rgba >> 16) & 0xff), (byte)((rgba >> 24) & 0xff)); }

@@ -20,6 +20,7 @@ using SharpGL.WPF;
 using Sloths.source.gui;
 using Sloths.source.math;
 using Sloths.source.model;
+using Sloths.source.file_system;
 
 namespace Sloths
 {
@@ -32,6 +33,7 @@ namespace Sloths
         private IPaint engine; //Движок на котором рисуем все
         private IFigure Figure = FabricFiguries.Create("Line"); //Поле для новой фигуры
         private string id = ""; //Название нажатой кнопки  
+        private IInOut saverLoader = new InOut();
         public MainWindow()
         {
             InitializeComponent();
@@ -70,6 +72,8 @@ namespace Sloths
             NormPoint.Height = DrawingPanel.ActualHeight;
             NormPoint.Widht = DrawingPanel.ActualWidth;
 
+            
+
             DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
 
             //Назначаем иветны на кнопки
@@ -83,6 +87,12 @@ namespace Sloths
             {
                 elem.Click += ButtonActive_Event;
             }
+            Saver.Click += SaveList;
+        }
+
+        private void SaveList(object sender, RoutedEventArgs e)
+        {
+            saverLoader.Save();
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
