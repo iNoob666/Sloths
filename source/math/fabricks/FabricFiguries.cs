@@ -109,7 +109,8 @@ namespace Sloths.source.math
         }
         public static void Redo()
         {
-            ListOfFigures.Add(ListOfFigures[ListOfFigures.Count() - 1].MoveByVector(0.05f, 0.05f));
+            if (ListOfFigures.Count() > 0)
+                ListOfFigures.Add(ListOfFigures[ListOfFigures.Count() - 1].MoveByVector(0.05f, 0.05f));
 
         }
         public static void OpenEvent(object sender, ExecutedRoutedEventArgs e)
@@ -117,10 +118,7 @@ namespace Sloths.source.math
             throw new NotImplementedException();
         }
 
-        public static void SaveEvent(object sender, ExecutedRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+
         //пкркмещение фигур в пространстве
         internal static void UpEvent()
         {

@@ -44,8 +44,7 @@ namespace Sloths
             // Дефолтные команды
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, UndoEvent));
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, RedoEvent));
-            CommandBindings.Add(new CommandBinding(ApplicationCommands.Open, FabricFiguries.OpenEvent));
-            CommandBindings.Add(new CommandBinding(ApplicationCommands.SaveAs, FabricFiguries.SaveEvent));
+
 
             BrushSettings();
 
@@ -73,11 +72,12 @@ namespace Sloths
             {
                 elem.Click += ButtonFigureActive_Event;
             }
-
+            
 
         }
         private void BrushSettings()
         {
+            Thickness = 1;
             ThickSlider.ValueChanged += ValueChanged_Event;
             ColorList.SelectionChanged += ColorListChanged_Event;
             brushColorOk.Click += brushColorOk_Event;
@@ -183,6 +183,7 @@ namespace Sloths
         }
         private void SelectMouseDown_Event(object sender, MouseButtonEventArgs e)
         {
+            KeyDown -= MainWindow_KeyDown;
             var MouseCoord = e.GetPosition(this.DrawingPanel);
             var point = new NormPoint(MouseCoord.X, MouseCoord.Y);
             FabricFiguries.SelectFigure(point);

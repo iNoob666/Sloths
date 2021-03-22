@@ -120,7 +120,7 @@
 
                 <StackPanel  Margin="23,5,22,5" x:Name="BrushSettingsContainer" Height="211">
                     <Label>Толщина Кисти</Label>
-                    <Slider x:Name= "ThickSlider" Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
+                    <Slider x:Name= "ThickSlider" Value="1" Minimum="1" Maximum="10" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
                     <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
                     <Label>Цвет</Label>
                     <ComboBox SelectedIndex="0" Name="ColorList" Height="30" VerticalAlignment="Top">

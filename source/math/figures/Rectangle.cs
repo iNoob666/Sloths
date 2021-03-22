@@ -80,20 +80,23 @@ namespace Sloths.source.math
             double CY = (BeginCoord.Y + EndCoord.Y) / 2;
             tmp.BeginCoord.UpdateCoord(CX + (BeginCoord.X - CX) * koeff, CY + (BeginCoord.Y - CY) * koeff);
             tmp.EndCoord.UpdateCoord(CX + (EndCoord.X - CX) * koeff, CY + (EndCoord.Y - CY) * koeff);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             tmp.Node3.UpdateCoord(CX + (Node3.X - CX) * koeff, CY + (Node3.Y - CY) * koeff);
             tmp.Node4.UpdateCoord(CX + (Node4.X - CX) * koeff, CY + (Node4.Y - CY) * koeff);
-            //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
+
             return tmp;
         }
 
         public IFigure MoveByVector(float x, float y)
         {
             Rectangle tmp = new Rectangle();
+
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             tmp.Node3.UpdateCoord(this.Node3.X + x, this.Node3.Y + y);
             tmp.Node4.UpdateCoord(this.Node4.X + x, this.Node4.Y + y);
-            //tmp.Init(tmp.BeginCoord, tmp.EndCoord);
+            
             return tmp;
         }
 

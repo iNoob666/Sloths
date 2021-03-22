@@ -72,7 +72,7 @@ namespace Sloths.source.math
             double dY = EndCoord.Y - BeginCoord.Y;
             dX= (p.X - BeginCoord.X)/dX;
             dY = dX * dY + BeginCoord.Y;
-            if (p.Y < dY + LineThick/100 && p.Y > dY - LineThick / 100) return true;
+            if (p.Y < dY + LineThick/100 && p.Y > dY - LineThick / 10) return true;
             else return false;           
         }
 
@@ -92,7 +92,7 @@ namespace Sloths.source.math
             Line tmp = new Line();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
-            tmp.Init(tmp.BeginCoord, tmp.EndCoord);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 
