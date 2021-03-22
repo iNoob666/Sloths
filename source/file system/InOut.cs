@@ -24,14 +24,5 @@ namespace Sloths.source.file_system
                 jsonFormatter.WriteObject(file, FabricFiguries.ListOfFigures);
             }
         }
-
-        public void Load()
-        {
-            using (var file = new FileStream("picture.json", FileMode.OpenOrCreate))
-            {
-                var newIfigureList = jsonFormatter.ReadObject(file);
-                FabricFiguries.ListOfFigures = newIfigureList as List<IFigure>;
-            }
-        }
     }
 }
