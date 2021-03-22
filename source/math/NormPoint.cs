@@ -19,15 +19,12 @@ namespace Sloths.source.math
     {
         [DataMember]
         private double mouse_x, mouse_y; // Координаты мыши
-        //Размеры полотна по которому нормируем
+
         [DataMember]
-<<<<<<< Updated upstream
+
         public static double Widht;
         [DataMember]
-=======
-        public static double Widht;
-        [DataMember]
->>>>>>> Stashed changes
+
         public static double Height;
         [DataMember]
         public double X { get; private set; }
@@ -51,12 +48,11 @@ namespace Sloths.source.math
         {
             X = x;
             Y = y;
-<<<<<<< Updated upstream
+
         }
 
-=======
-        }
 
->>>>>>> Stashed changes
+       
+
     }
 }
