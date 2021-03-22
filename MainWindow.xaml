@@ -11,7 +11,11 @@
         SourceInitialized="Window_SourceInitialized">
 
 
+
+
+
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -50,24 +54,22 @@
                     </Grid.RowDefinitions>
 
                     <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" x:Name="SelectMode" Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
-                        Width="60" Margin="16,0,16,5"/>
+                        Width="60" Margin="16,0,16,15"/>
 
                     <Button Grid.Column="0" Grid.Row="1" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="ColorPicker" Height="60"
-                        Width="60" Margin="16,5,17,5"/>
+                        Width="60" Margin="16,0,16,15"/>
 
                     <Button Grid.Column="0" Grid.Row="2" x:Name="Undo" Content="{materialDesign:PackIcon undo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Undo" Height="60"
-                        Width="60" Margin="16,0,17,5"/>
+                        Width="60" Margin="16,0,16,15"/>
 
                     <Button Grid.Column="1" Grid.Row="2" x:Name="Redo" Content="{materialDesign:PackIcon redo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Redo" Height="60"
-                        Width="60" Margin="16,0,16,5"/>
+                        Width="60" Margin="16,0,16,15"/>
 
                     <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
-                        Width="60" Margin="16,35,16,5"/>
+                        Width="60" Margin="16,35,16,15"/>
 
-                    <Button Grid.Column="1" Grid.Row="1" x:Name="Rotate" Content="{materialDesign:PackIcon axiszrotateclockwise}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rotate" Height="60"
-                        Width="60" Margin="16,0,16,5"/>
-                    
-                    
+                    <Button Grid.Column="1" Grid.Row="1" x:Name="Rotate" Content="{materialDesign:PackIcon axiszrotateclockwise}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rotate" Height="Auto"
+                        Width="60" Margin="16,0,16,15"/>
                 </Grid>
             </StackPanel>
         </Border>
@@ -102,17 +104,26 @@
                         <RowDefinition Height="0*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0" x:Name="Line" Content="{materialDesign:PackIcon chartlinevariant}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Line" Height="60"
+
+                    <Button Grid.Column="0" Grid.Row="0" x:Name="Line"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Line" Height="60"
+                        Width="60" Margin="16,0,16,15">
+                        <Image  Source="straight-line-icon.jpg"/>
+                    </Button>
+
+                    <Button Grid.Column="0" Grid.Row="1" x:Name="Triangle2" Content="{materialDesign:PackIcon triangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="IsoscelesTriangle" Height="60"
                         Width="60" Margin="16,0,16,15"/>
+                    <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Grid.Column="1" Grid.Row="1" x:Name="Triangle" ToolTip="RightTriangle" Height="60"
+                        Width="60" Margin="16,0,14,15" VerticalAlignment="Bottom">
+                        <Image  Source="right-triangle.png" Height="18" />
+                    </Button>
 
-                    <Button Grid.Column="1" Grid.Row="0" x:Name="Triangle" Content="{materialDesign:PackIcon triangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Triangle" Height="60"
-                        Width="60" Margin="16,0,16,15"/>
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="Circle" Content="{materialDesign:PackIcon circle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Circle" Height="60"
+                        Width="60" Margin="16,0,14,5"/>
 
-                    <Button Grid.Column="0" Grid.Row="1" x:Name="Circle" Content="{materialDesign:PackIcon circle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Circle" Height="60"
-                        Width="60" Margin="16,0,16,5"/>
+                    <Button Grid.Column="1" Grid.Row="0" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rectangle" Height="60"
+                        Width="60" Margin="16,0,14,15"/>
 
-                    <Button Grid.Column="1" Grid.Row="1" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rectangle" Height="60"
-                        Width="60" Margin="16,0,16,5"/>
+
                 </Grid>
 
                 <StackPanel  Margin="23,5,22,5" x:Name="BrushSettingsContainer" Height="211">
