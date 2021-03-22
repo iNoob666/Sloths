@@ -11,7 +11,7 @@ using System.Runtime.Serialization;
 namespace Sloths.source.math
 {
     [DataContract]
-    [KnownType(typeof(IFigure))]
+    [KnownType(typeof(Line))]
     class Line : IFigure
     {
         //private double k;
@@ -24,7 +24,9 @@ namespace Sloths.source.math
         //Коненая координата определяющая размер фигуры
         [DataMember]
         public NormPoint EndCoord { get; set; }
+        [DataMember]
         public float LineThick { get; set; }
+        [DataMember]
         public Color BorderColor { get; set; }
         public Line()
         {

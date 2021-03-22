@@ -13,17 +13,20 @@ using System.Runtime.Serialization;
  */
 namespace Sloths.source.math
 {
-    [Serializable]
+    [DataContract]
+    [KnownType(typeof(NormPoint))]
     public class NormPoint
     {
-        [NonSerialized]
+        [DataMember]
         private double mouse_x, mouse_y; // Координаты мыши
         //Размеры полотна по которому нормируем
-        [NonSerialized]
+        [DataMember]
         public static double Widht;
-        [NonSerialized]
+        [DataMember]
         public static double Height;
+        [DataMember]
         public double X { get; private set; }
+        [DataMember]
         public double Y { get; private set;  }
         public NormPoint(double x = 0, double y = 0)
         {

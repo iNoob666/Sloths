@@ -27,10 +27,10 @@ namespace Sloths.source.file_system
 
         public void Load()
         {
-            using (var file = new FileStream("picture.json", FileMode.Open))
+            using (var file = new FileStream("picture.json", FileMode.OpenOrCreate))
             {
-                var newIfigureList = jsonFormatter.ReadObject(file) as List<IFigure>;
-                FabricFiguries.ListOfFigures = newIfigureList;
+                var newIfigureList = jsonFormatter.ReadObject(file);
+                FabricFiguries.ListOfFigures = newIfigureList as List<IFigure>;
             }
         }
     }

@@ -58,6 +58,12 @@ namespace Sloths
                 elem.Click += ButtonActive_Event;
             }
             Saver.Click += SaveList;
+            Loader.Click += LoadList;
+        }
+
+        private void LoadList(object sender, RoutedEventArgs e)
+        {
+            saverLoader.Load();
         }
 
         private void SaveList(object sender, RoutedEventArgs e)
