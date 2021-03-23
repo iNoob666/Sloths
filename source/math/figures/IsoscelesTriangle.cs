@@ -79,6 +79,7 @@ namespace Sloths.source.math
             double CY = (BeginCoord.Y + EndCoord.Y) / 2;
             tmp.BeginCoord.UpdateCoord(CX + (BeginCoord.X - CX) * koeff, CY + (BeginCoord.Y - CY) * koeff);
             tmp.EndCoord.UpdateCoord(CX + (EndCoord.X - CX) * koeff, CY + (EndCoord.Y - CY) * koeff);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             tmp.Node3.UpdateCoord(CX + (Node3.X - CX) * koeff, CY + (Node3.Y - CY) * koeff);
             tmp.Node4.UpdateCoord(CX + (Node4.X - CX) * koeff, CY + (Node4.Y - CY) * koeff);
             tmp.Node5.UpdateCoord(CX + (Node5.X - CX) * koeff, CY + (Node5.Y - CY) * koeff);
@@ -93,6 +94,7 @@ namespace Sloths.source.math
             IsoscelesTriangle tmp = new IsoscelesTriangle();
             tmp.BeginCoord.UpdateCoord(this.BeginCoord.X + x, this.BeginCoord.Y + y);
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             tmp.Node3.UpdateCoord(this.Node3.X + x, this.Node3.Y + y);
             tmp.Node4.UpdateCoord(this.Node4.X + x, this.Node4.Y + y);
             tmp.Node5.UpdateCoord(this.Node5.X + x, this.Node5.Y + y);
@@ -104,11 +106,12 @@ namespace Sloths.source.math
 
         public IFigure Rotate(double Phi)
         {
-            IsoscelesTriangle tmp = new IsoscelesTriangle();
+            IsoscelesTriangle tmp ;
             tmp = this;
             Single PI = (Single)(Math.PI);
             NormPoint C = new NormPoint();
             C.UpdateCoord((BeginCoord.X + EndCoord.X) / 2, (BeginCoord.Y + EndCoord.Y) / 2);
+            
             tmp.BeginCoord.UpdateCoord(C.X + (BeginCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (BeginCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (BeginCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (BeginCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
             tmp.EndCoord.UpdateCoord(C.X + (EndCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (EndCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (EndCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (EndCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
             tmp.Node3.UpdateCoord(C.X + (Node3.X - C.X) * Math.Cos(Phi * PI / 180) - (Node3.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (Node3.X - C.X) * Math.Sin(Phi * PI / 180) + (Node3.Y - C.Y) * Math.Cos(Phi * PI / 180));

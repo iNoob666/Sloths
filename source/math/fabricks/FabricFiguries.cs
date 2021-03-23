@@ -104,8 +104,11 @@ namespace Sloths.source.math
         /// </summary>
         public static void Undo()
         {
-            if(ListOfFigures.Count() > 0)
+            if (ListOfFigures.Count() > 0)
+            {
                 ListOfFigures.RemoveAt(ListOfFigures.Count() - 1);
+                SelectedItem = -1;
+            }
         }
         public static void Redo()
         {

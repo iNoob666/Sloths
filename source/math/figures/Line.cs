@@ -83,7 +83,7 @@ namespace Sloths.source.math
             double CY = (BeginCoord.Y + EndCoord.Y) / 2;
             tmp.BeginCoord.UpdateCoord(CX + (BeginCoord.X-CX) * koeff, CY + (BeginCoord.Y-CY) * koeff);
             tmp.EndCoord.UpdateCoord(CX + (EndCoord.X - CX) * koeff, CY + (EndCoord.Y - CY) * koeff);
-            //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
+            tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
 

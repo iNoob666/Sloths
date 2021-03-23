@@ -34,7 +34,7 @@ namespace Sloths.source.gui
 
         void IPaint.drawhighlight(IEnumerable<NormPoint> xy) //Отрисовка линии
         {
-            openGL.LineWidth(1);
+            openGL.LineWidth(1.0f);
             openGL.Enable(OpenGL.GL_LINE_STIPPLE);
             openGL.LineStipple(1, 0x00F0);
             openGL.Begin(OpenGL.GL_LINE_LOOP); //Начало рисования

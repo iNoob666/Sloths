@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using MaterialDesignColors;
 using SharpGL;
 using SharpGL.SceneGraph.Primitives;
 using SharpGL.SceneGraph.Quadrics;
@@ -59,15 +59,18 @@ namespace Sloths
 
             DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
 
-            //Назначаем иветны на кнопки
-            //**ДЛЯ ОТДЕЛА UI**
-            //Когда будете пилить сюда интерфейс оберните кнопки фигур в контейнер плз))
-            
+            SelectMode.IsEnabled = false;
+            ColorPicker.IsEnabled = false;
+            Delete.IsEnabled = false;
+            Undo.IsEnabled = false;
+            Redo.IsEnabled = false;
+
             SelectMode.Click += SelectClick_Event;
             Delete.Click += DeleteFigure_Event;
             Undo.Click += UndoClick_Event;
             Redo.Click += RedoClick_Event;
             ColorPicker.Click += ColorPicker_Event;
+
             foreach (Button elem in PantTools.Children)
             {
                 elem.Click += ButtonFigureActive_Event;
@@ -96,7 +99,13 @@ namespace Sloths
 
 
 
-        private void ColorPicker_Event(object sender, RoutedEventArgs e) => DrawingPanel.MouseLeftButtonDown += ClickForColor_Event;
+        private void ColorPicker_Event(object sender, RoutedEventArgs e)
+        { 
+            DrawingPanel.MouseLeftButtonDown += ClickForColor_Event;
+            ClearButtons();
+            var b = sender as Button;
+            b.Background = new SolidColorBrush(Colors.Red);
+        }
 
 
         private void ClickForColor_Event(object sender, MouseButtonEventArgs e)
@@ -175,11 +184,26 @@ namespace Sloths
             }
 
         }
-
+        private void ClearButtons()
+        {
+            foreach (Button elem in SelectTools.Children)
+            {
+                elem.Background = new SolidColorBrush(Colors.Cyan);
+            }
+            // //Чистим цвета в правой части интерфейса
+            foreach (Button elem in PantTools.Children)
+            {
+                elem.Background = new SolidColorBrush(Colors.Cyan);
+            }
+        }
         private void SelectClick_Event(object sender, RoutedEventArgs e)
         {
             DrawingPanel.MouseLeftButtonDown -= MouseDown_Event;
             DrawingPanel.MouseLeftButtonDown += SelectMouseDown_Event;
+            ClearButtons();
+            var b = sender as Button;
+            b.Background = new SolidColorBrush(Colors.Red);
+
         }
         private void SelectMouseDown_Event(object sender, MouseButtonEventArgs e)
         {
@@ -188,23 +212,21 @@ namespace Sloths
             var point = new NormPoint(MouseCoord.X, MouseCoord.Y);
             FabricFiguries.SelectFigure(point);
             KeyDown += MainWindow_KeyDown;
+
         }
 
         //Ивент срабатывающий при нажатии кнопки фигуры
         private void ButtonFigureActive_Event(object sender, RoutedEventArgs e)
         {
+            SelectMode.IsEnabled = false;
+            ColorPicker.IsEnabled = false;
+            Delete.IsEnabled = false;
+            Undo.IsEnabled = false;
+            Redo.IsEnabled = false;
+
             KeyDown -= MainWindow_KeyDown;
             DrawingPanel.MouseLeftButtonDown -= MouseDown_Event;
-            //Чистим цвета в левой части интерфейса
-            foreach (Button elem in SelectTools.Children)
-            {
-                elem.Background = new SolidColorBrush(Colors.LightBlue);
-            }
-            // //Чистим цвета в правой части интерфейса
-            foreach (Button elem in PantTools.Children)
-            {
-                elem.Background = new SolidColorBrush(Colors.LightBlue);
-            }
+            ClearButtons();
 
             Button butt = sender as Button;
             id = butt.Name;
@@ -248,6 +270,12 @@ namespace Sloths
             p.UpdateCoord(0, 0);
             
             DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
+
+            SelectMode.IsEnabled = true;
+            ColorPicker.IsEnabled = true;
+            Delete.IsEnabled = true;
+            Undo.IsEnabled = true;
+            Redo.IsEnabled = true;
         }
 
         /*
