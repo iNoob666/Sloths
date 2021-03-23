@@ -5,16 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Runtime.Serialization;
 
 namespace Sloths.source.math
 {
+    [DataContract]
+    [KnownType(typeof(Rectangle))]
     class Rectangle : IFigure
     {
+        [DataMember]
         public NormPoint BeginCoord { get; set; }
+        [DataMember]
         public NormPoint EndCoord { get; set; }
+        [DataMember]
         private NormPoint Node3 { get; set; }
+        [DataMember]
         private NormPoint Node4 { get; set; }
+        [DataMember]
         public float LineThick { get; set; }
+        [DataMember]
         public Color BorderColor { get; set; }
 
         public Rectangle()
