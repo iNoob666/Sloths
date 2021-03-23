@@ -125,38 +125,46 @@ namespace Sloths.source.math
         //пкркмещение фигур в пространстве
         internal static void UpEvent()
         {
+            if(SelectedItem != -1)
             ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0,0.02f);
         }
 
         internal static void DownEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0,-0.02f);
+            if (SelectedItem != -1)
+                ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0,-0.02f);
         }
 
         internal static void RightEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0.02f, 0);
+            if (SelectedItem != -1)
+                ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(0.02f, 0);
         }
 
         internal static void LeftEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(-0.02f, 0);
+            if (SelectedItem != -1)
+                ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].MoveByVector(-0.02f, 0);
         }
         internal static void СounterClockWiseEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(1);
+            if (SelectedItem != -1)
+                ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(1);
         }
         internal static void ClockWiseEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-1);
+            if (SelectedItem != -1)
+                ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Rotate(-1);
         }
         internal static void PlusSizeEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Scale(1.1);
+            if (SelectedItem != -1)
+                ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Scale(1.1);
         }
         internal static void MinusSizeEvent()
         {
-            ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Scale(0.9);
+            if (SelectedItem != -1)
+                ListOfFigures[SelectedItem] = ListOfFigures[SelectedItem].Scale(0.9);
         }
         /* internal static void СounterClockWiseAroundCenterEvent()
          {
