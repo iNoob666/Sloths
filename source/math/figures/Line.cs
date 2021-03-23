@@ -112,11 +112,13 @@ namespace Sloths.source.math
         {
             NormPoint a = new NormPoint();
             NormPoint b = new NormPoint();
-            a.UpdateCoord(BeginCoord.X, BeginCoord.Y);
-            b.UpdateCoord(EndCoord.X, EndCoord.Y);
-            a.UpdateCoord(BeginCoord.X + 0.001, BeginCoord.Y + 0.01);
-            b.UpdateCoord(EndCoord.X + 0.001, EndCoord.Y + 0.01);
-            screen.drawhighlight(new List<NormPoint> { a, b });
+            NormPoint c = new NormPoint();
+            NormPoint d = new NormPoint();
+            a.UpdateCoord(BeginCoord.X + 0.001 , BeginCoord.Y + 0.01 + LineThick / 200);
+            b.UpdateCoord(EndCoord.X + 0.001, EndCoord.Y + 0.01 + LineThick / 200);
+            c.UpdateCoord(BeginCoord.X - 0.01 , BeginCoord.Y - 0.001 + LineThick / 200);
+            d.UpdateCoord(EndCoord.X - 0.01,  EndCoord.Y - 0.001 + LineThick / 200);
+            screen.drawhighlight(new List<NormPoint> { a, b,c,d });
 
         }
 
