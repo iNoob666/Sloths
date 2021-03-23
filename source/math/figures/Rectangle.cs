@@ -123,16 +123,12 @@ namespace Sloths.source.math
             NormPoint c = new NormPoint();
             NormPoint d = new NormPoint();
 
-            int hx, hy;
-            
-            if (BeginCoord.X < EndCoord.X) hx = 1;
-            else hx = -1;
-            if (BeginCoord.Y < EndCoord.Y) hy = 1;
-            else hy = -1;
-            a.UpdateCoord(BeginCoord.X - hx * 0.02, BeginCoord.Y - hy * 0.02);
-            d.UpdateCoord(Node4.X + hx * 0.02, Node4.Y - hy * 0.02);
-            c.UpdateCoord(EndCoord.X + hx * 0.02, EndCoord.Y + hy * 0.02);
-            b.UpdateCoord(Node3.X - hx * 0.02, Node3.Y + hy * 0.02);
+            double CX = (BeginCoord.X + EndCoord.X) / 2;
+            double CY = (BeginCoord.Y + EndCoord.Y) / 2;
+            a.UpdateCoord(CX + (BeginCoord.X - CX) * 1.1, CY + (BeginCoord.Y - CY) * 1.1);
+            d.UpdateCoord(CX + (Node4.X - CX) * 1.1, CY + (Node4.Y - CY) * 1.1);
+            c.UpdateCoord(CX + (EndCoord.X - CX) * 1.1, CY + (EndCoord.Y - CY) * 1.1);
+            b.UpdateCoord(CX + (Node3.X - CX) * 1.1, CY + (Node3.Y - CY) * 1.1);
             screen.drawhighlight(new List<NormPoint> { a, b, b, c, c, d, d, a });
         }
 

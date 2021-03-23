@@ -76,6 +76,8 @@ namespace Sloths.source.math
             tmp.EndCoord.UpdateCoord(CX + (EndCoord.X - CX) * koeff, CY + (EndCoord.Y - CY) * koeff);
             tmp.Node3.UpdateCoord(CX + (Node3.X - CX) * koeff, CY + (Node3.Y - CY) * koeff);
             tmp.Node4.UpdateCoord(CX + (Node4.X - CX) * koeff, CY + (Node4.Y - CY) * koeff);
+            tmp.SelectBorderColor(BorderColor.R, BorderColor.G, BorderColor.B, BorderColor.A);
+            tmp.SelectLineThick(LineThick);
             //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
@@ -87,6 +89,8 @@ namespace Sloths.source.math
             tmp.EndCoord.UpdateCoord(this.EndCoord.X + x, this.EndCoord.Y + y);
             tmp.Node3.UpdateCoord(this.Node3.X + x, this.Node3.Y + y);
             tmp.Node4.UpdateCoord(this.Node4.X + x, this.Node4.Y + y);
+            tmp.SelectBorderColor(BorderColor.R, BorderColor.G, BorderColor.B, BorderColor.A);
+            tmp.SelectLineThick(LineThick);
             //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
@@ -102,7 +106,8 @@ namespace Sloths.source.math
             tmp.EndCoord.UpdateCoord(C.X + (EndCoord.X - C.X) * Math.Cos(Phi * PI / 180) - (EndCoord.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (EndCoord.X - C.X) * Math.Sin(Phi * PI / 180) + (EndCoord.Y - C.Y) * Math.Cos(Phi * PI / 180));
             tmp.Node3.UpdateCoord(C.X + (Node3.X - C.X) * Math.Cos(Phi * PI / 180) - (Node3.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (Node3.X - C.X) * Math.Sin(Phi * PI / 180) + (Node3.Y - C.Y) * Math.Cos(Phi * PI / 180));
             tmp.Node4.UpdateCoord(C.X + (Node4.X - C.X) * Math.Cos(Phi * PI / 180) - (Node4.Y - C.Y) * Math.Sin(Phi * PI / 180), C.Y + (Node4.X - C.X) * Math.Sin(Phi * PI / 180) + (Node4.Y - C.Y) * Math.Cos(Phi * PI / 180));
-
+            tmp.SelectBorderColor(BorderColor.R, BorderColor.G, BorderColor.B, BorderColor.A);
+            tmp.SelectLineThick(LineThick);
             //tmp.Init(tmp.BeginCoord, tmp.EndCoord, BorderColor, LineThick);
             return tmp;
         }
