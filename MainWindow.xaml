@@ -7,17 +7,20 @@
         xmlns:local="clr-namespace:Sloths"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="627" Width="1004"
-        SourceInitialized="Window_SourceInitialized">
+        Title="MainWindow" ResizeMode="NoResize"
+        SourceInitialized="Window_SourceInitialized"
+        Height="720" Width="960"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <!----> 
 
     <Grid Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition  Height="9*" ></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="6*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="3.5*"></ColumnDefinition>
+            <ColumnDefinition Width="9*"></ColumnDefinition>
+            <ColumnDefinition Width="3.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Border BorderBrush="LightGray" BorderThickness="0 0 2 0">
@@ -68,11 +71,14 @@
 
 
         <wpf:OpenGLControl x:Name = "DrawingPanel"
-                           OpenGLDraw="OpenGLControl_OpenGLDraw"
-                           OpenGLInitialized="OpenGLControl_OpenGLInitialized"
-                           Resized="OpenGLControl_Resized"
-                           
-                           Grid.Column="1" OpenGLVersion="OpenGL4_4" FrameRate="60" RenderContextType="DIBSection" DrawFPS="True"/>
+                        OpenGLDraw="OpenGLControl_OpenGLDraw"
+                        OpenGLInitialized="OpenGLControl_OpenGLInitialized"
+                        Resized="OpenGLControl_Resized"
+                        Grid.Column="1"
+                        OpenGLVersion="OpenGL4_4" 
+                        FrameRate="60" RenderContextType="DIBSection" DrawFPS="True"/>
+
+        
 
         <Border Grid.Column="2" Margin="0 0 0 0" BorderBrush="LightGray" BorderThickness="2 0 0 0">
             <StackPanel Margin="0 5 0 0">
