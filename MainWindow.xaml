@@ -13,9 +13,10 @@
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <!----> 
 
-    <Grid>
+    <Grid Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
-            <RowDefinition  Height="9*" ></RowDefinition>
+            <RowDefinition  Height="4.5*" ></RowDefinition>
+            <RowDefinition  Height="4.5*" ></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3.5*"></ColumnDefinition>
@@ -68,13 +69,61 @@
                 </Grid>
             </StackPanel>
         </Border>
-
+        <Border Grid.Column="0" Grid.Row="1" Margin="0 0 0 0" BorderBrush="LightGray" BorderThickness="2 0 0 0">
+            <StackPanel Margin="0 5 0 0">
+                <Grid Margin="0 3 0 0" x:Name="MoveTools">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="13*"/>
+                        <RowDefinition Height="13*"/>
+                        <RowDefinition Height="13*"/>
+                        <RowDefinition Height="13*"/>
+                        <RowDefinition Height="13*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" Grid.ColumnSpan="2" 
+                            Grid.Row="0" x:Name="UpButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="10,0,10,2"/>
+                    <Button Grid.Column="1" Grid.ColumnSpan="1" 
+                            Grid.Row="1" x:Name="RightButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="16,0,16,0"/>
+                    <Button Grid.Column="0" Grid.ColumnSpan="1" 
+                            Grid.Row="1" x:Name="LeftButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="16,0,16,0"/>
+                    <Button Grid.Column="0" Grid.ColumnSpan="2" 
+                            Grid.Row="2" x:Name="DownButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="10,0,10,2"/>
+                    <Button Grid.Column="1" Grid.ColumnSpan="1" 
+                            Grid.Row="3" x:Name="RRotateButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="10,0,10,2"/>
+                    <Button Grid.Column="0" Grid.ColumnSpan="1" 
+                            Grid.Row="3" x:Name="LRotateButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="10,0,10,2"/>
+                    <Button Grid.Column="1" Grid.ColumnSpan="1" 
+                            Grid.Row="4" x:Name="PlusSizeButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="10,0,10,2"/>
+                    <Button Grid.Column="0" Grid.ColumnSpan="1" 
+                            Grid.Row="4" x:Name="MinusSizeButton" 
+                            Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Width="60" Margin="10,0,10,2"/>
+                </Grid>
+            </StackPanel>
+        </Border>
 
         <wpf:OpenGLControl x:Name = "DrawingPanel"
                         OpenGLDraw="OpenGLControl_OpenGLDraw"
                         OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                         Resized="OpenGLControl_Resized"
-                        Grid.Column="1"
+                        Grid.Column="1" Grid.RowSpan="2"
                         OpenGLVersion="OpenGL4_4" 
                         FrameRate="60" RenderContextType="DIBSection" DrawFPS="True"/>
 
@@ -124,28 +173,50 @@
 
                 </Grid>
 
-                <StackPanel  Margin="23,5,22,5" x:Name="BrushSettingsContainer" Height="211">
-                    <Label>Толщина Кисти</Label>
-
-                    <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
-                    <Label>Цвет</Label>
-                    <ComboBox SelectedIndex="0" Name="colorList" Height="30" VerticalAlignment="Top">
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Black"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Gray"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Brown"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Red"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Orange"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Yellow"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Green"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="LightBlue"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Blue"></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Width="100" Background="Purple"></TextBlock>
-                    </ComboBox>
-                    <Button x:Name="brushColorOk" Margin="36,25,49,15" Content="Ок" />
-                </StackPanel>
+                
 
             </StackPanel>
         </Border>
-
+   
+        <Border Grid.Column="2" Grid.Row="1" Margin="0 0 0 0" BorderBrush="LightGray" BorderThickness="2 0 0 0">
+            <StackPanel  Margin="23,0,22,0" x:Name="BrushSettingsContainer" Height="auto">
+                <Label>Толщина Кисти</Label>
+                <Slider x:Name= "ThickSlider" Value="1" Minimum="1" Maximum="10" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
+                <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
+                <Label>Цвет</Label>
+                <TextBlock x:Name="CurrentColor" HorizontalAlignment="Center" Width="100" Background="Black"></TextBlock>
+                <Label>Выбор цвета</Label>
+                <StackPanel>
+                    <Grid x:Name="ColorPick">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,3" x:Name="Black" HorizontalAlignment="Center" Width="50" Background="Black"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,3,0,3" x:Name="Gray" HorizontalAlignment="Center" Width="50" Background="Gray"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,3,0,3" x:Name="Brown" HorizontalAlignment="Center" Width="50" Background="Brown"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,3,0,3" x:Name="Red" HorizontalAlignment="Center" Width="50" Background="Red"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,3,0,3" x:Name="Orange" HorizontalAlignment="Center" Width="50" Background="Orange"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Margin="0,3,0,3" x:Name="Yellow" HorizontalAlignment="Center" Width="50" Background="Yellow"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,3,0,3" x:Name="Green" HorizontalAlignment="Center" Width="50" Background="Green"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Margin="0,3,0,3" x:Name="LightBlue" HorizontalAlignment="Center" Width="50" Background="LightBlue"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="0,3,0,3" x:Name="Blue" HorizontalAlignment="Center" Width="50" Background="Blue"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Margin="0,3,0,3" x:Name="Purple" HorizontalAlignment="Center" Width="50" Background="Purple"></TextBlock>
+                    </Grid>
+                </StackPanel>
+                <ComboBox SelectedIndex="0" Name="ColorList" Height="30" VerticalAlignment="Top">
+                    
+                </ComboBox>
+                <TextBox x:Name= "ColorTextBox" Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7">#ffffff</TextBox>
+                <Button x:Name="brushColorOk" Margin="36,15,49,15" Content="Ок" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
