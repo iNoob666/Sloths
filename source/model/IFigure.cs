@@ -21,7 +21,7 @@ namespace Sloths.source.model
 
         bool IsIn(NormPoint p);         //принадлежность точки фигуре
         void Init(NormPoint p1, NormPoint p2);
-        void Init(NormPoint p1, NormPoint p2, Color BorderColor, float LineThick);
+        void Init(NormPoint p1, NormPoint p2, Color BorderColor, float LineThick = 1);
         IFigure Scale(double koeff);        //изменение размера фигуры процентами
         IFigure MoveByVector(float x, float y);         //перемещение
         IFigure Rotate(double Phi);         //поворот относительно центра
