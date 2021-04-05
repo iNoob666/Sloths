@@ -71,7 +71,7 @@ namespace Sloths
             Redo.Click += RedoClick_Event;
             ColorPicker.Click += ColorPicker_Event;
 
-            foreach (Button elem in PantTools.Children)
+            foreach (Button elem in FigureSelect.Children)
             {
                 elem.Click += ButtonFigureActive_Event;
             }
@@ -82,7 +82,7 @@ namespace Sloths
         {
             Thickness = 1;
             ThickSlider.ValueChanged += ValueChanged_Event;
-            ColorList.SelectionChanged += ColorListChanged_Event;
+            //ColorList.SelectionChanged += ColorListChanged_Event;
             brushColorOk.Click += brushColorOk_Event;
         }
 
@@ -191,7 +191,7 @@ namespace Sloths
                 elem.Background = new SolidColorBrush(Colors.Cyan);
             }
             // //Чистим цвета в правой части интерфейса
-            foreach (Button elem in PantTools.Children)
+            foreach (Button elem in FigureSelect.Children)
             {
                 elem.Background = new SolidColorBrush(Colors.Cyan);
             }
@@ -307,7 +307,7 @@ namespace Sloths
         //Часть кода которая отвечает за ресайз всего окна, оставляя его aspect ratio , тем самым предотвращая изменение aspect ratio GL окна
         private void Window_SourceInitialized(object sender, EventArgs e)
         {
-            WindowAspectRatio.Register((Window)sender);
+            //WindowAspectRatio.Register((Window)sender);
         }
 
  
