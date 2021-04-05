@@ -25,30 +25,71 @@ namespace Sloths.source.math
         }
 
         public static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
+        public static Stack<IFigure> UndoStack { get; }
         private static int SelectedItem { get; set; }
-        //ВРЕМЕННО 
-        //Рома хочет сделать фабрики для каждого типа фигур
-        //будем переделывать
-        public static IFigure Create(string name) //Создание фигуры name - название фигуры 
+        private static IFigure currentFigure;
+
+        public static void Create(string name) //Создание фигуры name - название фигуры 
         {
             SelectedItem = -1;
-            switch (name)
+            var type = Type.GetType("Sloths.source.math." + name);
+            currentFigure = (IFigure)Activator.CreateInstance(type);
+            //switch (name)
+            //{
+            //    case "Line":
+            //        return new Line();
+            //    case "Circle":
+            //        return new Circle();
+            //    case "Rectangle":
+            //        return new Rectangle();
+            //    case "Triangle2":
+            //        return new IsoscelesTriangle();
+            //    case "Triangle":
+            //        return new RightTriangle();
+            //    default:
+            //        return new Line(); //что нибудь придумать для дефолта
+            //}
+        }
+        public static void ReCreate()
+        {
+            var type = currentFigure.GetType();
+            currentFigure = (IFigure)Activator.CreateInstance(type);
+        }
+        public static void AddCurrenFigtToList() => ListOfFigures.Add(currentFigure);
+
+        public static void DrawCurrenFigure(IPaint screen)
+        { 
+            if(currentFigure != null) currentFigure.Draw(screen);
+        }
+        public static void DrawAll(IPaint screen) //Отрисовка всех фигур из списка screen - класс полотна на котором рисуем 
+        {
+
+            for (int i = 0; i < ListOfFigures.Count(); i++)
             {
-                case "Line":
-                    return new Line();
-                case "Circle":
-                    return new Circle();
-                case "Rectangle":
-                    return new Rectangle();
-                case "Triangle2":
-                    return new IsoscelesTriangle();
-                case "Triangle":
-                    return new RightTriangle();
-                default:
-                    return new Line(); //что нибудь придумать для дефолта
-            }  
+                ListOfFigures[i].Draw(screen);
+            }
+            if (SelectedItem != -1) ListOfFigures[SelectedItem].Highlight(screen);
+            screen._flush();
+        }
+        public static void SetBegin(NormPoint p) => currentFigure.BeginCoord = p;
+        public static void SetEnd(NormPoint p) => currentFigure.EndCoord = p;
+        public static void SetColor(Color color) => currentFigure.BorderColor = color;
+        public static void SetThickness(float thickness) => currentFigure.LineThick = thickness;
+        public static void Update() //Изменение координат фигур при изменении размеров полотна 
+        {
+            foreach (IFigure fig in ListOfFigures)
+            {
+                fig.BeginCoord.UpdateSize();
+                fig.EndCoord.UpdateSize();
+                fig.Init(fig.BeginCoord, fig.EndCoord);
+            }
+        }
+        public static void AddFigureToFabric() //Добавление фигуры в список newfig - фигура
+        {
+            ListOfFigures.Add(currentFigure);
         }
 
+        //Legacy
         public static void AddFigureToFabric(IFigure newfig) //Добавление фигуры в список newfig - фигура
         {
             ListOfFigures.Add(newfig);
@@ -58,26 +99,7 @@ namespace Sloths.source.math
             if (SelectedItem != -1)  ListOfFigures.Remove(ListOfFigures[SelectedItem]);
             SelectedItem = -1;
         }
-        public static void DrawAll(IPaint screen) //Отрисовка всех фигур из списка screen - класс полотна на котором рисуем 
-        {
 
-            for (int i = 0; i < ListOfFigures.Count(); i++)
-            {
-                ListOfFigures[i].Draw(screen);
-            }
-            if(SelectedItem != -1) ListOfFigures[SelectedItem].Highlight(screen);
-            screen._flush();
-        }
-
-        public static void Update() //Изменение координат фигур при изменении размеров полотна 
-        {
-            foreach(IFigure fig in ListOfFigures)
-            {
-                fig.BeginCoord.UpdateSize();
-                fig.EndCoord.UpdateSize();
-                fig.Init(fig.BeginCoord, fig.EndCoord);
-            }
-        }
         public static void SelectFigure(NormPoint point)
         {
             int i = 1;

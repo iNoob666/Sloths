@@ -61,7 +61,7 @@ namespace Sloths.source.math
             C.UpdateCoord((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
         }
 
-        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick)
+        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick = 1)
         {
             BeginCoord = p1;
             EndCoord = p2;

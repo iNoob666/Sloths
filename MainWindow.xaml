@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:Sloths"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
@@ -121,10 +122,10 @@
             </StackPanel>
         </Border>
 
-        <wpf:OpenGLControl x:Name = "DrawingPanel"
-                        OpenGLDraw="OpenGLControl_OpenGLDraw"
+        <!--OpenGLDraw="OpenGLControl_OpenGLDraw"
                         OpenGLInitialized="OpenGLControl_OpenGLInitialized"
-                        Resized="OpenGLControl_Resized"
+                        Resized="OpenGLControl_Resized"-->
+        <wpf:OpenGLControl x:Name = "DrawingPanel"
                         Grid.Column="1" Grid.RowSpan="2"
                         OpenGLVersion="OpenGL4_4" 
                         FrameRate="60" RenderContextType="DIBSection" DrawFPS="True"/>

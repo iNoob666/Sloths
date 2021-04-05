@@ -42,7 +42,7 @@ namespace Sloths.source.math
             EndCoord = p2;
         }
 
-        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick)
+        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick = 1)
         {
             BeginCoord = p1;
             EndCoord = p2;
