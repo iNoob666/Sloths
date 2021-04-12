@@ -25,7 +25,7 @@ namespace Sloths.source.math
         [DataMember]
         public float LineThick { get; set; }
         [DataMember]
-        public Color BorderColor { get; set; }
+        public System.Drawing.Color BorderColor { get; set; }
 
         public IsoscelesTriangle()
         {
@@ -45,7 +45,7 @@ namespace Sloths.source.math
             Node5.UpdateCoord(EndCoord.X, BeginCoord.Y);
         }
 
-        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick = 1)
+        public void Init(NormPoint p1, NormPoint p2, System.Drawing.Color Color, float Thick = 1)
         {
             BeginCoord = p1;
             EndCoord = p2;
@@ -63,7 +63,7 @@ namespace Sloths.source.math
 
         public void SelectBorderColor(byte p1, byte p2, byte p3, byte p4)
         {
-            BorderColor = Color.FromRGBA(p1, p2, p3, p4);
+            BorderColor = System.Drawing.Color.FromArgb(p4, p1, p2, p3);
         }
 
         private double Scal(NormPoint a, NormPoint b, NormPoint c)

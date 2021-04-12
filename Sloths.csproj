@@ -102,7 +102,10 @@
     <Compile Include="source\model\IPaint.cs" />
     <Compile Include="source\ViewModel\CanvasVM.cs" />
     <Compile Include="source\ViewModel\ColorVM.cs" />
-    <Compile Include="source\ViewModel\FigureSelect.cs" />
+    <Compile Include="source\ViewModel\FigureMoveVM.cs" />
+    <Compile Include="source\ViewModel\FigureSelectVM.cs" />
+    <Compile Include="source\ViewModel\SelectToolsVM.cs" />
+    <Compile Include="source\ViewModel\SliderVM.cs" />
     <Page Include="Dictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

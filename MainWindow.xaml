@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:local="clr-namespace:Sloths"
+        xmlns:local = "clr-namespace:Sloths.source.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" ResizeMode="NoResize"
@@ -53,20 +53,25 @@
                         <RowDefinition Height="0*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" x:Name="SelectMode" Content="{materialDesign:PackIcon cursorpointer}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
-                        Width="60" Margin="16,0,16,15"/>
+                    <Button Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" x:Name="SelectMode" Content="{materialDesign:PackIcon cursorpointer}"
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                        Command = "{Binding SelectCommand}" CommandParameter = "SelectMode"  Width="60" Margin="16,0,16,15"/>
 
-                    <Button Grid.Column="0" Grid.Row="1" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="ColorPicker" Height="60"
-                        Width="60" Margin="16,0,16,15"/>
+                    <Button Grid.Column="0" Grid.Row="1" x:Name="ColorPicker" Content="{materialDesign:PackIcon colorize}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="ColorPicker" Height="60"
+                         Command="" Width="60" Margin="16,0,16,15"/>
 
-                    <Button Grid.Column="0" Grid.Row="2" x:Name="Undo" Content="{materialDesign:PackIcon undo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Undo" Height="60"
-                        Width="60" Margin="16,0,16,15"/>
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="Undo" Content="{materialDesign:PackIcon undo}"
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Undo" Height="60"
+                         Command="{Binding UndoCommand}" Width="60" Margin="16,0,16,15"/>
 
-                    <Button Grid.Column="1" Grid.Row="2" x:Name="Redo" Content="{materialDesign:PackIcon redo}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Redo" Height="60"
-                        Width="60" Margin="16,0,16,15"/>
+                    <Button Grid.Column="1" Grid.Row="2" x:Name="Redo" Content="{materialDesign:PackIcon redo}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Redo" Height="60"
+                         Command="{Binding RedoCommand}" Width="60" Margin="16,0,16,15"/>
 
-                    <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
-                        Width="60" Margin="16,35,16,15"/>
+                    <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
+                         Command="{Binding DeleteCommand}" Width="60" Margin="16,35,16,15"/>
                 </Grid>
             </StackPanel>
         </Border>
@@ -88,35 +93,59 @@
                     </Grid.RowDefinitions>
                     <Button Grid.Column="0" Grid.ColumnSpan="2" 
                             Grid.Row="0" x:Name="UpButton" 
-                            Content="{materialDesign:PackIcon arrowup}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon arrowup}"
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}"
+                            Command ="{Binding UpCommand}"
+                            ToolTip="Up" Height="60"
                             Width="60" Margin="10,0,10,2"/>
                     <Button Grid.Column="1" Grid.ColumnSpan="1" 
                             Grid.Row="1" x:Name="RightButton" 
-                            Content="{materialDesign:PackIcon arrowright}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon arrowright}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            Command ="{Binding RightCommand}"
+                            ToolTip="right" Height="60"
                             Width="60" Margin="16,0,16,0"/>
                     <Button Grid.Column="0" Grid.ColumnSpan="1" 
                             Grid.Row="1" x:Name="LeftButton" 
-                            Content="{materialDesign:PackIcon arrowleft}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon arrowleft}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}"
+                            Command ="{Binding LeftCommand}"
+                            ToolTip="left" Height="60"
                             Width="60" Margin="16,0,16,0"/>
                     <Button Grid.Column="0" Grid.ColumnSpan="2" 
                             Grid.Row="2" x:Name="DownButton" 
-                            Content="{materialDesign:PackIcon arrowdown}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon arrowdown}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            Command ="{Binding DownCommand}"
+                            ToolTip="down" Height="60"
                             Width="60" Margin="10,0,10,2"/>
                     <Button Grid.Column="1" Grid.ColumnSpan="1" 
                             Grid.Row="3" x:Name="RRotateButton" 
-                            Content="{materialDesign:PackIcon rotateright}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon rotateright}"
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            Command ="{Binding RightRotateCommand}"
+                            ToolTip="rotate right" Height="60"
                             Width="60" Margin="10,10,10,10"/>
                     <Button Grid.Column="0" Grid.ColumnSpan="1" 
                             Grid.Row="3" x:Name="LRotateButton" 
-                            Content="{materialDesign:PackIcon rotateleft}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon rotateleft}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}"
+                            Command ="{Binding LeftRotateCommand}"
+                            ToolTip="rotate left" Height="60"
                             Width="60" Margin="10,10,10,10"/>
                     <Button Grid.Column="1" Grid.ColumnSpan="1" 
                             Grid.Row="4" x:Name="PlusSizeButton" 
-                            Content="{materialDesign:PackIcon magnifyplusoutline}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon magnifyplusoutline}"
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            Command ="{Binding PlusSizeCommand}"
+                            ToolTip="PlusSize" Height="60"
                             Width="60" Margin="10,10,10,10"/>
                     <Button Grid.Column="0" Grid.ColumnSpan="1" 
                             Grid.Row="4" x:Name="MinusSizeButton" 
-                            Content="{materialDesign:PackIcon magnifyminusoutline}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="SelectFigure" Height="60"
+                            Content="{materialDesign:PackIcon magnifyminusoutline}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}"
+                            Command ="{Binding MinusSizeCommand}"
+                            ToolTip="MinusSize" Height="60"
                             Width="60" Margin="10,10,10,10"/>
                 </Grid>
             </StackPanel>
@@ -155,22 +184,41 @@
                     </Grid.RowDefinitions>
 
 
-                    <Button Grid.Column="0" Grid.Row="0" x:Name="Line"  Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Line" Height="60"
-                        Width="60" Margin="16,0,16,15">
+                    <Button Grid.Column="0" Grid.Row="0" x:Name="Line"  
+                            
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            ToolTip="Line" Height="60"
+                        Width="60" Margin="16,0,16,15" >
                         <Image  Source="straight-line-icon.jpg"/>
                     </Button>
 
-                    <Button Grid.Column="0" Grid.Row="1" x:Name="Triangle2" Content="{materialDesign:PackIcon triangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="IsoscelesTriangle" Height="60"
+                    <Button Grid.Column="0" Grid.Row="1" x:Name="IsoscelesTriangle" 
+                             
+                            Content="{materialDesign:PackIcon triangle}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            ToolTip="IsoscelesTriangle" Height="60"
                         Width="60" Margin="16,0,16,15"/>
-                    <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Grid.Column="1" Grid.Row="1" x:Name="Triangle" ToolTip="RightTriangle" Height="60"
+                    <Button Grid.Column="1" Grid.Row="1" x:Name="RightTriangle" 
+                            
+                            ToolTip="Righ tTriangle" 
+                            Height="60" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
                         Width="60" Margin="16,0,14,15" VerticalAlignment="Bottom">
                         <Image  Source="right-triangle.png" Height="18" />
                     </Button>
 
-                    <Button Grid.Column="0" Grid.Row="2" x:Name="Circle" Content="{materialDesign:PackIcon circle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Circle" Height="60"
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="Circle" 
+                            Content="{materialDesign:PackIcon circle}" 
+                            
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            ToolTip="Circle" Height="60"
                         Width="60" Margin="16,0,14,5"/>
 
-                    <Button Grid.Column="1" Grid.Row="0" x:Name="Rectangle" Content="{materialDesign:PackIcon rectangle}" Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Rectangle" Height="60"
+                    <Button Grid.Column="1" Grid.Row="0" x:Name="Rectangle"
+                            Content="{materialDesign:PackIcon rectangle}" 
+                            
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" 
+                            ToolTip="Rectangle" Height="60"
                         Width="60" Margin="16,0,14,15"/>
 
 
@@ -181,44 +229,41 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="2" Grid.Row="1" Margin="0.2,11.2,-0.4,0.4" BorderBrush="LightGray" BorderThickness="2 0 0 0">
+        <Border Grid.Column="2" Grid.Row="1" Margin="0.2,0,-0.4,0.4" BorderBrush="LightGray" BorderThickness="2 0 0 0">
             <StackPanel  Margin="23,0,22,0" x:Name="BrushSettingsContainer" Height="auto">
                 <Label>Толщина Кисти</Label>
-                <Slider x:Name= "ThickSlider" Value="1" Minimum="1" Maximum="10" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
+                <Slider x:Name= "ThickSlider" Value="{Binding SliderValue, Mode=TwoWay}" Minimum="1" Maximum="10" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
                 <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
                 <Label>Цвет</Label>
-                <TextBlock x:Name="CurrentColor" HorizontalAlignment="Center" Width="100" Background="Black"></TextBlock>
+                <TextBlock x:Name="CurrentColor" HorizontalAlignment="Center"
+                           Width="100" Background="{Binding Path = CurrentColor, Mode=TwoWay}"></TextBlock>
                 <Label>Выбор цвета</Label>
-                <StackPanel>
-                    <Grid x:Name="ColorPick">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,3,0,3" x:Name="Black" HorizontalAlignment="Center" Width="50" Background="Black"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,3,0,3" x:Name="Gray" HorizontalAlignment="Center" Width="50" Background="Gray"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,3,0,3" x:Name="Brown" HorizontalAlignment="Center" Width="50" Background="Brown"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,3,0,3" x:Name="Red" HorizontalAlignment="Center" Width="50" Background="Red"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,3,0,3" x:Name="Orange" HorizontalAlignment="Center" Width="50" Background="Orange"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="2" Margin="0,3,0,3" x:Name="Yellow" HorizontalAlignment="Center" Width="50" Background="Yellow"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,3,0,3" x:Name="Green" HorizontalAlignment="Center" Width="50" Background="Green"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="3" Margin="0,3,0,3" x:Name="LightBlue" HorizontalAlignment="Center" Width="50" Background="LightBlue"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="0,3,0,3" x:Name="Blue" HorizontalAlignment="Center" Width="50" Background="Blue"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="4" Margin="0,3,0,3" x:Name="Purple" HorizontalAlignment="Center" Width="50" Background="Purple"></TextBlock>
-                    </Grid>
-                </StackPanel>
+                <ListBox Margin="10,0,0,0"  SelectedItem="{Binding Path=PickedColor, Mode=TwoWay}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    
+                    <ListBoxItem Margin="0,3,3,3" x:Name="Black" HorizontalAlignment="Center" Width="52" Background="#000000"></ListBoxItem>
+                    <ListBoxItem Margin="0,3,3,3" x:Name="Gray" HorizontalAlignment="Center" Width="52" Background="#808080"></ListBoxItem>
+                    <ListBoxItem Margin="0,3,3,3" x:Name="Brown" HorizontalAlignment="Center" Width="52" Background="#A52A2A"></ListBoxItem>
+                    <ListBoxItem  Margin="0,3,3,3" x:Name="Red" HorizontalAlignment="Center" Width="52" Background="#FF0000"></ListBoxItem>
+                    <ListBoxItem  Margin="0,3,3,3" x:Name="Orange" HorizontalAlignment="Center" Width="52" Background="#FFA500"></ListBoxItem>
+                    <ListBoxItem Margin="0,3,3,3" x:Name="Yellow" HorizontalAlignment="Center" Width="52" Background="#FFFF00"></ListBoxItem>
+                    <ListBoxItem  Margin="0,3,3,3" x:Name="Green" HorizontalAlignment="Center" Width="52" Background="#008000"></ListBoxItem>
+                    <ListBoxItem  Margin="0,3,3,3" x:Name="LightBlue" HorizontalAlignment="Center" Width="52" Background="#ADD8E6"></ListBoxItem>
+                    <ListBoxItem  Margin="0,3,3,3" x:Name="Blue" HorizontalAlignment="Center" Width="52" Background="#0000FF"></ListBoxItem>
+                    <ListBoxItem  Margin="0,3,3,3" x:Name="Purple" HorizontalAlignment="Center" Width="52" Background="#800080"></ListBoxItem>
+                    <ListBoxItem  Margin="0,3,3,3" x:Name="Maroon" HorizontalAlignment="Center" Width="52" Background="#800000"></ListBoxItem>
+                    <ListBoxItem Margin="0,3,3,3" x:Name="Pink" HorizontalAlignment="Center" Width="52" Background="#FF00FF"></ListBoxItem>
+
+                </ListBox>
                 <!--<ComboBox SelectedIndex="0" Name="ColorList" Height="30" VerticalAlignment="Top">
                     
                 </ComboBox>-->
-                <TextBox x:Name= "ColorTextBox" Margin = "0,5 0,3" Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7">#ffffff</TextBox>
-                <Button x:Name="brushColorOk" Margin="36,15,49,15" Content="Ок" />
+                <TextBox x:Name="ColorTextBox" Text="{Binding Path= ColorTextField, Mode=TwoWay}" Margin = "0,5 0,3" Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7"></TextBox>
+                <Button x:Name="brushColorOk" Command="{Binding SetCustomColorCommand}" Margin="36,15,49,15" Content="Ок" />
             </StackPanel>
         </Border>
     </Grid>

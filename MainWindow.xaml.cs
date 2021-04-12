@@ -45,9 +45,15 @@ namespace Sloths
             // Дефолтные команды
             //CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, UndoEvent));
             //CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, RedoEvent));
-
+            
             CanvasVM canvasVM = new CanvasVM(DrawingPanel);
-            FigureSelect figureSelect = new FigureSelect(FiguresSelect);
+            
+            MoveTools.DataContext = new FigureMoveVM();
+            SelectTools.DataContext = new SelectToolsVM(canvasVM);
+            BrushSettingsContainer.DataContext = new ColorVM();
+            ThickSlider.DataContext = new SliderVM();
+
+            FigureSelectVM figureSelect = new FigureSelectVM(FigureSelect, canvasVM, (SliderVM)ThickSlider.DataContext);
             //BrushSettings();
 
             //Saver.Click += SaveList;

@@ -21,7 +21,7 @@ namespace Sloths.source.gui
             openGL.ClearColor(1f, 1f, 1f, 0.3f);
         }
 
-        void IPaint.drawline(IEnumerable<NormPoint> xy, model.Color BorderColor, float LineThick) //Отрисовка линии
+        void IPaint.drawline(IEnumerable<NormPoint> xy, System.Drawing.Color BorderColor, float LineThick) //Отрисовка линии
         {
             openGL.LineWidth(LineThick);
             openGL.Begin(OpenGL.GL_LINES); //Начало рисования
@@ -47,7 +47,7 @@ namespace Sloths.source.gui
         }
 
 
-        void IPaint.drawcircle(NormPoint xy, double rad, model.Color BorderColor, float LineThick) //Отрисовка круга
+        void IPaint.drawcircle(NormPoint xy, double rad, System.Drawing.Color BorderColor, float LineThick) //Отрисовка круга
         {
             openGL.LineWidth(LineThick);
             Single twicePI = (Single)(2.0f * Math.PI); 

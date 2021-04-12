@@ -18,62 +18,93 @@ namespace Sloths.source.ViewModel
 {
     class CanvasVM
     {
-        private GLpainter Painter;
-        private OpenGLControl openGLControl;
+        private OpenGLControl GLCanvas;//Класс полотна
+        private GLpainter Painter; //Класс рисования на полотне 
+        private bool PreviousButtonFlag; //false если seclect, true если фигура
         public CanvasVM(OpenGLControl OpenGLCanvas)
         {
-            openGLControl = OpenGLCanvas;
-            openGLControl.OpenGLInitialized += OpenGLControl_OpenGLInitialized;
-            openGLControl.OpenGLDraw += OpenGLControl_OpenGLDraw;
-            openGLControl.Resized += OpenGLControl_Resized;
-            openGLControl.MouseLeftButtonDown += MouseDown_Event;
+  
+            GLCanvas = OpenGLCanvas;
+            //Биндим ивенты
+            GLCanvas.OpenGLInitialized += OpenGLControl_OpenGLInitialized;
+            GLCanvas.OpenGLDraw += OpenGLControl_OpenGLDraw;
+            GLCanvas.Resized += OpenGLControl_Resized;
+            
+            SetPaintEvents();//По умолчанию нажата кнопка фигуры. Назначаем его ивенты.
 
         }
+        public void SetSelectFigureEvents()
+        {
+            PreviousButtonFlag = false;
+            GLCanvas.MouseMove -= MouseMove_Event;
+            GLCanvas.MouseLeftButtonUp -= MouseUp_Event;
+            GLCanvas.MouseLeftButtonDown -= MouseDown_Event;
+            GLCanvas.MouseLeftButtonDown += Select_Event;            
+
+        }
+        public void SetPaintEvents()
+        {
+            PreviousButtonFlag = true;
+            GLCanvas.MouseLeftButtonDown -= Select_Event;
+            GLCanvas.MouseLeftButtonDown += MouseDown_Event;
+        }
+
+        public void SetEventbyButtonName(string Name)
+        {
+            var CurrentBtnFlag = Name != "SelectMode";
+            if(CurrentBtnFlag != PreviousButtonFlag)
+                if (Name == "SelectMode") SetSelectFigureEvents();
+                else if (!PreviousButtonFlag) SetPaintEvents();
+
+        }
+
+        private void Select_Event(object sender, MouseButtonEventArgs e)
+        {
+            var MouseCoord = e.GetPosition(GLCanvas);
+            FabricFiguries.SelectFigure(new NormPoint(MouseCoord.X, MouseCoord.Y));
+        }
+
         /*
-         Евенты для рисования фигуры мышью
-             */
+            Евенты для рисования фигуры мышью
+        */
         //Ивент срабатывающий при нажатии на холст левой кнопкой мыши.
         //При нажатии на холст создается фигура
         private void MouseDown_Event(object sender, MouseButtonEventArgs e)
         {
-            openGLControl.MouseLeftButtonDown -= MouseDown_Event;
+            GLCanvas.MouseLeftButtonDown -= MouseDown_Event;
             //FabricFiguries.Create(id); //Создаем экземляр класса фигуры
             var gLControl = (OpenGLControl)sender;
-            var MouseCoord = e.GetPosition(this.openGLControl); //Сичтываем позицию мыши на полотне
+            var MouseCoord = e.GetPosition(GLCanvas); //Сичтываем позицию мыши на полотне
             //Назначаем начальную координату фигуры, которая в дальнейшем меняться не будет
             FabricFiguries.SetBegin(new NormPoint(MouseCoord.X, MouseCoord.Y));
             FabricFiguries.SetEnd(new NormPoint(MouseCoord.X, MouseCoord.Y));
+            FabricFiguries.Initialization();
             //Figure.Init(new NormPoint(MouseCoord.X, MouseCoord.Y), new NormPoint(MouseCoord.X, MouseCoord.Y), Color_, Thickness);
             //Вторая координата фигуры, которая в дальнейшем будет меняться в ивенте MouseMove_Event
-            openGLControl.MouseMove += MouseMove_Event; //Назначаем ивент для движения мышью с помощью которого будем менять размер фигуры
-            openGLControl.MouseLeftButtonUp += MouseUp_Event; //Назначаем ивент при отпуске левой кнопки мыши заканчивающий создание фигуры
+            GLCanvas.MouseMove += MouseMove_Event; //Назначаем ивент для движения мышью с помощью которого будем менять размер фигуры
+            GLCanvas.MouseLeftButtonUp += MouseUp_Event; //Назначаем ивент при отпуске левой кнопки мыши заканчивающий создание фигуры
         }
 
         private void MouseMove_Event(object sender, MouseEventArgs e)
         {
-            var gLControl = (OpenGLControl)sender;
-            var MouseCoord = e.GetPosition(this.openGLControl);//Сичтываем позицию мыши на полотне
+            var MouseCoord = e.GetPosition(GLCanvas);//Сичтываем позицию мыши на полотне
             //Меняем вторую координату фигуры для изменения размера и положения фигуры 
             FabricFiguries.SetEnd(new NormPoint(MouseCoord.X, MouseCoord.Y));
+            FabricFiguries.Initialization();
             //Figure.EndCoord = new NormPoint(MouseCoord.X, MouseCoord.Y);
         }
 
         private void MouseUp_Event(object sender, MouseButtonEventArgs e)
         {
-            openGLControl.MouseMove -= MouseMove_Event;
-            openGLControl.MouseLeftButtonUp -= MouseUp_Event;
+            GLCanvas.MouseMove -= MouseMove_Event;
+            GLCanvas.MouseLeftButtonUp -= MouseUp_Event;
             //Добавляем фигуру в фабрику для дальнейшей отрисовки
             FabricFiguries.AddFigureToFabric();
             FabricFiguries.ReCreate();
 
 
-            openGLControl.MouseLeftButtonDown += MouseDown_Event;
+            GLCanvas.MouseLeftButtonDown += MouseDown_Event;
 
-            //SelectMode.IsEnabled = true;
-            //ColorPicker.IsEnabled = true;
-            //Delete.IsEnabled = true;
-            //Undo.IsEnabled = true;
-            //Redo.IsEnabled = true;
         }
         /*
           Сегмент кода про OpenGL

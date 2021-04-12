@@ -21,6 +21,8 @@ namespace Sloths.source.math
         static FabricFiguries()
         {
             ListOfFigures = new List<IFigure>();
+            UndoStack = new Stack<IFigure>();
+            currentFigure = new Line();
             SelectedItem = -1;
         }
 
@@ -28,12 +30,43 @@ namespace Sloths.source.math
         public static Stack<IFigure> UndoStack { get; }
         private static int SelectedItem { get; set; }
         private static IFigure currentFigure;
+        private static System.Drawing.Color currentColor;
+        private static System.Drawing.Color CurrentColor
+        {
+            get
+            {
+                return currentColor;
+            }
+            set
+            {
+                currentColor = value;
+                currentFigure.BorderColor = currentColor;
+            }
+         
+        }
+
+
+        private static float currentThickness;
+        private static float CurrentThickness
+        {
+            get
+            {
+                return currentThickness;
+            }
+            set
+            {
+                currentThickness = value;
+                currentFigure.LineThick = currentThickness;
+            }
+        }
 
         public static void Create(string name) //Создание фигуры name - название фигуры 
         {
             SelectedItem = -1;
             var type = Type.GetType("Sloths.source.math." + name);
             currentFigure = (IFigure)Activator.CreateInstance(type);
+            currentFigure.LineThick = CurrentThickness;
+            currentFigure.BorderColor = CurrentColor;
             //switch (name)
             //{
             //    case "Line":
@@ -53,7 +86,12 @@ namespace Sloths.source.math
         public static void ReCreate()
         {
             var type = currentFigure.GetType();
+            var Thickness = currentFigure.LineThick;
+            var Color = currentFigure.BorderColor;
             currentFigure = (IFigure)Activator.CreateInstance(type);
+            currentFigure.LineThick = CurrentThickness;
+            currentFigure.BorderColor = CurrentColor;
+
         }
         public static void AddCurrenFigtToList() => ListOfFigures.Add(currentFigure);
 
@@ -73,8 +111,9 @@ namespace Sloths.source.math
         }
         public static void SetBegin(NormPoint p) => currentFigure.BeginCoord = p;
         public static void SetEnd(NormPoint p) => currentFigure.EndCoord = p;
-        public static void SetColor(Color color) => currentFigure.BorderColor = color;
-        public static void SetThickness(float thickness) => currentFigure.LineThick = thickness;
+        public static void SetColor(System.Drawing.Color color) => CurrentColor = color;
+        public static void SetThickness(float thickness) => CurrentThickness = thickness;
+        public static void Initialization() => currentFigure.Init(currentFigure.BeginCoord, currentFigure.EndCoord);
         public static void Update() //Изменение координат фигур при изменении размеров полотна 
         {
             foreach (IFigure fig in ListOfFigures)
@@ -89,14 +128,14 @@ namespace Sloths.source.math
             ListOfFigures.Add(currentFigure);
         }
 
-        //Legacy
-        public static void AddFigureToFabric(IFigure newfig) //Добавление фигуры в список newfig - фигура
-        {
-            ListOfFigures.Add(newfig);
-        }
+
         public static void DeleteSelectedFigureFromFabric()
         {
-            if (SelectedItem != -1)  ListOfFigures.Remove(ListOfFigures[SelectedItem]);
+            if (SelectedItem != -1)
+            {
+                UndoStack.Push(ListOfFigures[SelectedItem]);
+                ListOfFigures.Remove(ListOfFigures[SelectedItem]); 
+            }
             SelectedItem = -1;
         }
 
@@ -112,38 +151,45 @@ namespace Sloths.source.math
                 };
             }
         }
-        public static Color GetColor(NormPoint point)
+        public static System.Drawing.Color GetColor(NormPoint point)
         {
             foreach(IFigure elem in ListOfFigures)
             {
                 if (elem.IsIn(point)) return elem.BorderColor;
             }
-            return Color.WHITE;
+            return System.Drawing.Color.White;
                     
         }
-        /// <summary>
-        /// Ивенты для работы с фигурами
-        /// </summary>
         public static void Undo()
         {
             if (ListOfFigures.Count() > 0)
             {
+                UndoStack.Push(ListOfFigures[ListOfFigures.Count() - 1]);
                 ListOfFigures.RemoveAt(ListOfFigures.Count() - 1);
-                SelectedItem = -1;
             }
+            if (SelectedItem >= 0) SelectedItem--;
         }
         public static void Redo()
         {
-            if (ListOfFigures.Count() > 0)
-                ListOfFigures.Add(ListOfFigures[ListOfFigures.Count() - 1].MoveByVector(0.05f, 0.05f));
+            if (UndoStack.Count() > 0)
+                ListOfFigures.Add(UndoStack.Pop());
 
         }
+
+        //Legacy
+        /// <summary>
+        /// Ивенты для работы с фигурами
+        /// </summary>
+
         public static void OpenEvent(object sender, ExecutedRoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
-
+        public static void AddFigureToFabric(IFigure newfig) //Добавление фигуры в список newfig - фигура
+        {
+            ListOfFigures.Add(newfig);
+        }
         //пкркмещение фигур в пространстве
         internal static void UpEvent()
         {

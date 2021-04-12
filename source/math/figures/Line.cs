@@ -27,12 +27,12 @@ namespace Sloths.source.math
         [DataMember]
         public float LineThick { get; set; }
         [DataMember]
-        public Color BorderColor { get; set; }
+        public System.Drawing.Color BorderColor { get; set; }
         public Line()
         {
             BeginCoord = new NormPoint();
             EndCoord = new NormPoint();
-            BorderColor = Color.FromRGBA(0, 0, 0, 1);
+            BorderColor = System.Drawing.Color.FromArgb(0, 0, 0, 1);
             LineThick = 1;
         }
 
@@ -42,7 +42,7 @@ namespace Sloths.source.math
             EndCoord = p2;
         }
 
-        public void Init(NormPoint p1, NormPoint p2, Color Color, float Thick = 1)
+        public void Init(NormPoint p1, NormPoint p2, System.Drawing.Color Color, float Thick = 1)
         {
             BeginCoord = p1;
             EndCoord = p2;
@@ -58,7 +58,7 @@ namespace Sloths.source.math
 
         public void SelectBorderColor(byte p1, byte p2, byte p3, byte p4)
         {
-            BorderColor = Color.FromRGBA(p1, p2, p3, p4);
+            BorderColor = System.Drawing.Color.FromArgb(p4, p1, p2, p3);
         }
 
         public void Draw(IPaint screen)

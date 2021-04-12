@@ -17,11 +17,11 @@ namespace Sloths.source.model
         //void SetCoords(IEnumerable<NormPoint> xy);
 
         float LineThick { get; set; }
-        Color BorderColor { get; set; }
+        System.Drawing.Color BorderColor { get; set; }
 
         bool IsIn(NormPoint p);         //принадлежность точки фигуре
         void Init(NormPoint p1, NormPoint p2);
-        void Init(NormPoint p1, NormPoint p2, Color BorderColor, float LineThick = 1);
+        void Init(NormPoint p1, NormPoint p2, System.Drawing.Color BorderColor, float LineThick = 1);
         IFigure Scale(double koeff);        //изменение размера фигуры процентами
         IFigure MoveByVector(float x, float y);         //перемещение
         IFigure Rotate(double Phi);         //поворот относительно центра

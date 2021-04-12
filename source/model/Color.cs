@@ -41,5 +41,9 @@ namespace Sloths.source.model
         public static Color YELLOW = new Color(255, 255, 0, 255);
         public static Color WHITE = new Color(255, 255, 255, 255);
         public static Color DARKGRAYTRANSPARENT = new Color(128, 128, 128, 128);
+
+        public static bool operator ==(Color c1, Color c2) => c1.R == c2.R && c1.G == c2.G && c1.B == c2.B &&  c1.A == c2.A;
+
+        public static bool operator !=(Color c1, Color c2) => c1.R != c2.R || c1.G != c2.G || c1.B != c2.B || c1.A != c2.A;
     }
 }
