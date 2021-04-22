@@ -35,7 +35,7 @@ namespace Sloths.source.ViewModel
         }
         public SliderVM()
         {
-            
+            SliderValue = 1;
         }
 
 

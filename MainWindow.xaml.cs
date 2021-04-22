@@ -41,19 +41,20 @@ namespace Sloths
         public MainWindow()
         {
             InitializeComponent();
-            // Хоткеи
-            // Дефолтные команды
-            //CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, UndoEvent));
-            //CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, RedoEvent));
-            
+
+
             CanvasVM canvasVM = new CanvasVM(DrawingPanel);
             
             MoveTools.DataContext = new FigureMoveVM();
             SelectTools.DataContext = new SelectToolsVM(canvasVM);
             BrushSettingsContainer.DataContext = new ColorVM();
             ThickSlider.DataContext = new SliderVM();
+            UndoRedo.DataContext = new UndoRedoVM(InputBindings);
+            FigureSelectVM figureSelect = new FigureSelectVM(FigureSelect, canvasVM, (SliderVM)ThickSlider.DataContext, (ColorVM)BrushSettingsContainer.DataContext);
 
-            FigureSelectVM figureSelect = new FigureSelectVM(FigureSelect, canvasVM, (SliderVM)ThickSlider.DataContext);
+            
+
+
             //BrushSettings();
 
             //Saver.Click += SaveList;
@@ -86,6 +87,8 @@ namespace Sloths
             
 
         }
+
+
         //private void BrushSettings()
         //{
         //    Thickness = 1;
@@ -109,10 +112,10 @@ namespace Sloths
 
         //private void ColorPicker_Event(object sender, RoutedEventArgs e)
         //{ 
-        //    DrawingPanel.MouseLeftButtonDown += ClickForColor_Event;
-        //    ClearButtons();
-        //    var b = sender as Button;
-        //    b.Background = new SolidColorBrush(Colors.Red);
+            //DrawingPanel.MouseLeftButtonDown += ClickForColor_Event;
+            //ClearButtons();
+            //var b = sender as Button;
+            //b.Background = new SolidColorBrush(Colors.Red);
         //}
 
 
@@ -276,7 +279,7 @@ namespace Sloths
         //    Figure = null;
         //    NormPoint p = new NormPoint();
         //    p.UpdateCoord(0, 0);
-            
+
         //    DrawingPanel.MouseLeftButtonDown += MouseDown_Event;
 
         //    SelectMode.IsEnabled = true;

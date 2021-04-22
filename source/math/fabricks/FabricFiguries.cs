@@ -28,6 +28,12 @@ namespace Sloths.source.math
 
         public static List<IFigure> ListOfFigures { get; } //список всех нарисованых фигур
         public static Stack<IFigure> UndoStack { get; }
+
+        internal static void ClearFabric()
+        {
+            ListOfFigures.Clear();
+        }
+
         private static int SelectedItem { get; set; }
         private static IFigure currentFigure;
         private static System.Drawing.Color currentColor;
@@ -65,8 +71,8 @@ namespace Sloths.source.math
             SelectedItem = -1;
             var type = Type.GetType("Sloths.source.math." + name);
             currentFigure = (IFigure)Activator.CreateInstance(type);
-            currentFigure.LineThick = CurrentThickness;
-            currentFigure.BorderColor = CurrentColor;
+            //currentFigure.LineThick = CurrentThickness;
+            //currentFigure.BorderColor = CurrentColor;
             //switch (name)
             //{
             //    case "Line":
@@ -89,8 +95,8 @@ namespace Sloths.source.math
             var Thickness = currentFigure.LineThick;
             var Color = currentFigure.BorderColor;
             currentFigure = (IFigure)Activator.CreateInstance(type);
-            currentFigure.LineThick = CurrentThickness;
-            currentFigure.BorderColor = CurrentColor;
+            currentFigure.LineThick = Thickness;
+            currentFigure.BorderColor = Color;
 
         }
         public static void AddCurrenFigtToList() => ListOfFigures.Add(currentFigure);
@@ -111,8 +117,8 @@ namespace Sloths.source.math
         }
         public static void SetBegin(NormPoint p) => currentFigure.BeginCoord = p;
         public static void SetEnd(NormPoint p) => currentFigure.EndCoord = p;
-        public static void SetColor(System.Drawing.Color color) => CurrentColor = color;
-        public static void SetThickness(float thickness) => CurrentThickness = thickness;
+        public static void SetColor(System.Drawing.Color color) => currentFigure.BorderColor = color;
+        public static void SetThickness(float thickness) => currentFigure.LineThick = thickness;
         public static void Initialization() => currentFigure.Init(currentFigure.BeginCoord, currentFigure.EndCoord);
         public static void Update() //Изменение координат фигур при изменении размеров полотна 
         {

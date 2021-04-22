@@ -77,8 +77,14 @@ namespace Sloths.source.ViewModel
         {
             get
             {
-                CurrentColor = ColorTextField;
-                return _setCustomColorCommand ?? (_setCustomColorCommand = new ButtonCommand(obj => FabricFiguries.SetColor(SetCustomColor(ColorTextField))));
+
+                return _setCustomColorCommand ?? (_setCustomColorCommand = new ButtonCommand(
+                    obj =>
+                    {
+                        FabricFiguries.SetColor(SetCustomColor(ColorTextField));
+                        CurrentColor = ColorTextField;
+                    }
+                    ));
             }
         }
 

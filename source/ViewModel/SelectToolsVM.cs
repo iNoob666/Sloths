@@ -15,29 +15,15 @@ namespace Sloths.source.ViewModel
         private CanvasVM canvasVM;
 
 
-        private ICommand _undoCommand;
-        private ICommand _redoCommand;
+
         private ICommand _delCommand;
         private ICommand _selectCommand;
+        private ICommand _clearCommand;
         public SelectToolsVM(CanvasVM canVM)
         {
             canvasVM = canVM;
         }
-        public ICommand UndoCommand
-        {
-            get
-            {
-                return _undoCommand ?? (_undoCommand = new ButtonCommand(obj => FabricFiguries.Undo()));
-            }
-        }
-            
-        public ICommand RedoCommand
-        {
-            get
-            {
-                return _redoCommand ?? (_redoCommand = new ButtonCommand(obj => FabricFiguries.Redo()));
-            }
-        }
+      
     
         public ICommand DeleteCommand
         {
@@ -46,7 +32,13 @@ namespace Sloths.source.ViewModel
                 return _delCommand ?? (_delCommand = new ButtonCommand(obj => FabricFiguries.DeleteSelectedFigureFromFabric()));
             }
         }
-       
+        public ICommand ClearCommand
+        {
+            get
+            {
+                return _clearCommand ?? (_clearCommand = new ButtonCommand(obj => FabricFiguries.ClearFabric()));
+            }
+        }
         public ICommand SelectCommand
         {
             get

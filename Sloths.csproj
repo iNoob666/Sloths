@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>free-icon-pencil-case-4579084.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
@@ -106,6 +109,7 @@
     <Compile Include="source\ViewModel\FigureSelectVM.cs" />
     <Compile Include="source\ViewModel\SelectToolsVM.cs" />
     <Compile Include="source\ViewModel\SliderVM.cs" />
+    <Compile Include="source\ViewModel\UndoRedoVM.cs" />
     <Page Include="Dictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="straight-line-icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="free-icon-pencil-case-4579084.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

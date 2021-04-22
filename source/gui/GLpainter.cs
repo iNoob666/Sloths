@@ -24,6 +24,7 @@ namespace Sloths.source.gui
         void IPaint.drawline(IEnumerable<NormPoint> xy, System.Drawing.Color BorderColor, float LineThick) //Отрисовка линии
         {
             openGL.LineWidth(LineThick);
+            openGL.PointSize(LineThick);
             openGL.Begin(OpenGL.GL_LINES); //Начало рисования
             openGL.Color(BorderColor.R, BorderColor.G, BorderColor.B, BorderColor.A); //Задаем цвет
             foreach(NormPoint p in xy)
@@ -50,9 +51,10 @@ namespace Sloths.source.gui
         void IPaint.drawcircle(NormPoint xy, double rad, System.Drawing.Color BorderColor, float LineThick) //Отрисовка круга
         {
             openGL.LineWidth(LineThick);
+            openGL.PointSize(LineThick);
             Single twicePI = (Single)(2.0f * Math.PI); 
-            int stop = 100; //количество линий в "многоугольнике"
-            openGL.Begin(OpenGL.GL_LINE_LOOP); 
+            int stop = (int)(360 * 1.25 * twicePI * rad / LineThick) ; 
+            openGL.Begin(OpenGL.GL_POINTS); 
             openGL.Color(BorderColor.R, BorderColor.G, BorderColor.B, BorderColor.A);
             //Single x = (float)(xy.X + rad);
             //Single y = (float) xy.Y;
@@ -68,6 +70,7 @@ namespace Sloths.source.gui
                 //рисуем точку
                 openGL.Vertex(x, y); 
             }
+
 
             openGL.End();
             openGL.Flush();

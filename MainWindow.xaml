@@ -16,8 +16,8 @@
 
     <Grid Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
-            <RowDefinition  Height="329*" ></RowDefinition>
-            <RowDefinition  Height="362*" ></RowDefinition>
+            <!--<RowDefinition  Height="329*" ></RowDefinition>
+            <RowDefinition  Height="362*" ></RowDefinition>-->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3.5*"></ColumnDefinition>
@@ -61,6 +61,20 @@
                             Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="ColorPicker" Height="60"
                          Command="" Width="60" Margin="16,0,16,15"/>
 
+                    
+
+                    <Button Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
+                         Command="{Binding DeleteCommand}" Width="60" Margin="16,35,16,15"/>
+                    <Button Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="3" x:Name="DeleteAll" Content="{materialDesign:PackIcon autorenew}" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Clear all" Height="60"
+                         Command="{Binding ClearCommand}" Width="60" Margin="16,35,16,15"/>
+                </Grid>
+                <Grid Margin="0 20 0 0" x:Name="UndoRedo">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Grid.Row="2" x:Name="Undo" Content="{materialDesign:PackIcon undo}"
                             Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Undo" Height="60"
                          Command="{Binding UndoCommand}" Width="60" Margin="16,0,16,15"/>
@@ -68,18 +82,8 @@
                     <Button Grid.Column="1" Grid.Row="2" x:Name="Redo" Content="{materialDesign:PackIcon redo}" 
                             Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Redo" Height="60"
                          Command="{Binding RedoCommand}" Width="60" Margin="16,0,16,15"/>
-
-                    <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" x:Name="Delete" Content="{materialDesign:PackIcon delete}" 
-                            Style="{DynamicResource MaterialDesignRaisedAccentButton}" ToolTip="Delete" Height="60"
-                         Command="{Binding DeleteCommand}" Width="60" Margin="16,35,16,15"/>
                 </Grid>
-            </StackPanel>
-        </Border>
-        <Border Grid.Column="0" Grid.Row="1" Margin="0,11.2,0,0.4"
-                BorderBrush="LightGray" BorderThickness="0 0 2 0" 
-                Grid.ColumnSpan="1">
-            <StackPanel Margin="0 5 0 0">
-                <Grid Margin="0 3 0 0" x:Name="MoveTools">
+                <Grid Margin="0 30 0 0" x:Name="MoveTools">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -163,7 +167,7 @@
 
         <Border Grid.Column="2" Margin="0.2,0,0.4,0" BorderBrush="LightGray" BorderThickness="2 0 0 0">
             <StackPanel Margin="0 5 0 0">
-                <Grid Margin="0 3 0 0" x:Name="FigureSelect">
+                <Grid Margin="0 20 0 30" x:Name="FigureSelect">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -223,47 +227,44 @@
 
 
                 </Grid>
+                <StackPanel x:Name="BrushSettingsContainer">
+                    <Label Margin="0,20,5,0">Толщина Кисти</Label>
+                    <Slider Margin="15,20,15,0" x:Name= "ThickSlider" Value="{Binding SliderValue, Mode=TwoWay}" Minimum="1" Maximum="10" SelectionStart="1" Height="30" IsSelectionRangeEnabled="True" />
+                    <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
+                    <Label>Цвет</Label>
+                    <TextBlock x:Name="CurrentColor" HorizontalAlignment="Center"
+                            Width="100" Background="{Binding Path = CurrentColor, Mode=TwoWay}"></TextBlock>
+                    <Label>Выбор цвета</Label>
+                    <ListBox Margin="30,0,20,25"  SelectedItem="{Binding Path=ListOfColorElem, Mode=TwoWay}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
 
+                        <ListBoxItem Margin="0,3,3,3" x:Name="Black" HorizontalAlignment="Center" Width="52" Background="#000000"></ListBoxItem>
+                        <ListBoxItem Margin="0,3,3,3" x:Name="Gray" HorizontalAlignment="Center" Width="52" Background="#808080"></ListBoxItem>
+                        <ListBoxItem Margin="0,3,3,3" x:Name="Brown" HorizontalAlignment="Center" Width="52" Background="#A52A2A"></ListBoxItem>
+                        <ListBoxItem  Margin="0,3,3,3" x:Name="Red" HorizontalAlignment="Center" Width="52" Background="#FF0000"></ListBoxItem>
+                        <ListBoxItem  Margin="0,3,3,3" x:Name="Orange" HorizontalAlignment="Center" Width="52" Background="#FFA500"></ListBoxItem>
+                        <ListBoxItem Margin="0,3,3,3" x:Name="Yellow" HorizontalAlignment="Center" Width="52" Background="#FFFF00"></ListBoxItem>
+                        <ListBoxItem  Margin="0,3,3,3" x:Name="Green" HorizontalAlignment="Center" Width="52" Background="#008000"></ListBoxItem>
+                        <ListBoxItem  Margin="0,3,3,3" x:Name="LightBlue" HorizontalAlignment="Center" Width="52" Background="#ADD8E6"></ListBoxItem>
+                        <ListBoxItem  Margin="0,3,3,3" x:Name="Blue" HorizontalAlignment="Center" Width="52" Background="#0000FF"></ListBoxItem>
+                        <ListBoxItem  Margin="0,3,3,3" x:Name="Purple" HorizontalAlignment="Center" Width="52" Background="#800080"></ListBoxItem>
+                        <ListBoxItem  Margin="0,3,3,3" x:Name="Maroon" HorizontalAlignment="Center" Width="52" Background="#800000"></ListBoxItem>
+                        <ListBoxItem Margin="0,3,3,3" x:Name="Pink" HorizontalAlignment="Center" Width="52" Background="#FF00FF"></ListBoxItem>
 
-
-            </StackPanel>
-        </Border>
-
-        <Border Grid.Column="2" Grid.Row="1" Margin="0.2,0,-0.4,0.4" BorderBrush="LightGray" BorderThickness="2 0 0 0">
-            <StackPanel  Margin="23,0,22,0" x:Name="BrushSettingsContainer" Height="auto">
-                <Label>Толщина Кисти</Label>
-                <Slider x:Name= "ThickSlider" Value="{Binding SliderValue, Mode=TwoWay}" Minimum="1" Maximum="10" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" />
-                <!-- Не уверен, что работать с калор пикером будет удобно. Поэтому юзер просто может вводить цвет в поле ниже. Но если разберетесь будет найс -->
-                <Label>Цвет</Label>
-                <TextBlock x:Name="CurrentColor" HorizontalAlignment="Center"
-                           Width="100" Background="{Binding Path = CurrentColor, Mode=TwoWay}"></TextBlock>
-                <Label>Выбор цвета</Label>
-                <ListBox Margin="10,0,0,0"  SelectedItem="{Binding Path=PickedColor, Mode=TwoWay}">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    
-                    <ListBoxItem Margin="0,3,3,3" x:Name="Black" HorizontalAlignment="Center" Width="52" Background="#000000"></ListBoxItem>
-                    <ListBoxItem Margin="0,3,3,3" x:Name="Gray" HorizontalAlignment="Center" Width="52" Background="#808080"></ListBoxItem>
-                    <ListBoxItem Margin="0,3,3,3" x:Name="Brown" HorizontalAlignment="Center" Width="52" Background="#A52A2A"></ListBoxItem>
-                    <ListBoxItem  Margin="0,3,3,3" x:Name="Red" HorizontalAlignment="Center" Width="52" Background="#FF0000"></ListBoxItem>
-                    <ListBoxItem  Margin="0,3,3,3" x:Name="Orange" HorizontalAlignment="Center" Width="52" Background="#FFA500"></ListBoxItem>
-                    <ListBoxItem Margin="0,3,3,3" x:Name="Yellow" HorizontalAlignment="Center" Width="52" Background="#FFFF00"></ListBoxItem>
-                    <ListBoxItem  Margin="0,3,3,3" x:Name="Green" HorizontalAlignment="Center" Width="52" Background="#008000"></ListBoxItem>
-                    <ListBoxItem  Margin="0,3,3,3" x:Name="LightBlue" HorizontalAlignment="Center" Width="52" Background="#ADD8E6"></ListBoxItem>
-                    <ListBoxItem  Margin="0,3,3,3" x:Name="Blue" HorizontalAlignment="Center" Width="52" Background="#0000FF"></ListBoxItem>
-                    <ListBoxItem  Margin="0,3,3,3" x:Name="Purple" HorizontalAlignment="Center" Width="52" Background="#800080"></ListBoxItem>
-                    <ListBoxItem  Margin="0,3,3,3" x:Name="Maroon" HorizontalAlignment="Center" Width="52" Background="#800000"></ListBoxItem>
-                    <ListBoxItem Margin="0,3,3,3" x:Name="Pink" HorizontalAlignment="Center" Width="52" Background="#FF00FF"></ListBoxItem>
-
-                </ListBox>
-                <!--<ComboBox SelectedIndex="0" Name="ColorList" Height="30" VerticalAlignment="Top">
+                    </ListBox>
+                    <!--<ComboBox SelectedIndex="0" Name="ColorList" Height="30" VerticalAlignment="Top">
                     
                 </ComboBox>-->
-                <TextBox x:Name="ColorTextBox" Text="{Binding Path= ColorTextField, Mode=TwoWay}" Margin = "0,5 0,3" Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7"></TextBox>
-                <Button x:Name="brushColorOk" Command="{Binding SetCustomColorCommand}" Margin="36,15,49,15" Content="Ок" />
+                    <TextBox Margin="30,20,30,15" x:Name="ColorTextBox" Text="{Binding Path= ColorTextField, Mode=TwoWay}" Style="{DynamicResource MaterialDesignTextBox}" MaxLength="7"></TextBox>
+                    <Button  x:Name="brushColorOk" Command="{Binding SetCustomColorCommand}" Margin="36,15,49,15" Content="Ок" />
+                 </StackPanel>
+
+
+
             </StackPanel>
         </Border>
     </Grid>
